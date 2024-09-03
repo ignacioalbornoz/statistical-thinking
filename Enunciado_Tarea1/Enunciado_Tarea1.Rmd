@@ -122,13 +122,50 @@ Realice el experimento de lanzar una moneda cargada 1000 veces y observe el comp
 **Respuesta**
 
 ```{r eval=TRUE}
-# Simular lanzamientos
+
+resultados <- numeric(1000)  # Vector para almacenar los resultados
+
 for (lanzamientos in 1:1000) {
-  
+  # Simulación de un lanzamiento con probabilidad 5/8 de salir cara
+  resultados[lanzamientos] <- rbinom(
+    n = 1,
+    size = 1,
+    prob = 5 / 8
+  )
 }
 
+# Calcular la probabilidad acumulada de salir cara en cada lanzamiento
+probabilidades_acumuladas <- cumsum(resultados) / (1:1000)
+
 # Gráfico de la convergencia
+plot(
+  1:1000,
+  probabilidades_acumuladas,
+  type = "l",
+  col = "blue",
+  xlab = "Número de lanzamientos",
+  ylab = "Probabilidad acumulada de salir cara",
+  main = "Convergencia de la probabilidad de salir cara"
+)
+
+# Añadir línea de referencia para la probabilidad teórica
+abline(h = 5 / 8, col = "red", lty = 2)
+
+# Añadir leyenda
+legend(
+  "topright",
+  legend = c("Probabilidad acumulada", "Probabilidad teórica (5/8)"),
+  col = c("blue", "red"),
+  lty = c(1, 2)
+)
+
 ```
+
+Al realizar el experimento de lanzar una moneda cargada 1000 veces, con una probabilidad de 5/8 de salir cara, se puede observar que la probabilidad acumulada de obtener cara varía considerablemente al inicio, cuando el número de lanzamientos es bajo. A medida que se realizan más lanzamientos, esta probabilidad acumulada comienza a estabilizarse.
+
+El gráfico obtenido muestra cómo, después de aproximadamente 500 lanzamientos, la probabilidad acumulada de obtener cara comienza a oscilar alrededor del valor teórico de 5/8. Esta convergencia refleja la Ley de los Grandes Números, que establece que, a medida que el número de ensayos independientes de un experimento aumenta, la media de los resultados obtenidos se aproxima cada vez más al valor esperado teórico.
+
+
 
 #### El problema de Monty Hall 
 
@@ -145,21 +182,69 @@ Imagine que usted es participante del concurso y desea calcular la probabilidad 
 
 **Respuesta:**
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 # Creamos una función que simule el juego
-montyhall <- function(cambiar = TRUE){
-  Puertas <- sample(1:3,3)             #Puertas donde la posición que tiene el 3 es el premio
-  posicion <- sample(1:3,1)            #Elección del participante.
-  
-  return(Eleccion) # Retornamos la elección, esta puede que tenga el premio o no
+montyhall <- function(cambiar = TRUE) {
+  # Puertas donde la posición que tiene el 3 es el premio
+  puertas <- sample(1:3, 3)
+  # Elección del participante.
+  posicion <- sample(1:3, 1)
+  # El animador abre una de las puertas con una cabra
+  puerta_abierta <- setdiff(1:3, c(posicion, which(puertas == 3)))
+  if (length(puerta_abierta) > 1) {
+    puerta_abierta <- sample(puerta_abierta, 1)
+  }
+  # Si el participante decide cambiar de puerta
+  if (cambiar) {
+    eleccion <- setdiff(1:3, c(posicion, puerta_abierta))
+  } else {
+    eleccion <- posicion
+  }
+  return(eleccion) # Retornamos la elección, esta puede que tenga el premio o no
 }
 
 # Función que simula N juegos
-n_juegos <- function(n = 10 ,cambiar_puerta = TRUE){
-  
+n_juegos <- function(n = 10, cambiar_puerta = TRUE) {
+  resultados <- replicate(n, montyhall(cambiar_puerta))
+  # Calcular la probabilidad de ganar
+  probabilidad_ganar <- mean(resultados == 3)
+  # Graficar la probabilidad acumulada
+  plot(cumsum(resultados == 3) / (1:n), type = "l", col = "blue",
+       xlab = "Número de juegos", ylab = "Probabilidad acumulada de ganar",
+       main = paste("Probabilidad de ganar cambiando de puerta:",
+                    round(probabilidad_ganar, 3)))
+  # Añadir línea de referencia para la probabilidad
+  abline(h = probabilidad_ganar, col = "red", lty = 2)
+  return(probabilidad_ganar)
 }
-```
 
+
+```
+```{r eval=TRUE}
+# Generar N veces el experimento y graficar cada una de las iteraciones
+experimento_montyhall <- function(n = 1000, cambiar_puerta = TRUE) {
+  # Inicializar un vector para almacenar los resultados
+  resultados <- numeric(n)
+  # Realizar N experimentos
+  for (i in 1:n) {
+    resultados[i] <- montyhall(cambiar_puerta)
+  }
+  # Calcular la proporción acumulada de éxitos
+  proporciones <- cumsum(resultados == 3) / (1:n)
+  # Graficar los resultados
+  plot(1:n, proporciones, type = "l", col = "blue",
+       xlab = "Número de juegos", ylab = "Proporción acumulada de ganar",
+       main = paste("Proporción de ganar cambiando de puerta (N =", n, ")"))
+  # Añadir línea de referencia para la probabilidad teórica
+  abline(h = 2 / 3, col = "red", lty = 2)
+  return(proporciones[n])
+}
+
+# Ejemplo de uso
+experimento_montyhall(n = 1000, cambiar_puerta = TRUE)
+
+
+```
 ---
 
 ## Pregunta 4: ¿Independencia?
