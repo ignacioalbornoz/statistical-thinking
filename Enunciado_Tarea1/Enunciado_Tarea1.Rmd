@@ -64,6 +64,13 @@ Videos de las clases:
 
 En la siguiente sección deberá resolver cada uno de los experimentos computacionales a través de la programación en R. Para esto se le aconseja que cree funciones en R, ya que le facilitará la ejecución de gran parte de lo solicitado.
 
+
+```{r eval=T}
+set.seed(123)
+
+```
+
+---
 ## Pregunta 1: Visualización de Datos
 
 Para esta pregunta usted deberá trabajar en base al conjunto de datos `hearth_database.csv`, el cual esta compuesto por las siguientes variables:
@@ -184,67 +191,141 @@ Imagine que usted es participante del concurso y desea calcular la probabilidad 
 
 ```{r eval=TRUE}
 # Creamos una función que simule el juego
-montyhall <- function(cambiar = TRUE) {
-  # Puertas donde la posición que tiene el 3 es el premio
-  puertas <- sample(1:3, 3)
+montyhall <- function(cambiar) {
+  # Puerta con el premio (la posición que tiene el 3 es el premio)
+  puertas <- c(0, 0, 0)
+  puertas[sample(1:3, 1)] <- 3
+  
   # Elección del participante.
   posicion <- sample(1:3, 1)
+  
   # El animador abre una de las puertas con una cabra
   puerta_abierta <- setdiff(1:3, c(posicion, which(puertas == 3)))
   if (length(puerta_abierta) > 1) {
     puerta_abierta <- sample(puerta_abierta, 1)
   }
+  
   # Si el participante decide cambiar de puerta
   if (cambiar) {
     eleccion <- setdiff(1:3, c(posicion, puerta_abierta))
   } else {
     eleccion <- posicion
   }
-  return(eleccion) # Retornamos la elección, esta puede que tenga el premio o no
+  
+  return(eleccion == which(puertas == 3)) # Retornamos TRUE si elige la puerta con el premio
 }
 
 # Función que simula N juegos
-n_juegos <- function(n = 10, cambiar_puerta = TRUE) {
+n_juegos <- function(n, cambiar_puerta) {
   resultados <- replicate(n, montyhall(cambiar_puerta))
+  
   # Calcular la probabilidad de ganar
-  probabilidad_ganar <- mean(resultados == 3)
+  probabilidad_ganar <- mean(resultados)
+  
   # Graficar la probabilidad acumulada
-  plot(cumsum(resultados == 3) / (1:n), type = "l", col = "blue",
+  plot(cumsum(resultados) / (1:n), type = "l", col = "blue",
        xlab = "Número de juegos", ylab = "Probabilidad acumulada de ganar",
        main = paste("Probabilidad de ganar cambiando de puerta:",
                     round(probabilidad_ganar, 3)))
+  
   # Añadir línea de referencia para la probabilidad
   abline(h = probabilidad_ganar, col = "red", lty = 2)
+  
   return(probabilidad_ganar)
 }
 
 
 ```
+
+
+
 ```{r eval=TRUE}
 # Generar N veces el experimento y graficar cada una de las iteraciones
-experimento_montyhall <- function(n = 1000, cambiar_puerta = TRUE) {
+experimento_montyhall <- function(n, cambiar_puerta) {
   # Inicializar un vector para almacenar los resultados
   resultados <- numeric(n)
+  
   # Realizar N experimentos
   for (i in 1:n) {
     resultados[i] <- montyhall(cambiar_puerta)
   }
+  
   # Calcular la proporción acumulada de éxitos
-  proporciones <- cumsum(resultados == 3) / (1:n)
+  proporciones <- cumsum(resultados) / (1:n)
+  
+  # Definir el título y la probabilidad teórica según si se cambia o no de puerta
+  if (cambiar_puerta) {
+    titulo <- paste("Proporción de ganar cambiando de puerta (N =", n, ")")
+    prob_teorica <- '2 / 3'
+    prob_teorica_num <- 2 / 3
+    prob_teorica_title <-" cambiando de puerta  "
+    mensaje <- paste("Proporción final de ganar cambiando de puerta después de", n, "juegos:")
+  } else {
+    titulo <- paste("Proporción de ganar NO cambiando de puerta (N =", n, ")")
+    prob_teorica <- '1 / 3'
+    prob_teorica_num <- 1 / 3
+    prob_teorica_title <- " NO cambiando de puerta "
+    mensaje <- paste("Proporción final de ganar NO cambiando de puerta después de", n, "juegos:")
+  }
+  
   # Graficar los resultados
-  plot(1:n, proporciones, type = "l", col = "blue",
+  plot(1:n, proporciones, type = "l", col = "blue", ylim = c(0, 1),
        xlab = "Número de juegos", ylab = "Proporción acumulada de ganar",
-       main = paste("Proporción de ganar cambiando de puerta (N =", n, ")"))
+       main = titulo)
+  
   # Añadir línea de referencia para la probabilidad teórica
-  abline(h = 2 / 3, col = "red", lty = 2)
+  abline(h = prob_teorica_num, col = "red", lty = 2)
+  
+  # Añadir la leyenda
+  legend("bottomright", legend = c("Proporción acumulada", 
+                                   paste("Probabilidad teórica", prob_teorica_title ,"(", prob_teorica, ")", sep = "")),
+         col = c("blue", "red"), lty = c(1, 2))
+  
+  # Imprimir el resultado con contexto
+  cat(mensaje, proporciones[n], "\n")
+  
   return(proporciones[n])
 }
 
-# Ejemplo de uso
-experimento_montyhall(n = 1000, cambiar_puerta = TRUE)
 
 
 ```
+
+```{r eval=TRUE}
+# cambiar puerta true y n 1000
+experimento_montyhall(n = 1000, cambiar_puerta = TRUE)
+```
+
+
+
+```{r eval=TRUE}
+# cambiar puerta false y n 1000
+experimento_montyhall(n = 1000, cambiar_puerta = FALSE)
+```
+
+A partir de los resultados obtenidos en los gráficos y en base a la teoría del problema de Monty Hall, se puede llegar a las siguientes conclusiones:
+
+El problema de Monty Hall sugiere que, si decides cambiar de puerta después de que el animador ha revelado una de las puertas con una cabra, **tus probabilidades de ganar el premio aumentan considerablemente**. Esto ocurre porque al cambiar de puerta, se está aprovechando información adicional (la puerta con la cabra que ha sido revelada), lo que hace que las probabilidades de ganar aumenten de 1/3 a 2/3.
+
+Por el contrario, si no cambias de puerta, las probabilidades de ganar permanecen en 1/3, ya que la elección inicial se realizó sin tener información adicional.
+
+**Resultados obtenidos en el experimento**
+
+1. **Proporción de ganar cambiando de puerta:**
+   - Después de 1000 juegos, la proporción de éxito cambiando de puerta fue **0.665**, lo que es cercano a la probabilidad teórica de 2/3 (66.67%).
+   - Esto confirma que la estrategia de cambiar de puerta **aumenta considerablemente** las probabilidades de ganar el premio.
+
+2. **Proporción de ganar no cambiando de puerta:**
+   - Por otro lado, la proporción de éxito al **no cambiar de puerta** fue **0.335**, lo cual es cercano a la probabilidad teórica de 1/3 (33.33%).
+   - Esto sugiere que, si decides mantener tu elección original, las probabilidades de ganar el premio siguen siendo bajas.
+
+
+El experimento realizado muestra que cambiar de puerta es una estrategia mucho más favorable. La proporción final de **0.665** al cambiar de puerta se acerca a la probabilidad teórica de **2/3**, lo que confirma que cambiar de puerta es la mejor opción para maximizar las posibilidades de ganar. Por otro lado, no cambiar de puerta mantiene las probabilidades de éxito en aproximadamente **1/3**, lo cual es significativamente menos ventajoso.
+
+Por lo tanto, se logra verificar empíricamente la teoría de que cambiar de puerta es la mejor opción para aumentar las chances de ganar el concurso.
+
+
+
 ---
 
 ## Pregunta 4: ¿Independencia?
@@ -293,20 +374,117 @@ Para la segunda parte de este experimento, con las funciones ya creadas, proyect
 
 **Respuesta**
 
-```{r eval=FALSE}
+```{r eval=True}
 # Función para obtener el desarrollo de las apuestas
 ruina <- function(fondos = 100, apuesta = 5){
-  while (0<fondos & fondos<200) {
-    
+  vec_fondos <- numeric()  # Vector para almacenar la evolución de los fondos
+  while (0 < fondos & fondos < 200) {
+    if (runif(1) < 8/19) {  # Probabilidad de ganar
+      fondos <- fondos + apuesta
+    } else {
+      fondos <- fondos - apuesta
+    }
+    vec_fondos <- c(vec_fondos, fondos)  # Almacena los fondos actuales
   }
   return(vec_fondos) # Devuelve un vector con el desarrollo de los fondos
 }
 
+# Graficar los resultados
 plot(ruina(), type="l", col="blue", xlab="N° de juegos", ylab="Fondos", main="Evolución de los fondos (apuesta = 5)")
 plot(ruina(apuesta = 25), type="l", col="blue", xlab="N° de juegos", ylab="Fondos", main="Evolución de los fondos (apuesta = 25)")
 plot(ruina(apuesta = 50), type="l", col="blue", xlab="N° de juegos", ylab="Fondos", main="Evolución de los fondos (apuesta = 50)")
+
 ```
 
+En el primer experimento, se obtuvo la evolución de los fondos hasta que el jugador se quedó sin fondos para jugar, utilizando una lógica basada en una moneda cargada. Se realizaron simulaciones para tres valores de apuestas: 5, 25 y 50 dólares. A continuación se presentan los gráficos correspondientes y un análisis de los resultados obtenidos.
+
+- **Evolución de los fondos con apuesta de 5:**
+
+Con una apuesta de 5 dólares, el jugador tiene una trayectoria relativamente más larga antes de quedarse sin fondos, pero la tendencia general es a la baja, como era de esperarse dado que la probabilidad de ganar es menor al 50%. El fondo se va reduciendo gradualmente hasta llegar a 0.
+
+- **Evolución de los fondos con apuesta de 25:**
+
+Al aumentar la apuesta a 25 dólares, se observa una mayor volatilidad en la evolución de los fondos. El jugador tiene menos margen para recuperar pérdidas y, aunque inicialmente gana algunas rondas, termina perdiendo todos sus fondos en menos juegos que con la apuesta de 5 dólares.
+
+- **Evolución de los fondos con apuesta de 50:**
+
+Finalmente, con una apuesta de 50 dólares, se ve que los fondos suben y bajan de manera brusca debido a que cada juego tiene un impacto considerable en el saldo. La simulación muestra que el jugador eventualmente pierde todos sus fondos después de varias fluctuaciones y de manera mucho más violenta.
+
+
+
+La evolución de los fondos refleja que, aunque con apuestas más pequeñas como 5 dólares el jugador puede sobrevivir más rondas, las probabilidades siguen en su contra y eventualmente termina en bancarrota. Las apuestas más grandes, como 25 y 50 dólares, hacen que el jugador se quede sin fondos más rápidamente debido a la mayor volatilidad y riesgo asociado. Estos resultados confirman que la estrategia del jugador de seguir apostando indefinidamente no es efectiva para evitar la ruina, independientemente del tamaño de la apuesta.
+
+
+
+
+```{r eval=True}
+# Función para realizar la simulación 5000 veces y graficar
+simular_ruina <- function(n_simulaciones = 5000, apuesta = 5){
+  exitos <- 0  # Contador de éxitos
+  resultados <- numeric(n_simulaciones)  # Almacena el resultado final de cada simulación
+
+  for (i in 1:n_simulaciones) {
+    resultado <- ruina(fondos = 100, apuesta = apuesta)
+    
+    # Guardar el resultado final
+    resultados[i] <- tail(resultado, n=1)
+    
+    # Considerar como éxito si los fondos llegan a 200 o más
+    if (resultados[i] >= 200) {
+      exitos <- exitos + 1
+    }
+  }
+  
+  # Calcular la probabilidad de éxito
+  probabilidad_exito <- exitos / n_simulaciones
+  
+  # Graficar el histograma de los resultados finales
+  hist(resultados, breaks = 50, col = "blue", main = paste("Distribución de fondos finales (apuesta =", apuesta, ")"),
+       xlab = "Fondos finales", ylab = "Frecuencia")
+  
+  return(probabilidad_exito)
+}
+
+# Proyectar 5000 apuestas y obtener la probabilidad para cada valor de apuesta
+prob_5 <- simular_ruina(apuesta = 5)
+prob_25 <- simular_ruina(apuesta = 25)
+prob_50 <- simular_ruina(apuesta = 50)
+
+# Mostrar los resultados
+cat("Probabilidad de éxito con apuesta de 5: ", prob_5, "\n")
+cat("Probabilidad de éxito con apuesta de 25: ", prob_25, "\n")
+cat("Probabilidad de éxito con apuesta de 50: ", prob_50, "\n")
+
+# Crear un gráfico de barras para comparar las probabilidades de éxito
+barplot(c(prob_5, prob_25, prob_50), names.arg = c("Apuesta 5", "Apuesta 25", "Apuesta 50"),
+        col = "lightblue", main = "Probabilidad de éxito por apuesta", ylab = "Probabilidad de éxito")
+
+
+```
+
+Para la segunda parte de este experimento, con las funciones ya creadas, se proyectaron 5000 apuestas y se obtuvo la probabilidad a la que converge el experimento empezando con una apuesta de 5, 25 y 50. Para este experimento, se consideró como éxito (1) cuando el valor final de la función `ruina` supera los 200 y como fallo cuando el valor de los fondos es menor o igual a 0.
+
+Los resultados obtenidos fueron los siguientes:
+
+- **Probabilidad de éxito con apuesta de 5**: 0.002
+- **Probabilidad de éxito con apuesta de 25**: 0.2228
+- **Probabilidad de éxito con apuesta de 50**: 0.3436
+
+**Análisis de los gráficos**
+
+1. **Distribución de fondos finales con apuesta de 5:**
+   En el primer gráfico, con una apuesta de 5 dólares, se puede observar que casi todas las simulaciones terminan con el jugador en la ruina, es decir, con fondos cercanos a 0. Esta estrategia de apostar pequeñas cantidades tiene una muy baja probabilidad de éxito, como lo reflejan los resultados, con solo un 0.002 de probabilidad de éxito.
+
+2. **Distribución de fondos finales con apuesta de 25:**
+   En el segundo gráfico, con una apuesta de 25 dólares, aunque la mayoría de las simulaciones aún terminan con el jugador en la ruina, se observa una mejora significativa, con algunas simulaciones donde los fondos alcanzan los 200 dólares. Esto se refleja en la probabilidad de éxito del 22.28%.
+
+3. **Distribución de fondos finales con apuesta de 50:**
+   En el tercer gráfico, con una apuesta de 50 dólares, se aprecia que un número más significativo de simulaciones termina con los fondos en 200 dólares, aunque una cantidad importante aún resulta en la ruina. La probabilidad de éxito con esta estrategia es considerablemente mayor, alcanzando el 34.36%.
+
+4. **Probabilidad de éxito por apuesta:**
+   En el gráfico de barras de la probabilidad de éxito, se visualiza claramente la diferencia en la probabilidad de éxito entre las diferentes apuestas. A medida que el valor de la apuesta aumenta, la probabilidad de éxito también crece, siendo mínima con la apuesta de 5 dólares y máxima con la apuesta de 50 dólares. Sin embargo, esta estrategia también implica un mayor riesgo, ya que con apuestas más grandes, las caídas en los fondos son más drásticas.
+
+En conclusión, apostar una mayor cantidad (como 50 dólares) aumenta considerablemente la probabilidad de éxito, aunque también aumenta el riesgo de perder todo rápidamente. Apostar cantidades pequeñas tiene muy poca probabilidad de éxito, como se ve en el caso de la apuesta de 5 dólares.
 
 
 &nbsp;
