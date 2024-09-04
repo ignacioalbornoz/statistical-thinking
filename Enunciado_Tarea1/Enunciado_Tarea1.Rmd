@@ -7,13 +7,9 @@ output:
 
 ![](banner.png)
 
-<center>
+# Tarea 1: Foundations
 
-<h1>Tarea 1: Foundations</h1>
-
-</center>
-
-<center><strong>CC6104: Statistical Thinking</strong></center>
+**CC6104: Statistical Thinking**
 
 #### **Integrantes :**
 
@@ -35,7 +31,7 @@ output:
 
 ### **Objetivo**<a name="id1"></a>
 
-[Bienvenid\@s](mailto:Bienvenid@s){.email} a la primera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la primera parte del curso, los cuales se enfocan principalmente en análisis exploratorio de datos y conceptos introductorios de probabilidades. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+Bienvenidas y Bienvenidos a la primera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la primera parte del curso, los cuales se enfocan principalmente en análisis exploratorio de datos y conceptos introductorios de probabilidades. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
 
 La tarea consta de ejercicios prácticos con el fín de introducirlos a la programación en R enfocada en el análisis estadístico de datos.
 
@@ -75,7 +71,6 @@ set.seed(123)
 
 ```
 
----
 ## Pregunta 1: Visualización de Datos
 
 Para esta pregunta usted deberá trabajar en base al conjunto de datos `hearth_database.csv`, el cual esta compuesto por las siguientes variables:
@@ -175,7 +170,7 @@ for (var in numeric) {
 }
 ```
 
-------------------------------------------------------------------------
+---
 
 ## Pregunta 2: Teorema Central del Limite
 
@@ -253,7 +248,7 @@ Antes de contestar la pregunta, hay que tener en cuenta que en un histograma la 
 1.  La distribución gamma es asimetrica para una cantidad de muestras igual a 10, mientras que las otras sugieren seguir de cierta forma una distribución normal. Sin embargo, a medida aumentan los muestreos se acerca mas a la distribución normal, de manera mas lenta que las otras.
 2.  La distribución binomial y normal convergen a una distribucion normal de manera más rápida a medida aumenta el numero de muestreos
 
-------------------------------------------------------------------------
+---
 
 ## Pregunta 3: Ley de los Grandes Numeros.
 
@@ -550,7 +545,7 @@ text(x = 1:length(valores), y = valores,
 
 > Al ser una diferencia positiva, se puede observar que los eventos A y B no son independientes, ya que ambos dependen del mismo dado, lo que tiene sentido pues la ocurrencia de un evento afecta la probabilidad del otro.
 
-------------------------------------------------------------------------
+---
 
 ## Pregunta 5: La Ruina del Jugador
 
@@ -686,21 +681,13 @@ En conclusión, apostar una mayor cantidad (como 50 dólares) aumenta considerab
 <hr />
 
 <p style="text-align: center;">
-
 A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a>
-
 </p>
 
 <!-- Add icon library -->
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <!-- Add font awesome icons -->
-
 <p style="text-align: center;">
-
 <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
-
 </p>
-
- 
