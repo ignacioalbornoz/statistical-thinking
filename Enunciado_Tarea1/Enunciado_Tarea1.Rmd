@@ -570,7 +570,7 @@ Para la segunda parte de este experimento, con las funciones ya creadas, proyect
 
 **Respuesta**
 
-```{r eval=True}
+```{r eval=TRUE}
 # Función para obtener el desarrollo de las apuestas
 ruina <- function(fondos = 100, apuesta = 5){
   vec_fondos <- numeric()  # Vector para almacenar la evolución de los fondos
@@ -613,7 +613,7 @@ La evolución de los fondos refleja que, aunque con apuestas más pequeñas como
 
 
 
-```{r eval=True}
+```{r eval=TRUE}
 # Función para realizar la simulación 5000 veces y graficar
 simular_ruina <- function(n_simulaciones = 5000, apuesta = 5){
   exitos <- 0  # Contador de éxitos
