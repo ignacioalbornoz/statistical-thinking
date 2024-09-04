@@ -309,22 +309,81 @@ Se le aconseja que para simular los lanzamientos de dados utilice la función `s
 **Respuesta:**
 
 ```{r eval=FALSE}
-# Primer grupo de eventos
+# Primer grupo de eventos 
 N_lan = 1000 # Numero de lanzamientos
+set.seed(123)
+
+A <- c(1,2,6)
+B <- c(1,2,3,4)
+
+D1 <- sample(1:6, N_lan, replace = T)
+D2 <- sample(1:6, N_lan, replace = T)
   
-L_A =  # Lanzamientos favorables A = c(1, 2, 6)
-L_B =  # Lanzamientos favorables B = c(1, 2, 3, 4)
-L_AB = # Lanzamientos favorables AB = c(1, 2)
+# casos favorables
+L_A <- sum(D1 %in% A)
+L_B <- sum(D2 %in% B)
+
+L_AB <- sum(
+  D1 %in% A & D2 %in% B
+)
+
+# calculamos probabilidades
+P.a <- L_A / N_lan
+P.b <- L_B / N_lan
+P.ab <- L_AB / N_lan
+
+diferencia <- P.ab - (P.a * P.b)
+valores <- c(P.a, P.b, P.ab, diferencia)
+nombres <- c("P(A)", "P(B)", "P(AB)", "P(AB) - P(A)P(B)")
+
+barplot(valores, names.arg = nombres, col = "skyblue", 
+        main = "Primer grupo de eventos",
+        ylab = "Probabilidades",
+        ylim = c(0, max(valores) * 1.2))
+
+text(x = 1:length(valores), y = valores, 
+     label = round(valores, 3), pos = 3)
 ```
+
+> En el gráfico anterior se puede comprobar que A y B son aproximadamente independientes, ya que para serlo completamente la diferencia entre P(AB) con P(A)P(B) deberia ser cercana a 0.
 
 ```{r eval=FALSE}
 # Segundo grupo de eventos
 N_lan = 1000 # Numero de lanzamientos
+set.seed(123)
+
+A <- c(1,2,6)
+B <- c(1,2,3)
+
+D1_D2 <- sample(1:6, N_lan, replace = T)
   
-L_A =  # Lanzamientos favorables A = c(1, 2, 6)
-L_B =  # Lanzamientos favorables B = c(1, 2, 3)
-L_AB = # Lanzamientos favorables AB = c(1, 2)
+# casos favorables
+L_A <- sum(D1_D2 %in% A)
+L_B <- sum(D1_D2 %in% B)
+
+L_AB <- sum(
+  D1_D2 %in% A & D1_D2 %in% B
+)
+
+# calculamos probabilidades
+P.a <- L_A / N_lan
+P.b <- L_B / N_lan
+P.ab <- L_AB / N_lan
+
+diferencia <- P.ab - (P.a * P.b)
+valores <- c(P.a, P.b, P.ab, diferencia)
+nombres <- c("P(A)", "P(B)", "P(AB)", "P(AB) - P(A)P(B)")
+
+barplot(valores, names.arg = nombres, col = "skyblue", 
+        main = "Segundo grupo de eventos",
+        ylab = "Probabilidades",
+        ylim = c(0, max(valores) * 1.2))
+
+text(x = 1:length(valores), y = valores, 
+     label = round(valores, 3), pos = 3)
 ```
+
+> Al ser una diferencia positiva, se puede observar que los eventos A y B no son independientes, ya que ambos dependen del mismo dado, lo que tiene sentido pues la ocurrencia de un evento afecta la probabilidad del otro.
 
 ------------------------------------------------------------------------
 
