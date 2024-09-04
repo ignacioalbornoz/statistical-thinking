@@ -7,58 +7,63 @@ output:
 
 ![](banner.png)
 
-<center> <h1>Tarea 1: Foundations</h1> </center>
-<center><strong>CC6104: Statistical Thinking</strong></center>
-#### **Integrantes :** 
+<center>
 
-- Alumno 1
-- Alumno 2
+<h1>Tarea 1: Foundations</h1>
+
+</center>
+
+<center><strong>CC6104: Statistical Thinking</strong></center>
+
+#### **Integrantes :**
+
+-   Ignacio Albornoz
+-   Alejandra Toro
 
 #### **Cuerpo Docente:**
 
-- Profesor: Felipe Bravo M.
-- Auxiliares: Benjamín Farías, Martín Paredes
-- Ayudantes: Scarleth Betancurt, Emilio Díaz, Kevin Iturra, Renzo Zanca
+-   Profesor: Felipe Bravo M.
+-   Auxiliares: Benjamín Farías, Martín Paredes
+-   Ayudantes: Scarleth Betancurt, Emilio Díaz, Kevin Iturra, Renzo Zanca
 
 ### **Índice:**
 
-1. [Objetivo](#id1)
-2. [Instrucciones](#id2)
-3. [Referencias](#id3)
-4. [Elaboración de Código](#id4)
+1.  [Objetivo](#id1)
+2.  [Instrucciones](#id2)
+3.  [Referencias](#id3)
+4.  [Elaboración de Código](#id4)
 
 ### **Objetivo**<a name="id1"></a>
 
-Bienvenid@s a la primera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la primera parte del curso, los cuales se enfocan principalmente en análisis exploratorio de datos y conceptos introductorios de probabilidades. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+[Bienvenid\@s](mailto:Bienvenid@s){.email} a la primera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la primera parte del curso, los cuales se enfocan principalmente en análisis exploratorio de datos y conceptos introductorios de probabilidades. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
 
-La tarea consta de ejercicios prácticos con el fín de introducirlos a la programación en R enfocada en el análisis estadístico de datos. 
+La tarea consta de ejercicios prácticos con el fín de introducirlos a la programación en R enfocada en el análisis estadístico de datos.
 
 ### **Instrucciones:**<a name="id2"></a>
 
-- La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
-- La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
-- El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
-- Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
-- No serán revisadas tareas desarrolladas en Python.
-- Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
-- Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso. 
-
+-   La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
+-   La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
+-   El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
+-   Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
+-   No serán revisadas tareas desarrolladas en Python.
+-   Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
+-   Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso.
 
 ### **Referencias:**<a name="id3"></a>
 
 Slides de las clases:
 
-- [Introduction to Statistical Thinking](https://github.com/dccuchile/CC6104/blob/master/slides/1_1_ST-intro.pdf)
-- [Introduction to R](https://github.com/dccuchile/CC6104/blob/master/slides/1_2_ST-R.pdf)
-- [Descriptive Statistics](https://github.com/dccuchile/CC6104/blob/master/slides/1_3_ST-explore.pdf)
-- [Probability](https://github.com/dccuchile/CC6104/blob/master/slides/1_4_ST-prob.pdf)
+-   [Introduction to Statistical Thinking](https://github.com/dccuchile/CC6104/blob/master/slides/1_1_ST-intro.pdf)
+-   [Introduction to R](https://github.com/dccuchile/CC6104/blob/master/slides/1_2_ST-R.pdf)
+-   [Descriptive Statistics](https://github.com/dccuchile/CC6104/blob/master/slides/1_3_ST-explore.pdf)
+-   [Probability](https://github.com/dccuchile/CC6104/blob/master/slides/1_4_ST-prob.pdf)
 
 Videos de las clases:
 
-- Introduction to Statistical Thinking: [video1](https://youtu.be/X4SqJu6lExM) [video2](https://youtu.be/YbiQU5TTBX4)
-- Introduction to R: [video1](https://youtu.be/MbeLD3hWWVo) [video2](https://youtu.be/9W_eWCy86F4) [video3](https://youtu.be/QvFXSw2-1r4) [video4](https://youtu.be/y4JY7klrbfQ)
-- Descriptive Statistics: [video1](https://youtu.be/kWNskZ8_98o) [video2](https://youtu.be/_FJ8x9M4b1w) [video3](https://youtu.be/m7VBNZ2mYWI) [video4](https://youtu.be/ylGMJ_aSQk0)
-- Probability: [video1](https://youtu.be/R9AVYV73m1M) [video2](https://youtu.be/zubh1jbRiKE) [video3](https://youtu.be/uiwToagp0z4) [video4](https://youtu.be/RlhN3t_VIyw) [video5](https://youtu.be/4kV1dBaeWVc) [video6](https://youtu.be/MGyXc70JdSk)
+-   Introduction to Statistical Thinking: [video1](https://youtu.be/X4SqJu6lExM) [video2](https://youtu.be/YbiQU5TTBX4)
+-   Introduction to R: [video1](https://youtu.be/MbeLD3hWWVo) [video2](https://youtu.be/9W_eWCy86F4) [video3](https://youtu.be/QvFXSw2-1r4) [video4](https://youtu.be/y4JY7klrbfQ)
+-   Descriptive Statistics: [video1](https://youtu.be/kWNskZ8_98o) [video2](https://youtu.be/_FJ8x9M4b1w) [video3](https://youtu.be/m7VBNZ2mYWI) [video4](https://youtu.be/ylGMJ_aSQk0)
+-   Probability: [video1](https://youtu.be/R9AVYV73m1M) [video2](https://youtu.be/zubh1jbRiKE) [video3](https://youtu.be/uiwToagp0z4) [video4](https://youtu.be/RlhN3t_VIyw) [video5](https://youtu.be/4kV1dBaeWVc) [video6](https://youtu.be/MGyXc70JdSk)
 
 ### **Elaboración de código**<a name="id4"></a>
 
@@ -68,31 +73,102 @@ En la siguiente sección deberá resolver cada uno de los experimentos computaci
 
 Para esta pregunta usted deberá trabajar en base al conjunto de datos `hearth_database.csv`, el cual esta compuesto por las siguientes variables:
 
-- target: Señala si el paciente tuvo un infarto.
-- sex: Sexo de los sujetos de prueba.
-- fbs: Azúcar en la sangre con ayunas. Esta variable señala solo si se encuentra <=120 o >120.
-- exang: Angina de pecho inducida por el ejercicio.
-- cp: Tipo de dolor de pecho.
-- restecg: Resultados electrocardiográficos en reposo.
-- slope: Pendiente del segmento ST máximo de ejercicio.
-- ca: Número de buques principales.
-- thal: Thalassemia.
-- age: Edad en años.
-- trestbps: Presión arterial en reposo.
-- chol: colesterol sérico en mg/dl.
-- thalach: Frecuencia cardíaca máxima alcanzada.
-- oldpeak: Depresión del ST inducida por el ejercicio en relación con el reposo.
+-   target: Señala si el paciente tuvo un infarto.
+-   sex: Sexo de los sujetos de prueba.
+-   fbs: Azúcar en la sangre con ayunas. Esta variable señala solo si se encuentra \<=120 o \>120.
+-   exang: Angina de pecho inducida por el ejercicio.
+-   cp: Tipo de dolor de pecho.
+-   restecg: Resultados electrocardiográficos en reposo.
+-   slope: Pendiente del segmento ST máximo de ejercicio.
+-   ca: Número de buques principales.
+-   thal: Thalassemia.
+-   age: Edad en años.
+-   trestbps: Presión arterial en reposo.
+-   chol: colesterol sérico en mg/dl.
+-   thalach: Frecuencia cardíaca máxima alcanzada.
+-   oldpeak: Depresión del ST inducida por el ejercicio en relación con el reposo.
 
 En base al dataset propuesto realice un análisis exploratorio de los datos (EDA). Para su análisis enfoquen el desarrollo en las siguientes tareas:
 
-- [ ] Obtenga la media, mediana, quintiles y valores máximos desde los datos que componen el dataset.
-- [ ] Obtenga la Matriz de correlación de Pearson y visualice la relación entre las variables numéricas.
-- [ ] Visualice los boxplot para las variables numéricas.
-- [ ] Visualice a través de un histograma como distribuyen las variables respecto a los TARGET.
+-   [x] Obtenga la media, mediana, quintiles y valores máximos desde los datos que componen el dataset.
+-   [x] Obtenga la Matriz de correlación de Pearson y visualice la relación entre las variables numéricas.
+-   [x] Visualice los boxplot para las variables numéricas.
+-   [ ] Visualice a través de un histograma como distribuyen las variables respecto a los TARGET.
 
 **Respuesta**
 
----
+```{r eval=FALSE}
+df <- read.csv(file = "hearth_database.csv", header = T, sep = ",")
+```
+
+```{r}
+# Considerando solo las variables numericas
+categoric <- names(df)[sapply(df, is.character)]
+df.categoric <- lapply(df[categoric], function(x) as.numeric(as.factor(x)))
+names.categoric <- names(df.categoric)
+
+numeric <- names(df)[sapply(df, is.numeric)]
+
+# Media
+media_num <- sapply(df[numeric], mean)
+media_cat <- sapply(df.categoric[names.categoric], mean)
+print(media_num)
+print(media_cat)
+
+# Mediana
+mediana_num <- sapply(df[numeric], median)
+mediana_cat <- sapply(df.categoric[names.categoric], median)
+print(mediana_num)
+print(mediana_cat)
+
+# Quintiles
+quintiles_num <- sapply(df[numeric], quantile, seq(0,1,0.2))
+quintiles_cat <- sapply(df.categoric[names.categoric], quantile, seq(0,1,0.2))
+print(quintiles_num)
+print(quintiles_cat)
+
+# Valores maximos
+maximos_num <- sapply(df[numeric], max)
+maximos_cat <- sapply(df.categoric[names.categoric], max)
+print(maximos_num)
+print(maximos_cat)
+```
+
+```{r}
+# Matriz de correlacion de Pearson de variables numericas
+cor(df[numeric])
+```
+
+```{r}
+library(ggplot2)
+# Boxplot para cada variable numerica
+for (var in numeric){
+  boxplot(df[[var]], ylab=var, xlab="observaciones", main=paste("Boxplot ", var))
+}
+
+```
+
+```{r}
+# Visualice a través de un histograma como distribuyen las variables respecto a los TARGET
+
+levels_target <- levels(as.factor(df$target))
+
+# histogramas para cada variable numerica segun el target
+for (var in numeric) {
+  for (level in levels_target) { # YES or NO
+    
+    data_to_plot <- df[[var]][df$target == level]
+    hist(data_to_plot,
+         main = paste("Histograma de", var, "para target =", level),
+         xlab = var,
+         ylab = "Frecuencia",
+         col = "lightblue",
+         border = "black")
+  }
+}
+```
+
+------------------------------------------------------------------------
 
 ## Pregunta 2: Teorema Central del Limite
 
@@ -103,20 +179,79 @@ Pruebe el teorema central del limite aplicando un muestreo de la media en las di
 ```{r eval=FALSE}
 # Definición de variables o estructuras necesarias para el muestreo.
 n <- 1000
+muestreos <- c(10, 100, 1000, 5000)
+set.seed(123)
 
-# Realizar el muestreo de las distribuciones.
-for(i in 1:n) {
+#my_list <- vector("list", length=muestreos)
+mean_gamma_f <- list()
+mean_normal_f <- list()
+mean_binomial_f <- list()
+
+for(m in muestreos){
+  mean_gamma <- numeric(m)
+  mean_normal <- numeric(m)
+  mean_binomial <- numeric(m)
   
+  # Muesteo distribuciones
+  for(i in 1:m){
+    sample_gamma <- rgamma(n, shape=2)
+    mean_gamma[i] <- mean(sample_gamma)
+    
+    sample_normal <- rnorm(n, mean=0, sd=1)
+    mean_normal[i] <- mean(sample_normal)
+    
+    sample_binomial <- rbinom(n, size=10, prob=0.5)
+    mean_binomial[i] <- mean(sample_binomial)
+  }
+  
+  mean_gamma_f[[as.character(m)]] <- mean_gamma
+  mean_normal_f[[as.character(m)]] <- mean_normal
+  mean_binomial_f[[as.character(m)]] <- mean_binomial
 }
-
-# Código para gráficos
 ```
 
----
+```{r}
+# Código para gráficos
+par(mfrow = c(3, 4))
+
+# Hicimos histogramas para ver como son las distribuciones de las medias muestrales
+for (m in muestreos) {
+  hist(mean_gamma_f[[as.character(m)]], 
+       main = paste("Gamma, n =", m), 
+       xlab = "Media Muestral", 
+       col = "lightblue", 
+       border = "black", 
+       prob = TRUE)
+  
+  hist(mean_normal_f[[as.character(m)]], 
+       main = paste("Normal, n =", m), 
+       xlab = "Media Muestral", 
+       col = "lightgreen", 
+       border = "black", 
+       prob = TRUE)
+  
+  hist(mean_binomial_f[[as.character(m)]], 
+       main = paste("Binomial, n =", m), 
+       xlab = "Media Muestral", 
+       col = "lightcoral", 
+       border = "black", 
+       prob = TRUE)
+}
+```
+
+> ¿El efecto ocurre con el mismo número de muestreo para todas las distribuciones?
+
+Antes de contestar la pregunta, hay que tener en cuenta que en un histograma la convergencia se observa cuando las medias muestrales se aproximan a una distribución normal a medida que se aumentan el numro de muestros. Con esto, se puede observar que el efecto fel TLC no ocurre con el mismo numero de muestreos para todas las distribuciones, por ejemplo:
+
+1.  La distribución gamma es asimetrica para una cantidad de muestras igual a 10, mientras que las otras sugieren seguir de cierta forma una distribución normal. Sin embargo, a medida aumentan los muestreos se acerca mas a la distribución normal, de manera mas lenta que las otras.
+2.  La distribución binomial y normal convergen a una distribucion normal de manera más rápida a medida aumenta el numero de muestreos
+
+------------------------------------------------------------------------
 
 ## Pregunta 3: Ley de los Grandes Numeros.
 
 #### Lanzamiento de monedas
+
 Realice el experimento de lanzar una moneda cargada 1000 veces y observe el comportamiento que tiene la probabilidad de salir cara. Para realizar el experimento considere que la moneda tiene una probabilidad de $5/8$ de salir cara. Grafique el experimento para las secuencias de intentos que van desde 1 a 1000, señalando el valor en que converge la probabilidad de salir cara.
 
 **Respuesta**
@@ -130,18 +265,19 @@ for (lanzamientos in 1:1000) {
 # Gráfico de la convergencia
 ```
 
-#### El problema de Monty Hall 
+#### El problema de Monty Hall
 
-Remontándonos en la televisión del año 1963, en USA existía un programa de concursos donde los participantes debían escoger entre 3 puertas para ganar un premio soñado. El problema del concurso era que solo detrás de 1 puerta estaba el premio mayor, mientras que detrás de las otras dos habían cabras como "premio". 
+Remontándonos en la televisión del año 1963, en USA existía un programa de concursos donde los participantes debían escoger entre 3 puertas para ganar un premio soñado. El problema del concurso era que solo detrás de 1 puerta estaba el premio mayor, mientras que detrás de las otras dos habían cabras como "premio".
 
 Una de las particularidades de este concurso, es que cuando el participante escogía una puerta, el animador del show abría una de las puertas que no fue escogida por el participante (Obviamente la puerta abierta por el animador no contenía el premio). Tras abrir la puerta, el animador consultaba al participante si su elección era definitiva, o si deseaba cambiar la puerta escogida por la otra puerta cerrada. Un vídeo que puede ayudar a comprender mejor este problema en el siguiente [link](https://www.youtube.com/watch?v=rSa_uiKncEI).
 
 Imagine que usted es participante del concurso y desea calcular la probabilidad de ganar el gran premio **si cambia de puerta** en el momento que el animador se lo ofrece. Utilizando listas/arrays/vectores simule las puertas del concurso, dejando aleatoriamente el premio en alguna posición del array. Hecho esto, genere un numero de forma aleatoria para escoger una de las puerta (posiciones de la estructura), para luego ver si cambiando de posición tendrá mayores posibilidades de ganar el premio. Genere N veces el experimento y grafique cada una de las iteraciones, tal como se hizo en el ejercicio de las monedas.
 
 <p align="center">
-  <img src="https://brilliant-staff-media.s3-us-west-2.amazonaws.com/tiffany-wang/gWotbuEdYC.png" width="350">
-</p>
 
+<img src="https://brilliant-staff-media.s3-us-west-2.amazonaws.com/tiffany-wang/gWotbuEdYC.png" width="350"/>
+
+</p>
 
 **Respuesta:**
 
@@ -160,10 +296,11 @@ n_juegos <- function(n = 10 ,cambiar_puerta = TRUE){
 }
 ```
 
----
+------------------------------------------------------------------------
 
 ## Pregunta 4: ¿Independencia?
-Ustedes disponen de los dados D1 y D2, los cuales no están cargados y son utilizados para comprobar que $\mathbb{P}(AB)=\mathbb{P}(A)\mathbb{P}(B)$ cuando el evento A es independiente del B. Para estudiar la independencia considere que los eventos A y B se definen de la siguiente manera; sea A el evento dado por los valores obtenidos en el lanzamiento del dado D1, este está compuesto por $A=\{D1=1,D1=2,D1=6\}$. Por otro lado, el evento B viene dado por los valores obtenidos con el dado D2, el que está conformado por $B=\{D2=1,D2=2,D2=3,D2=4\}$. Con esto, tendremos un $\mathbb{P}(A)=1/2$, $\mathbb{P}(𝐵)=2/3$ y $\mathbb{P}(AB)=1/3$. Compruebe de forma gráfica que al realizar 1000 lanzamientos (u otro valor grande que usted desea probar) se visualiza que $\mathbb{P}(AB)=\mathbb{P}(A)\mathbb{P}(B)$. 
+
+Ustedes disponen de los dados D1 y D2, los cuales no están cargados y son utilizados para comprobar que $\mathbb{P}(AB)=\mathbb{P}(A)\mathbb{P}(B)$ cuando el evento A es independiente del B. Para estudiar la independencia considere que los eventos A y B se definen de la siguiente manera; sea A el evento dado por los valores obtenidos en el lanzamiento del dado D1, este está compuesto por $A=\{D1=1,D1=2,D1=6\}$. Por otro lado, el evento B viene dado por los valores obtenidos con el dado D2, el que está conformado por $B=\{D2=1,D2=2,D2=3,D2=4\}$. Con esto, tendremos un $\mathbb{P}(A)=1/2$, $\mathbb{P}(𝐵)=2/3$ y $\mathbb{P}(AB)=1/3$. Compruebe de forma gráfica que al realizar 1000 lanzamientos (u otro valor grande que usted desea probar) se visualiza que $\mathbb{P}(AB)=\mathbb{P}(A)\mathbb{P}(B)$.
 
 Hecho lo anterior, compruebe el comportamiento de un segundo grupo de eventos, dados por el lanzamiento de solo el dado D1. Donde, los eventos para D1 quedan definidos como: $A =\{D1=1,D1=2,D1=6\}$ y $B=\{D1=1,D1=2,D1=3\}$. ¿Se observa independencia en este experimento?.
 
@@ -189,22 +326,23 @@ L_B =  # Lanzamientos favorables B = c(1, 2, 3)
 L_AB = # Lanzamientos favorables AB = c(1, 2)
 ```
 
----
+------------------------------------------------------------------------
+
 ## Pregunta 5: La Ruina del Jugador
+
 Un amigo ludópata suyo le comenta que el truco de jugar en el casino esta en no parar de apostar y apostando lo mínimo posible. Ya que así, tienes mas probabilidades de ganar el gran pozo que acumula el juego. Usted sabiendo la condición de su amigo, decide no creer en su conjetura y decide probar esto a través de un experimento.
 
 Para realizar el experimento usted decide asumir las siguientes declaraciones, bajo sus observaciones:
 
-- La probabilidad de ganar en un juego del casino es $8/19$
-- Sabe que su amigo *solo* posee siempre fondos en el rango de 0 a 200 dolares.
-- Las apuestas como mínimo deben ser igual a 5 dolares.
-- El monto de las apuestas no cambia y son siempre igual a la primera. Por ejemplo, si su amigo apuesta 50 dolares, todos los próximos juegos apuesta 50 hasta que se acaba su dinero.
-- Usted pierde cuando se le acaban los fondos.
+-   La probabilidad de ganar en un juego del casino es $8/19$
+-   Sabe que su amigo *solo* posee siempre fondos en el rango de 0 a 200 dolares.
+-   Las apuestas como mínimo deben ser igual a 5 dolares.
+-   El monto de las apuestas no cambia y son siempre igual a la primera. Por ejemplo, si su amigo apuesta 50 dolares, todos los próximos juegos apuesta 50 hasta que se acaba su dinero.
+-   Usted pierde cuando se le acaban los fondos.
 
 En el primer experimento deberá obtener la evolución de los fondos hasta que el jugador se queda sin fondos para jugar. Puede ser útil seguir la lógica de una moneda cargada para realizar esto. Pruebe esto con una apuesta igual a 5, 25 y 50 graficando los resultados. Comente los resultados obtenidos.
 
 Para la segunda parte de este experimento, con las funciones ya creadas, proyecte 5000 apuestas y obtenga la probabilidad a la que converge el experimento empezando con una apuesta de: 5, 25 y 50. Para este experimento considerar como éxito (1) cuando su función ruina supera los 200 y considere lo contrario cuando su función perdida es menor o igual a 0.
-
 
 **Respuesta**
 
@@ -222,18 +360,26 @@ plot(ruina(apuesta = 25), type="l", col="blue", xlab="N° de juegos", ylab="Fond
 plot(ruina(apuesta = 50), type="l", col="blue", xlab="N° de juegos", ylab="Fondos", main="Evolución de los fondos (apuesta = 50)")
 ```
 
+ 
 
-
-&nbsp;
 <hr />
-<p style="text-align: center;">A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a></p>
+
+<p style="text-align: center;">
+
+A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a>
+
+</p>
 
 <!-- Add icon library -->
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <!-- Add font awesome icons -->
+
 <p style="text-align: center;">
-    <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
+
+<a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
+
 </p>
 
-&nbsp;
+ 
