@@ -1,0 +1,454 @@
+---
+title: "Tarea 2"
+output:
+  html_document:
+    df_print: paged
+---
+
+![](banner.png)
+
+<center> <h1>Tarea 2: Frequentist Inference </h1> </center>
+<center><strong>CC6104: Statistical Thinking</strong></center>
+#### **Integrantes :** 
+
+- Alumno 1
+- Alumno 2
+
+#### **Cuerpo Docente:**
+
+- Profesor: Felipe Bravo M.
+- Auxiliares: Martín Paredes, Benjamín Farías
+- Ayudantes: Renzo Zanca, Kevin Iturra, Emilio Díaz, Scarleth Betancurt
+            
+
+#### **Fecha límite de entrega:**
+
+### **Índice:**
+
+1. [Objetivo](#id1)
+2. [Instrucciones](#id2)
+3. [Referencias](#id3)
+2. [Elaboración de Código](#id4)
+
+### **Objetivo**<a name="id1"></a>
+
+Bienvenid@s a la segunda tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la segunda parte del curso, los cuales se enfocan principalmente en inferencia estadística, diseño de experimentos y test de hipótesis. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+
+La tarea consta de una parte teórica que busca evaluar conceptos vistos en clases. Seguido por una parte práctica con el fin de introducirlos a la programación en R enfocada en el análisis estadístico de datos. 
+
+### **Instrucciones:**<a name="id2"></a>
+
+- La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
+- La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
+- El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
+- Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
+- No serán revisadas tareas desarrolladas en Python.
+- Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
+- Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso. 
+
+
+### **Referencias:**<a name="id3"></a>
+
+Slides de las clases:
+
+- [Introduction to Statistical Inference](https://github.com/dccuchile/CC6104/blob/master/slides/ST-inference.pdf)
+- [Design of Experiments & Hypothesis Testing](https://github.com/dccuchile/CC6104/blob/master/slides/ST-hypothesis.pdf)
+
+Enlaces a videos de las clases:
+
+- Introduction to Statistical Inference: [video1](https://youtu.be/A0BAhO9_RSI) [video2](https://youtu.be/6Io555e2stM) [video3](https://youtu.be/2-Q2f6zmTns) [video4](https://youtu.be/Hp2A5EJoXbk) [video5](https://youtu.be/M0Ag4bww7Q0) [video6](https://youtu.be/K7khgecup3I) [video7](https://youtu.be/uZ126Lh3L-k) [video8](https://youtu.be/kHSPx99nJ7g)
+- Design of Experiments & Hypothesis Testing: [video1](https://youtu.be/3MueyHnNNig) [video2](https://youtu.be/JuyIrya23E0) [video3](https://youtu.be/OXTyG6DIvK4) [video4](https://youtu.be/95QeSwrNoLI) [video5](https://youtu.be/ZCr3WCdc-54) [video6](https://youtu.be/T6ZR0KoKhBQ)
+
+Documentación:
+
+- [Boostrap en r](https://www.datacamp.com/community/tutorials/bootstrap-r)
+- [ggplot2](https://ggplot2.tidyverse.org/)
+
+# Elaboración de Código<a name="id4"></a>
+
+En la siguiente sección deberá resolver cada uno de los experimentos computacionales a través de la programación en R. Para esto se le aconseja que cree funciones en R, ya que le facilitará la ejecución de gran parte de lo solicitado.
+
+Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 2 son las siguientes:
+
+```{r, echo=FALSE, warning=FALSE}
+# Manipulación de estructuras
+library(tidyverse)
+
+# Para realizar plots
+library(ggplot2)
+library(plotly)
+
+# Manipulación de varios plots en una imagen.
+library(gridExtra)
+```
+
+Elimine ``eval=FALSE`` para ejecutar las celdas.
+
+### Pregunta 1: Estimadores.
+
+- [ ] Considere una serie de variables aleatorias $X_i$ que siguen una distribución de Bernoulli de parámetro $p=0.5$ y un estimador de $p$ dado por $\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \displaystyle{\sum_{i=1}^{n}}X_{i}$ donde $\epsilon_{\sigma} \sim \mathcal{N}(0,\sigma)$. Para $\sigma = 0, 1, 2, 4$ grafique el valor de $\hat{p}_{n, \sigma}$ y comparelo con el valor verdadero. Calcule el sesgo del estimador para cada valor de $\sigma$.
+
+```{r, eval=FALSE}
+# sigma = 0
+cte <- rep(0.5,1000)
+x <- 1:1000
+data <- c()
+
+for (n in x) {
+  #...
+}
+```
+
+```{r, eval=FALSE}
+# sigma = 1
+cte <- rep(0.5,1000)
+x <- 1:1000
+data <- c()
+```
+
+```{r, eval=FALSE}
+# sigma = 2
+cte <- rep(0.5,1000)
+x <- 1:1000
+data <- c()
+```
+
+```{r, eval=FALSE}
+# sigma = 4
+cte <- rep(0.5,1000)
+x <- 1:1000
+data <- c()
+```
+
+> Respuesta
+
+- [ ] ¿Qué puede decir del sesgo de los estimadores $\hat{p}_{n,\sigma}$?¿Son los estimadores con menos sesgo más precisos? Justifique.
+
+> Respuesta
+
+### Pregunta 2: Intervalo de Confidencia
+
+En las preguntas 2, 3 y 4 deberá trabajar con el dataset ``diabetes_prediction_dataset``.
+
+```{r}
+datos <- read.csv("diabetes_prediction_dataset.csv", header = TRUE)
+head(datos)
+```
+
+Una forma de estimar la distribución de la media de una población es a través de la realización de la `sampling distribution` de una distribución cualquiera. El valor obtenido en cada sampling distribution nos entrega un estimador de la media que posee una determinada distribución de la población. Sabiendo esto, calcule la `sampling distribution` de las columnas ``bmi`` y ``blood_glucose_level``, obteniendo el intervalo de confianza de $95\%$ para cada una de las medias obtenidas desde la distribución. Para realizar este experimento considere los siguientes puntos:
+
+- [ ] Obtener las medias y desviaciones estándar de la población real.
+- [ ] Realizar una `sampling distribution` con un tamaño de muestra igual a $100$. Repita la obtención de la media un número elevado de veces (recomendación $5000$ veces).
+- [ ] Calcular el intervalo de confianza para cada uno de las medias obtenidas en las iteraciones.
+- [ ] De acuerdo a los valores obtenidos (medias e intervalos de confianza), grafique cada una de las medias obtenidas en conjunto a sus intervalos de confianza. Aquí debe notar que, si el intervalo de confianza contiene a la media de la población, este se considerará como parte del intervalo de confianza del $95\%$, haga un conteo de cuantos valores están contenidos en este intervalo. Para graficar los intervalos deconfianza puede ser útil utilizar forest plot.
+- [ ] Compare las estimaciones para ``bmi`` y ``blood_glucose_level`` y señale que diferencias y similitudes encuentra entre estas (en cuanto a la calidad de la estimación, no los valores obtenidos). De una explicación de por qué cree que se dan las similitudes/diferencias.
+
+**Hints**: 
+
+- Para comparar comparar las 2 estimaciones puede ser útil normalizar ``bmi`` y ``blood_glucose_level`` a una misma escala.
+- Para realizar la `sampling distribution` podría serle útil el comando `sample()`.
+- Puede ser útil generar un dataframe para graficar con ggplot2.
+
+**Respuesta:**
+
+```{r, eval=FALSE}
+
+# Definimos tamaños de muestreo
+tamano_muestra = 100
+n_muestras = 10000
+
+# Inicializamos estructuras necesarias
+list_mean_bmi = vector()
+list_interval_bmi = vector()
+list_typeCI_bmi = vector()
+list_prop_bmi = vector()
+sucess_bmi = 0
+
+list_mean_bgl = vector()
+list_interval_bgl = vector()
+list_typeCI_bgl = vector()
+list_prop_bgl = vector()
+sucess_bgl = 0
+
+# Obtenemos la media y desviación estándar de cada columna
+
+
+# Sampling distribution, calculo del intervalo de confianza y proporción.
+for (i in 1:n_muestras) {
+  
+}
+
+# Generamos dataframes para plotear mas facilmente los datos.
+
+
+```
+
+```{r, eval=FALSE}
+# Plot de Intervalos de confianza
+
+
+```
+
+```{r, eval=FALSE}
+# Plot de Intervalos de confianza
+
+
+```
+
+```{r, eval=FALSE}
+# Plot de proporción de CI
+
+```
+
+> Respuesta
+
+### Pregunta 3: Estimación de Máxima Verosimilitud
+
+El objetivo de esta parte será obtener los parámetros de las distribuciones de la media y la mediana de ``bmi``. Para responder la pregunta realice los siguientes puntos:
+
+- [ ] Simule la distribución empírica a través de mustras con repetición, como las de la pregunta anterior, y grafique los histogramas de la media y mediana.
+- [ ] Utilice la estimación logaritmica de máxima verosimilitud negativa para obtener los parámetros de estas distribuciones.
+- [ ] Gráfique a traves de un gráfico de calor el rango de valores en que se mueve la solución del problema de likelihood (puede ser útil `persp()` o `filled.contour()`).
+- [ ] Aplique el comando `nlminb()` sobre la likelihood y encuentre el máximo o mínimo del problema a optimizar.
+- [ ] Genere muestras lo suficientemente grandes de las distribuciones normales con los parámetros obtenidos por máxima verosimilitud, y comparelas con la distribución empírica mediante histogramas.
+
+Cabe señalar que el método de máxima verosimilitud deberá ser programado por usted y no podrá utilizar librerías que entreguen el valor directo (por ejemplo la librería MASS).
+
+**Respuesta**
+
+```{r, eval=FALSE}
+# Obtenemos métricas de muestreo con repetición
+means <- c()
+medis <- c()
+n_muestras <- 10000
+tamano_muestra <- 100
+
+for (i in 1:n_muestras) {
+  
+}
+
+# dataframe con las medias y medianas de las muestras
+
+```
+
+```{r, eval=FALSE}
+# Histograma media
+```
+
+```{r, eval=FALSE}
+# Histograma mediana
+```
+
+```{r, eval=FALSE}
+# Media
+# función log likelihood
+ll_plot <- function(mu, sigma) {
+  # ...
+}
+
+ll_plot <- Vectorize(ll_plot)
+
+# definir espacio donde se va a evaluar ll_plot
+mu_m <- 
+sigma_m <- 
+likelihood_m <- outer(X=mu_m, Y=sigma_m, ll_plot)
+
+filled.contour(x=mu_m, y=sigma_m, z=likelihood_m, xlab=expression(mu), 
+               ylab=expression(sigma), color = topo.colors)
+```
+
+```{r, eval=FALSE}
+# Mediana
+# función log likelihood
+ll_plot <- function(mu, sigma) {
+  # ...
+}
+
+ll_plot <- Vectorize(ll_plot)
+
+# definir espacio donde se va a evaluar ll_plot
+mu_d <-
+sigma_d <-
+likelihood_d <- outer(X=mu_d, Y=sigma_d, ll_plot)
+
+filled.contour(x=mu_d, y=sigma_d, z=likelihood_d, xlab=expression(mu), 
+               ylab=expression(sigma), color = topo.colors)
+```
+
+```{r, eval=FALSE}
+likelihood_mean <- function(param) {
+  # Definimos los parametros de entrada de la funcion
+  mu <- param[1]
+  sigma <- param[2]
+  # Definimos la likelihood como la suma logaritmica de la función de densidad
+  # ...
+}
+
+# Agrrgue el rango donde operará nlminb
+nlminb(objective=likelihood_mean, start=c(, ), lower=c(, ), upper=c(, ))
+```
+
+```{r, eval=FALSE}
+likelihood_med <- function(param) {
+  # Definimos los parametros de entrada de la funcion
+  mu <- param[1]
+  sigma <- param[2]
+  # Definimos la likelihood como la suma logaritmica de la función de densidad
+  # ...
+}
+
+# Agrrgue el rango donde operará nlminb
+nlminb(objective=likelihood_med, start=c(, ), lower=c(, ), upper=c(, ))
+```
+
+```{r, eval=FALSE}
+# Muestra de medias
+
+
+# Histogrmas
+
+```
+
+```{r, eval=FALSE}
+# Muestra de medianas
+
+
+# Histogrmas
+
+```
+
+### Pregunta 4: Bootstrap I
+
+En esta pregunta se error e inetrvalo de confianza para la varianza de la columna ``HbA1c_level``.
+
+Las actividades por realizar son las siguientes:
+
+- [ ] Programar el método Bootstrap para calcular el error estándar de la varianza. No se permite la utilización de librerías de bootstrap para esta parte.
+- [ ] Visualizar a través de un de puntos las distintas varianzas obtenidas al realizar el muestreo con Bootstrap y comparar con el valor real.
+- [ ] Visualizar a través de un gráfico el histograma obtenido al realizar el muestreo con Bootstrap y comparar con el valor real.
+- [ ] Obtener el 95% de intervalo de confianza de la estimación.
+- [ ] ¿Qué puede se inferir a pertir de los resutados de Bootstrap?
+
+**Respuesta:**
+
+
+```{r, eval=FALSE}
+# Bootstrap
+B <- 5000
+largo <- length(datos$HbA1c_level)
+output <- c()
+
+for (it in 1:B) {
+  
+}
+```
+
+```{r, eval=FALSE}
+# Gráfico de puntos
+
+```
+
+```{r, eval=FALSE}
+# Histogrma
+
+```
+
+
+```{r, eval=FALSE}
+# Obtenemos error e intervalos de confianze
+se_vars <-
+z_a2 <-
+alpha <-
+
+# límite inferios
+l.CI <- 
+# límite superior
+u.CI <- 
+
+sprintf('El intervalo de confidencia de 95%% de las varianzas es: (%.3f,%.3f)', l.CI , u.CI)
+sprintf('El SE de la varianzas es: (%.3f)', se_vars)
+```
+
+> Respuesta
+
+### Pregunta 5: Bootstrap II
+
+El siguiente código genera una regresión lineal de ``bmi`` con respecto a ``age``, es decir, una función lineal de ``age``, $y(age) = b + m\cdot age$, que pretende determinar el valor de ``bmi``.
+
+```{r}
+linearMod <- lm(bmi ~ age, data=datos)
+print(linearMod)
+```
+
+```{r}
+m <- linearMod$coefficients["age"]
+b <- linearMod$coefficients["(Intercept)"]
+
+ggplot() +
+  geom_point(aes(x=datos$age, y=datos$bmi)) +
+  geom_line(aes(x=datos$age, y=datos$age*m+b), color="red") +
+  ggtitle("Regresión lineal") +
+  ylab("bmi") + 
+  xlab("Age")
+```
+
+Repita el proceso de la pregunta 4 para estimar el error e intervalos de confianza de los parámetros de la regresión ($m$ y $b$). ¿Qué indican los resultados de Bootstrap?¿Un valor bajo en el error significa que la regresión es buena? 
+
+```{r, eval=FALSE}
+# Bootstrap
+B <- 500
+largo <- 1000
+output_m <- c()
+output_b <- c()
+
+for (it in 1:B) {
+  
+}
+```
+
+```{r, eval=FALSE}
+# Obtenemos error e intervalos de confianze
+se_m <- 
+z_a2 <-
+alpha <-
+
+# límite inferios
+l.CI <- 
+# límite superior
+u.CI <- 
+
+sprintf('El intervalo de confidencia de 95%% de las varianzas es: (%.3f,%.3f)', l.CI , u.CI)
+sprintf('El SE de la varianzas es: (%.3f)', se_m)
+```
+
+```{r, eval=FALSE}
+# Obtenemos error e intervalos de confianze
+se_b <- 
+z_a2 <-
+alpha <-
+
+# límite inferios
+l.CI <- 
+# límite superior
+u.CI <- 
+
+sprintf('El intervalo de confidencia de 95%% de los sesgos es: (%.3f,%.3f)', l.CI , u.CI)
+sprintf('El SE del sesgo es: (%.3f)', se_b)
+```
+
+> Respuesta
+
+&nbsp;
+<hr />
+<p style="text-align: center;">A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a></p>
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
+<!-- Add font awesome icons -->
+<p style="text-align: center;">
+    <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
+    <a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+</p>
+
+&nbsp;
