@@ -70,6 +70,9 @@ En la siguiente sección deberá resolver cada uno de los experimentos computaci
 
 Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 2 son las siguientes:
 
+
+
+
 ```{r, echo=FALSE, warning=FALSE}
 # Manipulación de estructuras
 library(tidyverse)
@@ -88,39 +91,96 @@ Elimine ``eval=FALSE`` para ejecutar las celdas.
 
 - [ ] Considere una serie de variables aleatorias $X_i$ que siguen una distribución de Bernoulli de parámetro $p=0.5$ y un estimador de $p$ dado por $\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \displaystyle{\sum_{i=1}^{n}}X_{i}$ donde $\epsilon_{\sigma} \sim \mathcal{N}(0,\sigma)$. Para $\sigma = 0, 1, 2, 4$ grafique el valor de $\hat{p}_{n, \sigma}$ y comparelo con el valor verdadero. Calcule el sesgo del estimador para cada valor de $\sigma$.
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # sigma = 0
-cte <- rep(0.5,1000)
+sigma = 0
+cte <- rep(0.5, 1000)
 x <- 1:1000
 data <- c()
 
 for (n in x) {
-  #...
+  X <- rbinom(n, size = 1, prob = 0.5)  # Simular n variables aleatorias de Bernoulli
+  p_estimado <- (1 / n) * sum(X)  # Calcular p estimado
+  epsilon_sigma <- rnorm(1, mean = 0, sd = sigma)  # Agregar el ruido una sola vez
+  p_estimado <- p_estimado + epsilon_sigma
+  data <- c(data, p_estimado)
 }
+
+plot(x, data, type = "l", col = "blue", ylim = c(-5, 5), main = "Estimador con sigma = 0", ylab = "p estimado", xlab = "n")
+abline(h = 0.5, col = "red", lty = 2)  # Valor verdadero de p
+legend("topright", legend = c("Estimador", "Valor verdadero"), col = c("blue", "red"), lty = c(1, 2))
+
+
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # sigma = 1
-cte <- rep(0.5,1000)
+sigma = 1
+cte <- rep(0.5, 1000)
 x <- 1:1000
 data <- c()
+
+for (n in x) {
+  X <- rbinom(n, size = 1, prob = 0.5)  # Simular n variables aleatorias de Bernoulli
+  p_estimado <- (1 / n) * sum(X)  # Calcular p estimado
+  epsilon_sigma <- rnorm(1, mean = 0, sd = sigma)  # Agregar el ruido una sola vez
+  p_estimado <- p_estimado + epsilon_sigma
+  data <- c(data, p_estimado)
+}
+
+plot(x, data, type = "l", col = "green", ylim = c(-5, 5), main = "Estimador con sigma = 1", ylab = "p estimado", xlab = "n")
+abline(h = 0.5, col = "red", lty = 2)  # Valor verdadero de p
+legend("topright", legend = c("Estimador", "Valor verdadero"), col = c("green", "red"), lty = c(1, 2))
+
+
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # sigma = 2
-cte <- rep(0.5,1000)
+sigma = 2
+cte <- rep(0.5, 1000)
 x <- 1:1000
 data <- c()
+
+for (n in x) {
+  X <- rbinom(n, size = 1, prob = 0.5)  # Simular n variables aleatorias de Bernoulli
+  p_estimado <- (1 / n) * sum(X)  # Calcular p estimado
+  epsilon_sigma <- rnorm(1, mean = 0, sd = sigma)  # Agregar el ruido una sola vez
+  p_estimado <- p_estimado + epsilon_sigma
+  data <- c(data, p_estimado)
+}
+
+plot(x, data, type = "l", col = "purple", ylim = c(-5, 5), main = "Estimador con sigma = 2", ylab = "p estimado", xlab = "n")
+abline(h = 0.5, col = "red", lty = 2)  # Valor verdadero de p
+legend("topright", legend = c("Estimador", "Valor verdadero"), col = c("purple", "red"), lty = c(1, 2))
+
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # sigma = 4
-cte <- rep(0.5,1000)
+sigma = 4
+cte <- rep(0.5, 1000)
 x <- 1:1000
 data <- c()
+
+for (n in x) {
+  X <- rbinom(n, size = 1, prob = 0.5)  # Simular n variables aleatorias de Bernoulli
+  p_estimado <- (1 / n) * sum(X)  # Calcular p estimado
+  epsilon_sigma <- rnorm(1, mean = 0, sd = sigma)  # Agregar el ruido una sola vez
+  p_estimado <- p_estimado + epsilon_sigma
+  data <- c(data, p_estimado)
+}
+
+plot(x, data, type = "l", col = "orange", ylim = c(-5, 5), main = "Estimador con sigma = 4", ylab = "p estimado", xlab = "n")
+abline(h = 0.5, col = "red", lty = 2)  # Valor verdadero de p
+legend("topright", legend = c("Estimador", "Valor verdadero"), col = c("orange", "red"), lty = c(1, 2))
 ```
 
 > Respuesta
+
+
+
+
 
 - [ ] ¿Qué puede decir del sesgo de los estimadores $\hat{p}_{n,\sigma}$?¿Son los estimadores con menos sesgo más precisos? Justifique.
 
