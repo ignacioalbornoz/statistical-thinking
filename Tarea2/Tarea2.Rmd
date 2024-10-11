@@ -178,19 +178,48 @@ legend("topright", legend = c("Estimador", "Valor verdadero"), col = c("orange",
 
 > Respuesta
 
+El estimador \(\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \sum_{i=1}^{n} X_i\), con \(X_i \sim \text{Bernoulli}(0.5)\) y \(\epsilon_{\sigma} \sim \mathcal{N}(0, \sigma)\), introduce un sesgo debido a la varianza de \(\epsilon_{\sigma}\). A medida que \(\sigma\) aumenta, también lo hace la varianza del estimador.
+
+1. **\(\sigma = 0\)**:
+   - El estimador converge rápidamente al valor verdadero \(p = 0.5\), sin introducir ruido.
+   - **Sesgo**: Nulo, ya que \(\epsilon_{\sigma} = 0\).
+
+2. **\(\sigma = 1\)**:
+   - Se observa una fluctuación moderada en torno a \(p = 0.5\) debido al ruido de \(\epsilon_{\sigma}\).
+   - **Sesgo**: Bajo, con varianza causada por el ruido.
+
+3. **\(\sigma = 2\)**:
+   - Aumenta la dispersión del estimador respecto a \(p = 0.5\), lo que incrementa la varianza.
+   - **Sesgo**: Moderado, por el incremento de la varianza en \(\epsilon_{\sigma}\).
+
+4. **\(\sigma = 4\)**:
+   - El estimador presenta alta fluctuación y poca precisión, dada la gran dispersión.
+   - **Sesgo**: Alto, por la alta varianza de \(\epsilon_{\sigma}\).
 
 
+El sesgo del estimador crece con \(\sigma\) debido a la mayor varianza de \(\epsilon_{\sigma}\). Esto afecta la precisión del estimador conforme \(\sigma\) aumenta, introduciendo más ruido y dificultando la convergencia al valor verdadero \(p = 0.5\).
 
 
 - [ ] ¿Qué puede decir del sesgo de los estimadores $\hat{p}_{n,\sigma}$?¿Son los estimadores con menos sesgo más precisos? Justifique.
 
 > Respuesta
 
+El sesgo del estimador \(\hat{p}_{n, \sigma}\) está directamente relacionado con el valor de \(\sigma\), ya que \(\epsilon_{\sigma} \sim \mathcal{N}(0, \sigma)\) introduce varianza en la estimación. Para \(\sigma = 0\), el estimador no tiene sesgo, pero a medida que \(\sigma\) aumenta, el sesgo también aumenta debido a la mayor dispersión generada por el término \(\epsilon_{\sigma}\).
+
+- **Estimadores con menos sesgo** (es decir, \(\sigma\) cercano a 0) son más **precisos**, ya que sus valores se concentran alrededor del valor verdadero \(p = 0.5\). Un sesgo bajo implica que el estimador fluctúa menos y se aproxima mejor al valor verdadero.
+
+- **Estimadores con más sesgo** (valores grandes de \(\sigma\)) son menos **precisos**, ya que la varianza del ruido añadido hace que el estimador fluctúe significativamente alrededor de \(p = 0.5\), lo que aumenta la incertidumbre en la estimación.
+
+Teóricamente, un estimador sin sesgo (como cuando \(\sigma = 0\)) es más preciso porque su valor esperado es igual al parámetro verdadero. Cuando \(\sigma\) crece, la varianza aumenta y, por ende, el estimador se vuelve menos preciso. La precisión está inversamente relacionada con la varianza del estimador, y como esta depende directamente de \(\sigma\), un mayor \(\sigma\) significa menor precisión y mayor sesgo.
+
+
+
 ### Pregunta 2: Intervalo de Confidencia
 
 En las preguntas 2, 3 y 4 deberá trabajar con el dataset ``diabetes_prediction_dataset``.
 
 ```{r}
+rm(list = ls())  # Limpia todas las variables del entorno global
 datos <- read.csv("diabetes_prediction_dataset.csv", header = TRUE)
 head(datos)
 ```
@@ -211,171 +240,271 @@ Una forma de estimar la distribución de la media de una población es a través
 
 **Respuesta:**
 
-```{r, eval=FALSE}
+```{r, eval=T}
+
 
 # Definimos tamaños de muestreo
 tamano_muestra = 100
-n_muestras = 10000
+n_muestras = 100
 
 # Inicializamos estructuras necesarias
 list_mean_bmi = vector()
-list_interval_bmi = vector()
-list_typeCI_bmi = vector()
-list_prop_bmi = vector()
+list_interval_bmi = list()  # Lista anidada para guardar los intervalos como pares (lower, upper)
 sucess_bmi = 0
 
 list_mean_bgl = vector()
-list_interval_bgl = vector()
-list_typeCI_bgl = vector()
-list_prop_bgl = vector()
+list_interval_bgl = list()  # Lista anidada para guardar los intervalos como pares (lower, upper)
 sucess_bgl = 0
 
-# Obtenemos la media y desviación estándar de cada columna
+# Eliminar valores NA de las columnas relevantes
+datos_bmi <- na.omit(datos$bmi)
+datos_bgl <- na.omit(datos$blood_glucose_level)
 
+# Normalizamos las variables a una misma escala (z-score normalization)
+datos_bmi_norm <- scale(datos_bmi)
+datos_bgl_norm <- scale(datos_bgl)
+
+# Obtenemos la media y desviación estándar de la población real
+media_bmi <- mean(datos_bmi_norm)
+desviacion_bmi <- sd(datos_bmi_norm)
+
+media_bgl <- mean(datos_bgl_norm)
+desviacion_bgl <- sd(datos_bgl_norm)
 
 # Sampling distribution, calculo del intervalo de confianza y proporción.
+set.seed(123) # Para reproducibilidad
 for (i in 1:n_muestras) {
   
+  # Muestreo y cálculo para BMI
+  muestra_bmi <- sample(datos_bmi_norm, tamano_muestra, replace = FALSE)
+  media_muestra_bmi <- mean(muestra_bmi)
+  error_bmi <- qt(0.975, df = tamano_muestra - 1) * (sd(muestra_bmi) / sqrt(tamano_muestra))
+  intervalo_bmi <- c(media_muestra_bmi - error_bmi, media_muestra_bmi + error_bmi)  # (lower, upper)
+  
+  # Verificar si la media de la población cae en el intervalo
+  if (media_bmi >= intervalo_bmi[1] && media_bmi <= intervalo_bmi[2]) {
+    sucess_bmi <- sucess_bmi + 1
+  }
+  
+  # Guardar resultados
+  list_mean_bmi <- c(list_mean_bmi, media_muestra_bmi)
+  list_interval_bmi[[i]] <- intervalo_bmi  # Guardamos el intervalo completo como par
+
+  # Muestreo y cálculo para blood_glucose_level
+  muestra_bgl <- sample(datos_bgl_norm, tamano_muestra, replace = FALSE)
+  media_muestra_bgl <- mean(muestra_bgl)
+  error_bgl <- qt(0.975, df = tamano_muestra - 1) * (sd(muestra_bgl) / sqrt(tamano_muestra))
+  intervalo_bgl <- c(media_muestra_bgl - error_bgl, media_muestra_bgl + error_bgl)  # (lower, upper)
+  
+  # Verificar si la media de la población cae en el intervalo
+  if (media_bgl >= intervalo_bgl[1] && media_bgl <= intervalo_bgl[2]) {
+    sucess_bgl <- sucess_bgl + 1
+  }
+  
+  # Guardar resultados
+  list_mean_bgl <- c(list_mean_bgl, media_muestra_bgl)
+  list_interval_bgl[[i]] <- intervalo_bgl  # Guardamos el intervalo completo como par
 }
 
-# Generamos dataframes para plotear mas facilmente los datos.
+# Proporción de veces que la media verdadera cae en el intervalo
+prop_bmi <- sucess_bmi / n_muestras * 100
+prop_bgl <- sucess_bgl / n_muestras * 100
 
+cat("Proporción de intervalos que contienen la media para BMI:", prop_bmi, "%\n")
+cat("Proporción de intervalos que contienen la media para BGL:", prop_bgl, "%\n")
+
+# Generamos dataframes para plotear fácilmente los datos (opcional para ggplot)
+df_bmi <- data.frame(
+  mean = list_mean_bmi, 
+  lower = sapply(list_interval_bmi, `[`, 1),  # Límite inferior del intervalo
+  upper = sapply(list_interval_bmi, `[`, 2)   # Límite superior del intervalo
+)
+
+df_bgl <- data.frame(
+  mean = list_mean_bgl, 
+  lower = sapply(list_interval_bgl, `[`, 1), 
+  upper = sapply(list_interval_bgl, `[`, 2)
+)
+
+cat("Longitud de list_mean_bmi:", length(list_mean_bmi), "\n")
+cat("Longitud de list_mean_bgl:", length(list_mean_bgl), "\n")
+
+fig.width=15
+
+fig.height=6
 
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Plot de Intervalos de confianza
 
+# Plot de Intervalos de confianza para BMI
+ggplot(df_bmi, aes(x = 1:nrow(df_bmi), y = mean)) +
+  geom_errorbar(aes(ymin = lower, ymax = upper, color = "Intervalo de confianza"), width = 0.5) +  # Intervalo de confianza
+  geom_point(aes(color = "Media"), size = 1) +  # Media
+  geom_hline(aes(yintercept = media_bmi, color = "Media población"), linetype = "dashed", size = 1) +  # Media de la población
+  labs(title = "Intervalos de Confianza para BMI", x = "Muestras", y = "Medias") +
+  theme_minimal() +
+  ylim(-1, 1) +  # Ajustamos el eje y
+  scale_color_manual(name = "Leyenda", values = c("Intervalo de confianza" = "blue", "Media" = "red", "Media población" = "black"))
+
 
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Plot de Intervalos de confianza
 
+# Plot de Intervalos de confianza para Blood Glucose Level (BGL)
+ggplot(df_bgl, aes(x = 1:nrow(df_bgl), y = mean)) +
+  geom_errorbar(aes(ymin = lower, ymax = upper, color = "Intervalo de confianza"), width = 0.5) +  # Intervalo de confianza
+  geom_point(aes(color = "Media"), size = 1) +  # Media
+  geom_hline(aes(yintercept = media_bgl, color = "Media población"), linetype = "dashed", size = 1) +  # Media de la población
+  labs(title = "Intervalos de Confianza para Blood Glucose Level", x = "Muestras", y = "Medias") +
+  theme_minimal() +
+  ylim(-1, 1) +  # Ajustamos el eje y
+  scale_color_manual(name = "Leyenda", values = c("Intervalo de confianza" = "blue", "Media" = "red", "Media población" = "black"))
+
 
 ```
 
-```{r, eval=FALSE}
-# Plot de proporción de CI
+```{r, eval=T}
+
+# Plot de proporción de CI que contienen la media
+
+df_proporciones <- data.frame(
+  variable = c("BMI", "Blood Glucose Level"),
+  proporciones = c(prop_bmi, prop_bgl)
+)
+
+ggplot(df_proporciones, aes(x = variable, y = proporciones, fill = variable)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  geom_text(aes(label = sprintf("%.1f%%", proporciones)), 
+            vjust = -1, size = 4, fontface = "bold") +  # Ajustar posición y formato del texto
+  labs(title = "Proporción de Intervalos de Confianza que Contienen la Media", 
+       y = "Proporción (%)") +
+  ylim(0, 100) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+        axis.title.y = element_text(size = 12),
+        axis.text.x = element_text(size = 12))
+
+
+```
+
+
+```{r, eval=T}
+
+# Cálculo de los largos promedio de los intervalos de confianza
+longitud_intervalos_bmi <- sapply(list_interval_bmi, function(x) x[2] - x[1])
+longitud_intervalos_bgl <- sapply(list_interval_bgl, function(x) x[2] - x[1])
+
+largo_promedio_bmi <- mean(longitud_intervalos_bmi)
+largo_promedio_bgl <- mean(longitud_intervalos_bgl)
+
+cat("Largo promedio de los intervalos de confianza para BMI:", largo_promedio_bmi, "\n")
+cat("Largo promedio de los intervalos de confianza para Blood Glucose Level:", largo_promedio_bgl, "\n")
+
+# Cálculo de la desviación promedio de las medias respecto a la media poblacional (0)
+desviacion_media_bmi <- mean(abs(list_mean_bmi))
+desviacion_media_bgl <- mean(abs(list_mean_bgl))
+
+cat("Desviación promedio de las medias respecto a la media poblacional (BMI):", desviacion_media_bmi, "\n")
+cat("Desviación promedio de las medias respecto a la media poblacional (Blood Glucose Level):", desviacion_media_bgl, "\n")
+
+
+error_estandar_bmi <- sd(list_mean_bmi)
+error_estandar_bgl <- sd(list_mean_bgl)
+
+cat("Error estándar de las medias para BMI:", error_estandar_bmi, "\n")
+cat("Error estándar de las medias para Blood Glucose Level:", error_estandar_bgl, "\n")
+
+rmse_bmi <- sqrt(mean((list_mean_bmi - media_bmi)^2))
+rmse_bgl <- sqrt(mean((list_mean_bgl - media_bgl)^2))
+
+cat("RMSE para BMI:", rmse_bmi, "\n")
+cat("RMSE para Blood Glucose Level:", rmse_bgl, "\n")
+
+bias_bmi <- mean(list_mean_bmi) - media_bmi
+bias_bgl <- mean(list_mean_bgl) - media_bgl
+
+cat("Sesgo para BMI:", bias_bmi, "\n")
+cat("Sesgo para Blood Glucose Level:", bias_bgl, "\n")
+
 
 ```
 
 > Respuesta
 
+El experimento se centró en estimar la media poblacional de las variables BMI y Blood Glucose Level mediante la creación de una distribución de muestreo y el cálculo de intervalos de confianza del 95%. Para lograrlo, se utilizó el valor crítico de la distribución t de Student (t ≈ 1.984), ya que el tamaño de muestra fue de 100 y no se conocía la desviación estándar poblacional. Este valor crítico permitió calcular los intervalos de confianza para cada una de las 100 muestras obtenidas. Posteriormente, se verificó cuántos de esos intervalos incluían la media poblacional. El 94% de los intervalos para ambas variables contenían la media, lo cual está bastante alineado con el valor teórico esperado del 95%.
+
+Al analizar los gráficos generados, se observa una alta variabilidad en las medias muestrales de ambas variables. Tanto en BMI como en Blood Glucose Level, las medias muestrales tienden a desviarse de la media poblacional teórica de 0, lo que refleja una dispersión no despreciable en algunas muestras. Aunque la mayoría de los intervalos de confianza abarcan la media poblacional, las medias individuales de las muestras no están agrupadas de manera estrecha alrededor de la media verdadera, lo que indica una inestabilidad en las estimaciones muestrales. Esto sugiere que algunas muestras individuales no son representativas de la media poblacional, generando variabilidad en las estimaciones.
+
+Además, los intervalos de confianza varían ligeramente en longitud, lo que indica leves diferencias en la variabilidad de las muestras. Algunos intervalos son más largos que otros, lo que refleja una mayor incertidumbre en ciertas estimaciones específicas. Esta fluctuación leve en los largos de los intervalos sugiere que las muestras con mayor variabilidad intrínseca tienden a generar estimaciones más imprecisas.
+
+Al observar los resultados numéricos, el largo promedio de los intervalos de confianza para BMI es de 0.3976 y para Blood Glucose Level es de 0.3892, lo que indica que la precisión en las estimaciones es similar para ambas variables. Sin embargo, al examinar la desviación promedio de las medias muestrales respecto a la media poblacional, se encuentra que BMI tiene una desviación de 0.0830 mientras que Blood Glucose Level tiene una desviación de 0.0861. Esto muestra que ambas variables presentan medias muestrales que, en promedio, están cerca de la media poblacional, pero la desviación es ligeramente mayor en Blood Glucose Level.
+
+El error estándar de las medias para BMI es de 0.1057 y para Blood Glucose Level es de 0.1012, lo que confirma que la dispersión de las medias muestrales es prácticamente la misma para ambas variables, indicando una precisión comparable en las estimaciones. Los valores del RMSE, que son de 0.1054 para BMI y 0.1033 para Blood Glucose Level, refuerzan la idea de que las estimaciones están, en promedio, bastante cercanas a la media poblacional. 
+
+Finalmente, el sesgo para BMI es de 0.0074 y para Blood Glucose Level es de -0.0232, lo que indica que ambas variables tienen estimaciones muestrales cercanas a la media poblacional, aunque Blood Glucose Level presenta un leve sesgo negativo, lo que sugiere una ligera subestimación de la media verdadera.
+
+En conclusión, los resultados muestran que las estimaciones para BMI y Blood Glucose Level son comparables en términos de calidad. Los largos de los intervalos de confianza, las desviaciones de las medias y los errores estándar indican que ambas variables tienen una estimación precisa y estable. Las pequeñas diferencias en el sesgo y el RMSE se deben a la variabilidad intrínseca de los datos, pero en general, las dos variables presentan un comportamiento similar en cuanto a la alta calidad de las estimaciones.
+
 ### Pregunta 3: Estimación de Máxima Verosimilitud
 
-El objetivo de esta parte será obtener los parámetros de las distribuciones de la media y la mediana de ``bmi``. Para responder la pregunta realice los siguientes puntos:
+El objetivo de esta parte será estimar la media ``bmi`` mediante MLE. Para responder la pregunta realice los siguientes puntos:
 
-- [ ] Simule la distribución empírica a través de mustras con repetición, como las de la pregunta anterior, y grafique los histogramas de la media y mediana.
-- [ ] Utilice la estimación logaritmica de máxima verosimilitud negativa para obtener los parámetros de estas distribuciones.
-- [ ] Gráfique a traves de un gráfico de calor el rango de valores en que se mueve la solución del problema de likelihood (puede ser útil `persp()` o `filled.contour()`).
-- [ ] Aplique el comando `nlminb()` sobre la likelihood y encuentre el máximo o mínimo del problema a optimizar.
-- [ ] Genere muestras lo suficientemente grandes de las distribuciones normales con los parámetros obtenidos por máxima verosimilitud, y comparelas con la distribución empírica mediante histogramas.
+- [ ] Grafique el histograma de ``bmi`` y obtenga la media y varianza de los datos.
+- [ ] Calcule el valor teórico del estimador de máxima verosimilitud $\hat{\mu}$ para la media, asumiendo una distribución normal y fijando $\sigma^2$ en la varianza muestral.
 
-Cabe señalar que el método de máxima verosimilitud deberá ser programado por usted y no podrá utilizar librerías que entreguen el valor directo (por ejemplo la librería MASS).
+$$
+loglike(\mu) = -\frac{n}{2}\ln{2\pi}-n\log\sigma -\frac{1}{2\sigma^2}\sum^n_{i=1}(x_i-\mu)^2
+$$
+
+- [ ] Gráfique a traves de un gráfico de calor el rango de valores en que se mueve la solución del problema de likelihood (puede ser útil `persp()` o `filled.contour()`). Considere el histograma de ``bmi`` y el valor de $\hat{\mu}$ para definir un rango adecuado para la media, y que $\sigma$ está entre 1 y 7.
+- [ ] Aplique el comando `nlminb()` sobre la función likelihood (o log-likelihood) para encontrar el óptimo de $\mu$ y $\sigma$ computacionalemte.
+- [ ] Compare el valor dado por `nlminb()` con el resultado teórico y la media muestral, y comente sus resultados.
+
+Cabe señalar que el método de máxima verosimilitud deberá ser programado por usted y **no** podrá utilizar librerías que entreguen el valor directo (por ejemplo la librería MASS).
 
 **Respuesta**
 
 ```{r, eval=FALSE}
-# Obtenemos métricas de muestreo con repetición
-means <- c()
-medis <- c()
-n_muestras <- 10000
-tamano_muestra <- 100
-
-for (i in 1:n_muestras) {
-  
-}
-
-# dataframe con las medias y medianas de las muestras
+# Histogrma
 
 ```
 
-```{r, eval=FALSE}
-# Histograma media
-```
+> 
 
 ```{r, eval=FALSE}
-# Histograma mediana
-```
-
-```{r, eval=FALSE}
-# Media
-# función log likelihood
-ll_plot <- function(mu, sigma) {
+ll_plot <- function(a, b) {
+  # Definimos la likelihood como la suma logaritmica negativa de la función de densidad
   # ...
 }
 
-ll_plot <- Vectorize(ll_plot)
+ll_plot = Vectorize(ll_plot)
 
-# definir espacio donde se va a evaluar ll_plot
-mu_m <- 
-sigma_m <- 
-likelihood_m <- outer(X=mu_m, Y=sigma_m, ll_plot)
+mu_m = seq(from=, to=, by=)
+sigma_m = seq(from=, to=, by=)
+likelihood_m = outer(X=mu_m, Y=sigma_m, ll_plot)
 
 filled.contour(x=mu_m, y=sigma_m, z=likelihood_m, xlab=expression(mu), 
                ylab=expression(sigma), color = topo.colors)
 ```
 
 ```{r, eval=FALSE}
-# Mediana
-# función log likelihood
-ll_plot <- function(mu, sigma) {
-  # ...
-}
-
-ll_plot <- Vectorize(ll_plot)
-
-# definir espacio donde se va a evaluar ll_plot
-mu_d <-
-sigma_d <-
-likelihood_d <- outer(X=mu_d, Y=sigma_d, ll_plot)
-
-filled.contour(x=mu_d, y=sigma_d, z=likelihood_d, xlab=expression(mu), 
-               ylab=expression(sigma), color = topo.colors)
-```
-
-```{r, eval=FALSE}
 likelihood_mean <- function(param) {
   # Definimos los parametros de entrada de la funcion
-  mu <- param[1]
-  sigma <- param[2]
-  # Definimos la likelihood como la suma logaritmica de la función de densidad
+  mu = param[1]
+  sigma = param[2]
+  # Definimos la likelihood como la suma logaritmica negativa de la función de densidad
   # ...
 }
 
-# Agrrgue el rango donde operará nlminb
 nlminb(objective=likelihood_mean, start=c(, ), lower=c(, ), upper=c(, ))
 ```
 
-```{r, eval=FALSE}
-likelihood_med <- function(param) {
-  # Definimos los parametros de entrada de la funcion
-  mu <- param[1]
-  sigma <- param[2]
-  # Definimos la likelihood como la suma logaritmica de la función de densidad
-  # ...
-}
-
-# Agrrgue el rango donde operará nlminb
-nlminb(objective=likelihood_med, start=c(, ), lower=c(, ), upper=c(, ))
-```
-
-```{r, eval=FALSE}
-# Muestra de medias
-
-
-# Histogrmas
-
-```
-
-```{r, eval=FALSE}
-# Muestra de medianas
-
-
-# Histogrmas
-
-```
+>
 
 ### Pregunta 4: Bootstrap I
 
