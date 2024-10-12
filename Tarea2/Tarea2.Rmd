@@ -5,64 +5,66 @@ output:
     df_print: paged
 ---
 
-![](banner.png)
+<center>
 
-<center> <h1>Tarea 2: Frequentist Inference </h1> </center>
+<h1>Tarea 2: Frequentist Inference</h1>
+
+</center>
+
 <center><strong>CC6104: Statistical Thinking</strong></center>
-#### **Integrantes :** 
 
-- Alumno 1
-- Alumno 2
+#### **Integrantes :**
+
+-   Ignacio Albornoz
+-   Alejandra Toro
 
 #### **Cuerpo Docente:**
 
-- Profesor: Felipe Bravo M.
-- Auxiliares: Martín Paredes, Benjamín Farías
-- Ayudantes: Renzo Zanca, Kevin Iturra, Emilio Díaz, Scarleth Betancurt
-            
+-   Profesor: Felipe Bravo M.
+-   Auxiliares: Martín Paredes, Benjamín Farías
+-   Ayudantes: Renzo Zanca, Kevin Iturra, Emilio Díaz, Scarleth Betancurt
 
 #### **Fecha límite de entrega:**
 
 ### **Índice:**
 
-1. [Objetivo](#id1)
-2. [Instrucciones](#id2)
-3. [Referencias](#id3)
-2. [Elaboración de Código](#id4)
+1.  [Objetivo](#id1)
+2.  [Instrucciones](#id2)
+3.  [Referencias](#id3)
+4.  [Elaboración de Código](#id4)
 
 ### **Objetivo**<a name="id1"></a>
 
-Bienvenid@s a la segunda tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la segunda parte del curso, los cuales se enfocan principalmente en inferencia estadística, diseño de experimentos y test de hipótesis. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+[Bienvenid\@s](mailto:Bienvenid@s){.email} a la segunda tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la segunda parte del curso, los cuales se enfocan principalmente en inferencia estadística, diseño de experimentos y test de hipótesis. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
 
-La tarea consta de una parte teórica que busca evaluar conceptos vistos en clases. Seguido por una parte práctica con el fin de introducirlos a la programación en R enfocada en el análisis estadístico de datos. 
+La tarea consta de una parte teórica que busca evaluar conceptos vistos en clases. Seguido por una parte práctica con el fin de introducirlos a la programación en R enfocada en el análisis estadístico de datos.
 
 ### **Instrucciones:**<a name="id2"></a>
 
-- La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
-- La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
-- El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
-- Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
-- No serán revisadas tareas desarrolladas en Python.
-- Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
-- Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso. 
-
+-   La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
+-   La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
+-   El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
+-   Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
+-   No serán revisadas tareas desarrolladas en Python.
+-   Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
+-   Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso.
 
 ### **Referencias:**<a name="id3"></a>
 
 Slides de las clases:
 
-- [Introduction to Statistical Inference](https://github.com/dccuchile/CC6104/blob/master/slides/ST-inference.pdf)
-- [Design of Experiments & Hypothesis Testing](https://github.com/dccuchile/CC6104/blob/master/slides/ST-hypothesis.pdf)
+-   [Introduction to Statistical Inference](https://github.com/dccuchile/CC6104/blob/master/slides/ST-inference.pdf)
+-   [Design of Experiments & Hypothesis Testing](https://github.com/dccuchile/CC6104/blob/master/slides/ST-hypothesis.pdf)
 
 Enlaces a videos de las clases:
 
-- Introduction to Statistical Inference: [video1](https://youtu.be/A0BAhO9_RSI) [video2](https://youtu.be/6Io555e2stM) [video3](https://youtu.be/2-Q2f6zmTns) [video4](https://youtu.be/Hp2A5EJoXbk) [video5](https://youtu.be/M0Ag4bww7Q0) [video6](https://youtu.be/K7khgecup3I) [video7](https://youtu.be/uZ126Lh3L-k) [video8](https://youtu.be/kHSPx99nJ7g)
-- Design of Experiments & Hypothesis Testing: [video1](https://youtu.be/3MueyHnNNig) [video2](https://youtu.be/JuyIrya23E0) [video3](https://youtu.be/OXTyG6DIvK4) [video4](https://youtu.be/95QeSwrNoLI) [video5](https://youtu.be/ZCr3WCdc-54) [video6](https://youtu.be/T6ZR0KoKhBQ)
+-   Introduction to Statistical Inference: [video1](https://youtu.be/A0BAhO9_RSI) [video2](https://youtu.be/6Io555e2stM) [video3](https://youtu.be/2-Q2f6zmTns) [video4](https://youtu.be/Hp2A5EJoXbk) [video5](https://youtu.be/M0Ag4bww7Q0) [video6](https://youtu.be/K7khgecup3I) [video7](https://youtu.be/uZ126Lh3L-k) [video8](https://youtu.be/kHSPx99nJ7g)
+-   Design of Experiments & Hypothesis Testing: [video1](https://youtu.be/3MueyHnNNig) [video2](https://youtu.be/JuyIrya23E0) [video3](https://youtu.be/OXTyG6DIvK4) [video4](https://youtu.be/95QeSwrNoLI) [video5](https://youtu.be/ZCr3WCdc-54) [video6](https://youtu.be/T6ZR0KoKhBQ)
 
 Documentación:
 
-- [Boostrap en r](https://www.datacamp.com/community/tutorials/bootstrap-r)
-- [ggplot2](https://ggplot2.tidyverse.org/)
+-   [Boostrap en r](https://www.datacamp.com/community/tutorials/bootstrap-r)
+-   [ggplot2](https://ggplot2.tidyverse.org/)
 
 # Elaboración de Código<a name="id4"></a>
 
@@ -85,11 +87,11 @@ library(plotly)
 library(gridExtra)
 ```
 
-Elimine ``eval=FALSE`` para ejecutar las celdas.
+Elimine `eval=FALSE` para ejecutar las celdas.
 
 ### Pregunta 1: Estimadores.
 
-- [ ] Considere una serie de variables aleatorias $X_i$ que siguen una distribución de Bernoulli de parámetro $p=0.5$ y un estimador de $p$ dado por $\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \displaystyle{\sum_{i=1}^{n}}X_{i}$ donde $\epsilon_{\sigma} \sim \mathcal{N}(0,\sigma)$. Para $\sigma = 0, 1, 2, 4$ grafique el valor de $\hat{p}_{n, \sigma}$ y comparelo con el valor verdadero. Calcule el sesgo del estimador para cada valor de $\sigma$.
+-   [ ] Considere una serie de variables aleatorias $X_i$ que siguen una distribución de Bernoulli de parámetro $p=0.5$ y un estimador de $p$ dado por $\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \displaystyle{\sum_{i=1}^{n}}X_{i}$ donde $\epsilon_{\sigma} \sim \mathcal{N}(0,\sigma)$. Para $\sigma = 0, 1, 2, 4$ grafique el valor de $\hat{p}_{n, \sigma}$ y comparelo con el valor verdadero. Calcule el sesgo del estimador para cada valor de $\sigma$.
 
 ```{r, eval=T}
 # sigma = 0
@@ -199,8 +201,7 @@ El estimador \(\hat{p}_{n, \sigma} = \epsilon_{\sigma} + \frac{1}{n} \sum_{i=1}^
 
 El sesgo del estimador crece con \(\sigma\) debido a la mayor varianza de \(\epsilon_{\sigma}\). Esto afecta la precisión del estimador conforme \(\sigma\) aumenta, introduciendo más ruido y dificultando la convergencia al valor verdadero \(p = 0.5\).
 
-
-- [ ] ¿Qué puede decir del sesgo de los estimadores $\hat{p}_{n,\sigma}$?¿Son los estimadores con menos sesgo más precisos? Justifique.
+-   [ ] ¿Qué puede decir del sesgo de los estimadores $\hat{p}_{n,\sigma}$?¿Son los estimadores con menos sesgo más precisos? Justifique.
 
 > Respuesta
 
@@ -216,26 +217,26 @@ Teóricamente, un estimador sin sesgo (como cuando \(\sigma = 0\)) es más preci
 
 ### Pregunta 2: Intervalo de Confidencia
 
-En las preguntas 2, 3 y 4 deberá trabajar con el dataset ``diabetes_prediction_dataset``.
+En las preguntas 2, 3 y 4 deberá trabajar con el dataset `diabetes_prediction_dataset`.
 
 ```{r}
 datos <- read.csv("diabetes_prediction_dataset.csv", header = TRUE)
 head(datos)
 ```
 
-Una forma de estimar la distribución de la media de una población es a través de la realización de la `sampling distribution` de una distribución cualquiera. El valor obtenido en cada sampling distribution nos entrega un estimador de la media que posee una determinada distribución de la población. Sabiendo esto, calcule la `sampling distribution` de las columnas ``bmi`` y ``blood_glucose_level``, obteniendo el intervalo de confianza de $95\%$ para cada una de las medias obtenidas desde la distribución. Para realizar este experimento considere los siguientes puntos:
+Una forma de estimar la distribución de la media de una población es a través de la realización de la `sampling distribution` de una distribución cualquiera. El valor obtenido en cada sampling distribution nos entrega un estimador de la media que posee una determinada distribución de la población. Sabiendo esto, calcule la `sampling distribution` de las columnas `bmi` y `blood_glucose_level`, obteniendo el intervalo de confianza de $95\%$ para cada una de las medias obtenidas desde la distribución. Para realizar este experimento considere los siguientes puntos:
 
-- [ ] Obtener las medias y desviaciones estándar de la población real.
-- [ ] Realizar una `sampling distribution` con un tamaño de muestra igual a $100$. Repita la obtención de la media un número elevado de veces (recomendación $5000$ veces).
-- [ ] Calcular el intervalo de confianza para cada uno de las medias obtenidas en las iteraciones.
-- [ ] De acuerdo a los valores obtenidos (medias e intervalos de confianza), grafique cada una de las medias obtenidas en conjunto a sus intervalos de confianza. Aquí debe notar que, si el intervalo de confianza contiene a la media de la población, este se considerará como parte del intervalo de confianza del $95\%$, haga un conteo de cuantos valores están contenidos en este intervalo. Para graficar los intervalos deconfianza puede ser útil utilizar forest plot.
-- [ ] Compare las estimaciones para ``bmi`` y ``blood_glucose_level`` y señale que diferencias y similitudes encuentra entre estas (en cuanto a la calidad de la estimación, no los valores obtenidos). De una explicación de por qué cree que se dan las similitudes/diferencias.
+-   [ ] Obtener las medias y desviaciones estándar de la población real.
+-   [ ] Realizar una `sampling distribution` con un tamaño de muestra igual a $100$. Repita la obtención de la media un número elevado de veces (recomendación $5000$ veces).
+-   [ ] Calcular el intervalo de confianza para cada uno de las medias obtenidas en las iteraciones.
+-   [ ] De acuerdo a los valores obtenidos (medias e intervalos de confianza), grafique cada una de las medias obtenidas en conjunto a sus intervalos de confianza. Aquí debe notar que, si el intervalo de confianza contiene a la media de la población, este se considerará como parte del intervalo de confianza del $95\%$, haga un conteo de cuantos valores están contenidos en este intervalo. Para graficar los intervalos deconfianza puede ser útil utilizar forest plot.
+-   [ ] Compare las estimaciones para `bmi` y `blood_glucose_level` y señale que diferencias y similitudes encuentra entre estas (en cuanto a la calidad de la estimación, no los valores obtenidos). De una explicación de por qué cree que se dan las similitudes/diferencias.
 
-**Hints**: 
+**Hints**:
 
-- Para comparar comparar las 2 estimaciones puede ser útil normalizar ``bmi`` y ``blood_glucose_level`` a una misma escala.
-- Para realizar la `sampling distribution` podría serle útil el comando `sample()`.
-- Puede ser útil generar un dataframe para graficar con ggplot2.
+-   Para comparar comparar las 2 estimaciones puede ser útil normalizar `bmi` y `blood_glucose_level` a una misma escala.
+-   Para realizar la `sampling distribution` podría serle útil el comando `sample()`.
+-   Puede ser útil generar un dataframe para graficar con ggplot2.
 
 **Respuesta:**
 
@@ -555,61 +556,95 @@ Finalmente, se utilizó el algoritmo nlminb() para encontrar computacionalmente 
 
 ### Pregunta 4: Bootstrap I
 
-En esta pregunta se error e inetrvalo de confianza para la varianza de la columna ``HbA1c_level``.
+En esta pregunta se error e inetrvalo de confianza para la varianza de la columna `HbA1c_level`.
 
 Las actividades por realizar son las siguientes:
 
-- [ ] Programar el método Bootstrap para calcular el error estándar de la varianza. No se permite la utilización de librerías de bootstrap para esta parte.
-- [ ] Visualizar a través de un de puntos las distintas varianzas obtenidas al realizar el muestreo con Bootstrap y comparar con el valor real.
-- [ ] Visualizar a través de un gráfico el histograma obtenido al realizar el muestreo con Bootstrap y comparar con el valor real.
-- [ ] Obtener el 95% de intervalo de confianza de la estimación.
-- [ ] ¿Qué puede se inferir a pertir de los resutados de Bootstrap?
+-   [x] Programar el método Bootstrap para calcular el error estándar de la varianza. No se permite la utilización de librerías de bootstrap para esta parte.
+-   [x] Visualizar a través de un de puntos las distintas varianzas obtenidas al realizar el muestreo con Bootstrap y comparar con el valor real.
+-   [x] Visualizar a través de un gráfico el histograma obtenido al realizar el muestreo con Bootstrap y comparar con el valor real.
+-   [x] Obtener el 95% de intervalo de confianza de la estimación.
+-   [ ] ¿Qué puede se inferir a pertir de los resutados de Bootstrap?
 
 **Respuesta:**
 
-
-```{r, eval=T}
+```{r}
 # Bootstrap
 B <- 5000
 largo <- length(datos$HbA1c_level)
 output <- c()
+```
 
+```{r}
 for (it in 1:B) {
   
+  x <- datos$HbA1c_level
+  samp.it <- sample(datos$HbA1c_level, largo, replace=T)
+  var_muestra <- var(samp.it)
+  output[it] <- var_muestra
+  
 }
+
+# varianza real
+var_real <- var(datos$HbA1c_level)
+
+# ahora calculamos el error estandar
+error_var <- sd(output)
+print(error_var)
 ```
 
-```{r, eval=T}
+```{r}
 # Gráfico de puntos
+# dataframe para graficar los datos con ggplot
+df_var <- data.frame(var_bootstrap = output)
+
+# Gráfico de scatter plot con ggplot para las varianzas obtenidas
+ggplot(df_var, aes(x = 1:length(var_bootstrap), y = var_bootstrap)) +
+  geom_point(color = "blue") +
+  geom_hline(aes(yintercept = var_real), color = "red", linetype = "dashed", size = 1) +
+  ggtitle("Distribución de varianzas") +
+  xlab("Iteración Bootstrap") +
+  ylab("Varianza") +
+  theme_minimal()
 
 ```
 
-```{r, eval=T}
+```{r}
 # Histogrma
-
+ggplot(df_var, aes(x = var_bootstrap)) +
+  geom_histogram(binwidth = 0.01, fill = "lightblue", color = "black") +
+  geom_vline(aes(xintercept = var_real), color = "red", linetype = "dashed", size = 1) +
+  ggtitle("Histograma de las varianzas obtenidas por Bootstrap") +
+  xlab("Varianza") +
+  ylab("Frecuencia") +
+  theme_minimal()
 ```
 
-
-```{r, eval=F}
+```{r}
 # Obtenemos error e intervalos de confianze
-se_vars <-
-z_a2 <-
-alpha <-
+se_vars <- sd(output) #error estandar de la varianza
+alpha <- 0.05
+z_a2 <- qnorm(1 - alpha/2) # valor critico
+
 
 # límite inferios
-l.CI <- 
+l.CI <- quantile(output, alpha/2)
 # límite superior
-u.CI <- 
+u.CI <- quantile(output, 1-alpha/2)
 
 sprintf('El intervalo de confidencia de 95%% de las varianzas es: (%.3f,%.3f)', l.CI , u.CI)
 sprintf('El SE de la varianzas es: (%.3f)', se_vars)
 ```
 
-> Respuesta
+> Respuesta:
+>
+> A partir de los resultados, se puede observar que en el grafico de las distribuciones de las varianzas se muestra una dispersion densa y estable a lo largo de las iteraciones (rango entre 1.12 y 1.16). La media de las varianzas obtenidas es de aproximadamente 1.15, por lo que no parece haber una gran variacion de las varianzas, lo que sugiere que el estimador es estable. En el histograma se observa una distribucion en donde los datos estan agrupados en torno a un valor central (1.14 y 1.15), con muy pocas iteraciones por encima de 1.16 y bajo 1.13. La marca media de las varianzas indica que esta muy cerca del centro de la distribucion (linea roja).
+>
+> Los intervalos de confianza del 95% son 1.136 y 1.157, con un error estandar de 0.005, lo cual es bajo por lo que las varianzas obtenidas con el metodo Boostrap estan concentradas entorno al valor promedio. En resumen, al obtener un error estandar bajo indica que el modelo se ajusto bien a los datos, y ademas la varianza de las estimaciones es pequeña, por lo que hay calidad en el ajuste.
 
 ### Pregunta 5: Bootstrap II
 
-El siguiente código genera una regresión lineal de ``bmi`` con respecto a ``age``, es decir, una función lineal de ``age``, $y(age) = b + m\cdot age$, que pretende determinar el valor de ``bmi``.
+El siguiente código genera una regresión lineal de `bmi` con respecto a `age`, es decir, una función lineal de `age`, $y(age) = b + m\cdot age$, que pretende determinar el valor de `bmi`.
 
 ```{r}
 linearMod <- lm(bmi ~ age, data=datos)
@@ -628,9 +663,9 @@ ggplot() +
   xlab("Age")
 ```
 
-Repita el proceso de la pregunta 4 para estimar el error e intervalos de confianza de los parámetros de la regresión ($m$ y $b$). ¿Qué indican los resultados de Bootstrap?¿Un valor bajo en el error significa que la regresión es buena? 
+Repita el proceso de la pregunta 4 para estimar el error e intervalos de confianza de los parámetros de la regresión ($m$ y $b$). ¿Qué indican los resultados de Bootstrap?¿Un valor bajo en el error significa que la regresión es buena?
 
-```{r, eval=FALSE}
+```{r}
 # Bootstrap
 B <- 500
 largo <- 1000
@@ -639,52 +674,107 @@ output_b <- c()
 
 for (it in 1:B) {
   
+  # muestra aleatoria
+  muestra_indices <- sample(1:largo, largo, replace=T)
+  muestra <- datos[muestra_indices, ]
+  
+  # Ajustamos el modelo lineal a la muestra
+  linearMod_bootstrap <- lm(bmi ~ age, data = muestra)
+  
+  # Almacenamos los coeficientes
+  output_m[it] <- linearMod_bootstrap$coefficients["age"]
+  output_b[it] <- linearMod_bootstrap$coefficients["(Intercept)"]
+  
 }
+
+# ahora calculamos el error estandar
+error_m <- sd(output_m)
+error_b <- sd(output_b)
+sprintf('Error estandar de m: (%.3f)', error_m)
+sprintf('Error estandar de b: (%.3f)', error_b)
 ```
 
-```{r, eval=FALSE}
+```{r}
 # Obtenemos error e intervalos de confianze
-se_m <- 
-z_a2 <-
-alpha <-
+se_m <- sd(output_m)
+alpha <- 0.05
+z_a2 <- qnorm(1 - alpha / 2) 
 
 # límite inferios
-l.CI <- 
+l.CI <- quantile(output_m, alpha/2)
 # límite superior
-u.CI <- 
+u.CI <- quantile(output_m, 1-alpha/2)
 
 sprintf('El intervalo de confidencia de 95%% de las varianzas es: (%.3f,%.3f)', l.CI , u.CI)
 sprintf('El SE de la varianzas es: (%.3f)', se_m)
 ```
 
-```{r, eval=FALSE}
+```{r}
+df_m <- data.frame(m_bootstrap = output_m)
+
+ggplot(df_m, aes(x = m_bootstrap)) +
+  geom_histogram(binwidth = 0.01, fill = "lightblue", color = "black") +
+  geom_vline(aes(xintercept = mean(output_m)), color = "red", linetype = "dashed", size = 1) +
+  ggtitle("Distribución de la pendiente (m)") +
+  xlab("Pendiente (m)") +
+  ylab("Frecuencia") +
+  theme_minimal()
+
+```
+
+```{r}
 # Obtenemos error e intervalos de confianze
-se_b <- 
-z_a2 <-
-alpha <-
+se_b <- sd(output_b)
+alpha <- 0.05
+z_a2 <- qnorm(1 - alpha / 2) 
 
 # límite inferios
-l.CI <- 
+l.CI <- quantile(output_b, alpha/2)
 # límite superior
-u.CI <- 
+u.CI <- quantile(output_b, 1-alpha/2)
 
 sprintf('El intervalo de confidencia de 95%% de los sesgos es: (%.3f,%.3f)', l.CI , u.CI)
 sprintf('El SE del sesgo es: (%.3f)', se_b)
 ```
 
-> Respuesta
+```{r}
+df_b <- data.frame(b_bootstrap = output_b)
 
-&nbsp;
+ggplot(df_b, aes(x = b_bootstrap)) +
+  geom_histogram(binwidth = 0.1, fill = "lightgreen", color = "black") +
+  geom_vline(aes(xintercept = mean(output_b)), color = "red", linetype = "dashed", size = 1) +
+  ggtitle("Distribución del intercepto (b)") +
+  xlab("Intercepto (b)") +
+  ylab("Frecuencia") +
+  theme_minimal()
+```
+
+>  Respuesta:
+>
+> Al observar los errores estandares de la pendiente (0.009) y el intercepto (0.404), sugieren que son estables con el metodo Bootstrap, ya que el error de ambos es bajo, lo que indica que las estimaciones de los parametros de la regresion no varian mucho en las diferentes muestras de Bootstrap. Sin embargo, esto no garantiza que el modelo sea bueno en si, ya que es importante evaluar el ajuste del modelo y la relacion entre las variables (age y bmi) para ver que la relacion lineal sea significativa y el modelo capture la relacion entre los datos.
+>
+> Al tener una pendiente pequeña (0.099 aprox) puede significar que la relacion entre age y bmi es debil, lo que indica que aunque la regresion sea estadisticamente significativa, la influencia sobre la edad sobre el bmi es pequeña.
+>
+> En resumen, el modelo es estable en terminos del error estandar, pero el valor bajo de la pendiente sugiere que las variables no tienen impactos significativos sobre eloos. Para ver si la regresion es buena habria que revisar el coeficiente de determinacion (R\*\*2)
+
 <hr />
-<p style="text-align: center;">A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a></p>
+
+<p style="text-align: center;">
+
+A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a>
+
+</p>
 
 <!-- Add icon library -->
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <!-- Add font awesome icons -->
+
 <p style="text-align: center;">
-    <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
-    <a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+
+<a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a> <a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+
 </p>
 
-&nbsp;
+ 
