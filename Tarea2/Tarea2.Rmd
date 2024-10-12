@@ -219,7 +219,6 @@ Teóricamente, un estimador sin sesgo (como cuando \(\sigma = 0\)) es más preci
 En las preguntas 2, 3 y 4 deberá trabajar con el dataset ``diabetes_prediction_dataset``.
 
 ```{r}
-rm(list = ls())  # Limpia todas las variables del entorno global
 datos <- read.csv("diabetes_prediction_dataset.csv", header = TRUE)
 head(datos)
 ```
@@ -469,42 +468,90 @@ Cabe señalar que el método de máxima verosimilitud deberá ser programado por
 
 **Respuesta**
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Histogrma
+# Graficar histograma de 'bmi' y obtener media y varianza muestral
+hist(datos$bmi, breaks = 30, main = "Histograma de BMI", xlab = "BMI")
+media_muestral <- mean(datos$bmi)
+varianza_muestral <- var(datos$bmi)
+sigma_mle <- sqrt(varianza_muestral)  # MLE para sigma es la raíz de la varianza muestral
+cat("Media muestral:", media_muestral, "\n")
+cat("Varianza muestral:", varianza_muestral, "\n")
 
 ```
 
 > 
 
-```{r, eval=FALSE}
-ll_plot <- function(a, b) {
-  # Definimos la likelihood como la suma logaritmica negativa de la función de densidad
-  # ...
+```{r, eval=T}
+
+# Definir la función de log-verosimilitud
+loglike <- function(mu, sigma) {
+  n <- length(datos$bmi)
+  suma_cuadrados <- sum((datos$bmi - mu)^2)
+  -(n/2) * log(2 * pi) - n * log(sigma) - (1 / (2 * sigma^2)) * suma_cuadrados
 }
 
-ll_plot = Vectorize(ll_plot)
+# Graficar la verosimilitud para diferentes valores de mu (manteniendo sigma fijo en el valor MLE)
+mu_values <- seq(from = media_muestral - 10, to = media_muestral + 10, by = 0.1)
+loglike_values <- sapply(mu_values, function(mu) loglike(mu, sigma_mle))
 
-mu_m = seq(from=, to=, by=)
-sigma_m = seq(from=, to=, by=)
-likelihood_m = outer(X=mu_m, Y=sigma_m, ll_plot)
+# Graficar los valores de log-verosimilitud
+plot(mu_values, loglike_values, type = "l", xlab = expression(mu), ylab = "Log-Verosimilitud", main = "Log-Verosimilitud para diferentes valores de mu")
 
-filled.contour(x=mu_m, y=sigma_m, z=likelihood_m, xlab=expression(mu), 
-               ylab=expression(sigma), color = topo.colors)
+# Gráfico de calor para explorar el rango de valores de mu y sigma
+ll_plot <- function(mu, sigma) {
+  if (sigma <= 0) return(NA)  # para evitar valores negativos de sigma
+  loglike(mu, sigma)
+}
+
+ll_plot <- Vectorize(ll_plot)
+
+# Definir rangos para mu y sigma
+mu_m <- seq(from = media_muestral - 10, to = media_muestral + 10, by = 0.5)
+sigma_m <- seq(from = 1, to = 7, by = 0.1)
+
+# Calcular la verosimilitud para todos los valores de mu y sigma
+likelihood_m <- outer(X = mu_m, Y = sigma_m, FUN = ll_plot)
+
+# Graficar el gráfico de calor (contour) de la verosimilitud
+filled.contour(x = mu_m, y = sigma_m, z = likelihood_m, 
+               xlab = expression(mu), ylab = expression(sigma), 
+               color = topo.colors, main = "Log-Verosimilitud en función de mu y sigma")
+
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
+# Definir la función de verosimilitud para optimización
 likelihood_mean <- function(param) {
-  # Definimos los parametros de entrada de la funcion
-  mu = param[1]
-  sigma = param[2]
-  # Definimos la likelihood como la suma logaritmica negativa de la función de densidad
-  # ...
+  mu <- param[1]
+  sigma <- param[2]
+  if (sigma <= 0) return(Inf)  # para evitar valores negativos de sigma
+  -loglike(mu, sigma)  # Negativo porque optimizamos minimizando
 }
 
-nlminb(objective=likelihood_mean, start=c(, ), lower=c(, ), upper=c(, ))
+# Optimizar usando nlminb()
+resultado_opt <- nlminb(start = c(media_muestral, sqrt(varianza_muestral)),
+                        objective = likelihood_mean, 
+                        lower = c(media_muestral - 10, 1), 
+                        upper = c(media_muestral + 10, 7))
+
+cat("Resultado optimización (mu, sigma):", resultado_opt$par, "\n")
+cat("Media teórica MLE:", media_muestral, "\n")
+cat("Resultado nlminb:", resultado_opt$par[1], "para mu y", resultado_opt$par[2], "para sigma", "\n")
 ```
 
->
+> Respuesta
+
+La estimación de máxima verosimilitud (MLE) para la media del índice de masa corporal (BMI) se realizó utilizando los datos proporcionados. Primero, se generó un histograma de los valores de BMI, donde se observó que la mayoría de los datos están concentrados entre 20 y 35, con una cola hacia valores más altos. La media muestral calculada fue 27.32077 y la varianza muestral 44.04689. Estos resultados reflejan un valor promedio del BMI moderadamente alto, con una dispersión relativamente pequeña.
+
+El estimador de máxima verosimilitud (MLE) de la media, bajo el supuesto de una distribución normal con la varianza fijada en el valor muestral, se obtuvo aplicando la fórmula de la log-verosimilitud. El valor teórico del MLE para la media resultó ser 27.32077, que coincide con la media muestral, lo cual es esperado dado que el MLE para la media de una distribución normal es equivalente a la media muestral.
+
+El gráfico de la log-verosimilitud en función de diferentes valores de mu muestra una forma parabólica invertida, con un máximo en torno a mu = 27.32, confirmando que la media muestral maximiza la función de verosimilitud. Esta interpretación es correcta, ya que el punto máximo de la curva representa el valor de mu que maximiza la probabilidad de observar los datos dados.
+
+El gráfico de calor que muestra la verosimilitud en función de mu y sigma revela que los valores de mu cercanos a 27.32 y sigma alrededor de 6.64 maximizan la función de verosimilitud. La forma del gráfico indica que, a medida que los valores de mu y sigma se alejan de estos puntos, la log-verosimilitud disminuye, lo que confirma que el rango adecuado para ambos parámetros fue correctamente elegido.
+
+Finalmente, se utilizó el algoritmo nlminb() para encontrar computacionalmente los valores óptimos de mu y sigma. Los resultados de la optimización fueron mu = 27.32077 y sigma = 6.63675, valores que coinciden con los resultados teóricos y empíricos previamente calculados. Esto sugiere una alta consistencia y validez en el procedimiento realizado.
+
 
 ### Pregunta 4: Bootstrap I
 
@@ -521,7 +568,7 @@ Las actividades por realizar son las siguientes:
 **Respuesta:**
 
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Bootstrap
 B <- 5000
 largo <- length(datos$HbA1c_level)
@@ -532,18 +579,18 @@ for (it in 1:B) {
 }
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Gráfico de puntos
 
 ```
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Histogrma
 
 ```
 
 
-```{r, eval=FALSE}
+```{r, eval=F}
 # Obtenemos error e intervalos de confianze
 se_vars <-
 z_a2 <-
