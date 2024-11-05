@@ -960,24 +960,35 @@ plotProbs(alpha)
 
 ```
 
-¿Se parecen sus resultados?
-Sí, los resultados empíricos y teóricos son bastante similares. A medida que aumentamos el número de experimentos (m), ambas probabilidades convergen, lo que muestra que la simulación empírica refleja correctamente el comportamiento teórico esperado.
+¿Se parecen sus resultados? Sí, los resultados empíricos y teóricos son
+bastante similares. A medida que aumentamos el número de experimentos
+(m), ambas probabilidades convergen, lo que muestra que la simulación
+empírica refleja correctamente el comportamiento teórico esperado.
 
-¿Qué sucede cuando la cantidad de experimentos crece mucho?
-Cuando el número de experimentos m es alto, la probabilidad de obtener al menos un resultado significativo por azar tiende rápidamente a 1, independientemente del valor de alpha. Esto implica que, con suficientes pruebas, la probabilidad de encontrar un resultado significativo por azar se acerca a 100%, lo cual demuestra la necesidad de correcciones cuando se realizan muchos tests de hipótesis.
+¿Qué sucede cuando la cantidad de experimentos crece mucho? Cuando el
+número de experimentos m es alto, la probabilidad de obtener al menos un
+resultado significativo por azar tiende rápidamente a 1,
+independientemente del valor de alpha. Esto implica que, con suficientes
+pruebas, la probabilidad de encontrar un resultado significativo por
+azar se acerca a 100%, lo cual demuestra la necesidad de correcciones
+cuando se realizan muchos tests de hipótesis.
 
-¿Este comportamiento depende del valor de significancia alpha?
-Sí, el valor de alpha afecta la velocidad con la que la probabilidad alcanza el 1. Un alpha mayor (por ejemplo, 0.2) hará que la probabilidad de obtener al menos un resultado significativo alcance 1 mucho más rápido que un alpha menor (como 0.01). Sin embargo, en todos los casos, la probabilidad tiende a 1 con un número suficientemente grande de experimentos.
+¿Este comportamiento depende del valor de significancia alpha? Sí, el
+valor de alpha afecta la velocidad con la que la probabilidad alcanza
+el 1. Un alpha mayor (por ejemplo, 0.2) hará que la probabilidad de
+obtener al menos un resultado significativo alcance 1 mucho más rápido
+que un alpha menor (como 0.01). Sin embargo, en todos los casos, la
+probabilidad tiende a 1 con un número suficientemente grande de
+experimentos.
 
-¿Es útil este método para la realización de múltiples tests de hipótesis?
-Este método no es adecuado para múltiples tests de hipótesis sin corrección, ya que a medida que el número de experimentos aumenta, se vuelve casi inevitable encontrar un resultado significativo solo por azar. Esto sugiere que, sin una corrección adecuada, los resultados pueden ser engañosos y llevar a conclusiones incorrectas. La corrección de Bonferroni, por ejemplo, es útil en estos casos para ajustar el nivel de significancia y reducir el riesgo de falsos positivos.
-
-
-
-
-
-
-
+¿Es útil este método para la realización de múltiples tests de
+hipótesis? Este método no es adecuado para múltiples tests de hipótesis
+sin corrección, ya que a medida que el número de experimentos aumenta,
+se vuelve casi inevitable encontrar un resultado significativo solo por
+azar. Esto sugiere que, sin una corrección adecuada, los resultados
+pueden ser engañosos y llevar a conclusiones incorrectas. La corrección
+de Bonferroni, por ejemplo, es útil en estos casos para ajustar el nivel
+de significancia y reducir el riesgo de falsos positivos.
 
 ```{r}
 probEmpiricaBonferroni <- function(alpha, m) {
@@ -1036,35 +1047,63 @@ alpha <- 0.05
 plotProbsBonferroni(alpha)
 
 ```
+
 ## Corrección Bonferroni
 
 ### ¿Mejoran los resultados?
-Sí, los resultados mejoran al aplicar la corrección de Bonferroni, ya que esta corrección reduce drásticamente la probabilidad de obtener al menos un resultado significativo por azar cuando se realizan múltiples tests. Esto se observa en el gráfico: la probabilidad empírica con la corrección de Bonferroni (línea verde) se mantiene muy baja incluso cuando el número de experimentos (m) aumenta, en comparación con las probabilidades empírica y teórica sin corrección, que tienden rápidamente a 1. Este ajuste minimiza el riesgo de falsos positivos, lo cual es especialmente importante cuando se realizan muchos tests simultáneos.
+
+Sí, los resultados mejoran al aplicar la corrección de Bonferroni, ya
+que esta corrección reduce drásticamente la probabilidad de obtener al
+menos un resultado significativo por azar cuando se realizan múltiples
+tests. Esto se observa en el gráfico: la probabilidad empírica con la
+corrección de Bonferroni (línea verde) se mantiene muy baja incluso
+cuando el número de experimentos (m) aumenta, en comparación con las
+probabilidades empírica y teórica sin corrección, que tienden
+rápidamente a 1. Este ajuste minimiza el riesgo de falsos positivos, lo
+cual es especialmente importante cuando se realizan muchos tests
+simultáneos.
 
 ### Problema si m es muy grande
-Cuando m es muy grande, la corrección de Bonferroni puede volverse demasiado conservadora. Dividir el nivel de significancia alpha por un número grande hace que el alpha corregido sea extremadamente bajo, lo cual requiere una evidencia estadística muy fuerte para obtener resultados significativos. Esto incrementa la probabilidad de falsos negativos, es decir, se hace más probable que se pierdan efectos verdaderamente significativos en los datos. En estudios con muchos tests, este método puede ser demasiado restrictivo, y podría ser preferible usar otras correcciones menos conservadoras, como el método de Benjamini-Hochberg, que controla la tasa de falsos descubrimientos en lugar de reducir drásticamente el nivel de significancia de cada test individual.
 
+Cuando m es muy grande, la corrección de Bonferroni puede volverse
+demasiado conservadora. Dividir el nivel de significancia alpha por un
+número grande hace que el alpha corregido sea extremadamente bajo, lo
+cual requiere una evidencia estadística muy fuerte para obtener
+resultados significativos. Esto incrementa la probabilidad de falsos
+negativos, es decir, se hace más probable que se pierdan efectos
+verdaderamente significativos en los datos. En estudios con muchos
+tests, este método puede ser demasiado restrictivo, y podría ser
+preferible usar otras correcciones menos conservadoras, como el método
+de Benjamini-Hochberg, que controla la tasa de falsos descubrimientos en
+lugar de reducir drásticamente el nivel de significancia de cada test
+individual.
 
 Finalmente observando los p-valores del csv, se observa que:
 
+Con un nivel de significancia alpha = 0.05, observamos que los p-valores
+originales que están por debajo de 0.05 son los siguientes:
 
-Con un nivel de significancia alpha = 0.05, observamos que los p-valores originales que están por debajo de 0.05 son los siguientes:
-
-NK602-13 por ciento: p-valor = 0.009946
-NK603-25 por ciento: p-valor = 0.03901
-NK602-22 por ciento: p-valor = 0.005332
-NK603-13 por ciento: p-valor = 0.00009712
-RoundUp D: p-valor = 0.00003723
-NK603-22 por ciento + R: p-valor = 0.02131745
-RoundUp C: p-valor = 0.02845455
+NK602-13 por ciento: p-valor = 0.009946 NK603-25 por ciento: p-valor =
+0.03901 NK602-22 por ciento: p-valor = 0.005332 NK603-13 por ciento:
+p-valor = 0.00009712 RoundUp D: p-valor = 0.00003723 NK603-22 por
+ciento + R: p-valor = 0.02131745 RoundUp C: p-valor = 0.02845455
 NK603-22 por ciento: p-valor = 0.01143779
 
+Sin embargo, después de aplicar la corrección de Bonferroni, la mayoría
+de estos valores aumentaron por encima del umbral de 0.05, y solo los
+valores de NK603-13 por ciento y RoundUp D (con p-valores corregidos de
+0.00223376 y 0.00085629, respectivamente) se mantienen por debajo de
+0.05. Esto significa que todos los demás valores que eran significativos
+con el p-valor usual ahora son rechazados bajo la corrección de
+Bonferroni.
 
-Sin embargo, después de aplicar la corrección de Bonferroni, la mayoría de estos valores aumentaron por encima del umbral de 0.05, y solo los valores de NK603-13 por ciento y RoundUp D (con p-valores corregidos de 0.00223376 y 0.00085629, respectivamente) se mantienen por debajo de 0.05. Esto significa que todos los demás valores que eran significativos con el p-valor usual ahora son rechazados bajo la corrección de Bonferroni.
-
-
-Este resultado implica que la corrección de Bonferroni puede aumentar el nivel de falsos negativos. Al hacer la prueba más estricta, se reduce el número de resultados significativos detectados, lo cual puede llevar a ignorar efectos que realmente existen en los datos. Esta corrección es conservadora y útil para evitar falsos positivos, pero en estudios con un gran número de tests, puede resultar en la pérdida de hallazgos significativos verdaderos.
-
+Este resultado implica que la corrección de Bonferroni puede aumentar el
+nivel de falsos negativos. Al hacer la prueba más estricta, se reduce el
+número de resultados significativos detectados, lo cual puede llevar a
+ignorar efectos que realmente existen en los datos. Esta corrección es
+conservadora y útil para evitar falsos positivos, pero en estudios con
+un gran número de tests, puede resultar en la pérdida de hallazgos
+significativos verdaderos.
 
 ------------------------------------------------------------------------
 
@@ -1119,8 +1158,8 @@ b)  Estudie si el modelo multivariable posee mejor desempeño que el
     hipótesis entregados por el comando `lm()`, ya que esto le servirá
     para observar si la regresión lineal es significativa.
 
-**Nota:** No esta permitido utilizar comandos que obtengan los valores solicitados directamente a menos que se le permita en la pregunta.
-
+**Nota:** No esta permitido utilizar comandos que obtengan los valores
+solicitados directamente a menos que se le permita en la pregunta.
 
 #### Respuesta: Parte I
 
@@ -1155,8 +1194,6 @@ summary(insurance)
 
 ```
 
-
-
 ```{r}
 
 
@@ -1166,8 +1203,6 @@ non_smokers <- insurance[insurance$smoker == 0, ]
 
 
 ```
-
-
 
 ```{r}
 
@@ -1233,7 +1268,6 @@ cat("Modelo lineal para no fumadores:\n")
 cat("Intercepto:", modelo_non_smokers$intercepto, "\nPendiente:", modelo_non_smokers$pendiente, "\n")
 ```
 
-
 ```{r}
 # Función para calcular el R^2 y el R^2 ajustado
 calc_R2 <- function(X, Y, modelo) {
@@ -1270,7 +1304,6 @@ cat("R^2:", R2_non_smokers$R2, "\nR^2-ajustado:", R2_non_smokers$R2_adjusted, "\
 
 ```
 
-
 ```{r}
 
 # Definir etiquetas de los ejes según la variable de mayor correlación
@@ -1298,16 +1331,48 @@ ggplot(data = non_smokers, aes(x = .data[[variable_mayor_correlacion_non_smokers
   theme_minimal()
 
 ```
-Como conclusión de la parte I y analizando las regresiones lineales obtenidas, se observa que el indice de masa corporal (BMI) es el predictor mas relevante para los fumadores, con una correlacion de 0.8065, mientras que la edad resulta ser el predictor mas significativo para los no fumadores, con una correlacion de 0.6279. Esto indica que el BMI esta fuertemente asociado con los gastos medicos en el grupo de fumadores, sugiriendo una relacion considerable entre el exceso de peso y los costos medicos en este subgrupo.
 
-El modelo para fumadores presenta un R2 de 0.6504 (ajustado: 0.6491), lo cual implica que aproximadamente el 65.04 por ciento de la variabilidad en los gastos medicos es explicada por el BMI en este grupo, un valor moderado-alto que refuerza la relevancia de este predictor. En contraste, el modelo para no fumadores muestra un R2 de 0.3943 (ajustado: 0.3937), indicando que solo el 39.43 por ciento de la variabilidad en los gastos medicos es explicado por la edad. Este menor ajuste sugiere que la edad tiene una influencia mas limitada sobre los costos medicos en los no fumadores, reflejando posiblemente la influencia de otros factores no capturados en el modelo.
+Como conclusión de la parte I y analizando las regresiones lineales
+obtenidas, se observa que el indice de masa corporal (BMI) es el
+predictor mas relevante para los fumadores, con una correlacion de
+0.8065, mientras que la edad resulta ser el predictor mas significativo
+para los no fumadores, con una correlacion de 0.6279. Esto indica que el
+BMI esta fuertemente asociado con los gastos medicos en el grupo de
+fumadores, sugiriendo una relacion considerable entre el exceso de peso
+y los costos medicos en este subgrupo.
 
-La pendiente del modelo en fumadores (1473.106) resalta un incremento significativo en los gastos con el aumento del BMI, mientras que en no fumadores la pendiente de 267.2489 indica un aumento mas moderado en funcion de la edad.
+El modelo para fumadores presenta un R2 de 0.6504 (ajustado: 0.6491), lo
+cual implica que aproximadamente el 65.04 por ciento de la variabilidad
+en los gastos medicos es explicada por el BMI en este grupo, un valor
+moderado-alto que refuerza la relevancia de este predictor. En
+contraste, el modelo para no fumadores muestra un R2 de 0.3943
+(ajustado: 0.3937), indicando que solo el 39.43 por ciento de la
+variabilidad en los gastos medicos es explicado por la edad. Este menor
+ajuste sugiere que la edad tiene una influencia mas limitada sobre los
+costos medicos en los no fumadores, reflejando posiblemente la
+influencia de otros factores no capturados en el modelo.
 
-Estas conclusiones implican que, en fumadores, el BMI es un factor critico que impulsa los costos medicos, sugiriendo que intervenciones para reducir el indice de masa corporal podrian ser efectivas en controlar gastos en este grupo. En no fumadores, aunque la edad afecta los costos, su impacto es menor, lo cual sugiere que en este grupo los factores de riesgo relacionados con el estilo de vida podrian ser menos determinantes en el gasto medico que en fumadores.
+La pendiente del modelo en fumadores (1473.106) resalta un incremento
+significativo en los gastos con el aumento del BMI, mientras que en no
+fumadores la pendiente de 267.2489 indica un aumento mas moderado en
+funcion de la edad.
 
-La mayor correlación entre BMI y gastos médicos en fumadores podría reflejar una interacción sinérgica entre los efectos del tabaquismo y el sobrepeso en la salud, donde el daño combinado exacerba los costos médicos. En contraste, para no fumadores, la edad influye en los gastos de manera más moderada, posiblemente porque, sin el impacto adicional del tabaquismo, el BMI y otros factores de estilo de vida tienen un papel menos directo y menos agresivo sobre los costos de salud, distribuyéndose sus efectos a lo largo del envejecimiento natural.
+Estas conclusiones implican que, en fumadores, el BMI es un factor
+critico que impulsa los costos medicos, sugiriendo que intervenciones
+para reducir el indice de masa corporal podrian ser efectivas en
+controlar gastos en este grupo. En no fumadores, aunque la edad afecta
+los costos, su impacto es menor, lo cual sugiere que en este grupo los
+factores de riesgo relacionados con el estilo de vida podrian ser menos
+determinantes en el gasto medico que en fumadores.
 
+La mayor correlación entre BMI y gastos médicos en fumadores podría
+reflejar una interacción sinérgica entre los efectos del tabaquismo y el
+sobrepeso en la salud, donde el daño combinado exacerba los costos
+médicos. En contraste, para no fumadores, la edad influye en los gastos
+de manera más moderada, posiblemente porque, sin el impacto adicional
+del tabaquismo, el BMI y otros factores de estilo de vida tienen un
+papel menos directo y menos agresivo sobre los costos de salud,
+distribuyéndose sus efectos a lo largo del envejecimiento natural.
 
 #### Respuesta: Parte II
 
@@ -1374,6 +1439,7 @@ cat("Intercepto:", modelo_multi_non_smokers$intercepto, "\nBeta1:", modelo_multi
 
 
 ```
+
 ```{r}
 # Modelo multivariable para fumadores usando lm()
 model_smokers_lm <- lm(charges ~ bmi + age, data = smokers)
@@ -1385,24 +1451,55 @@ summary(model_non_smokers_lm)
 
 ```
 
+Para evaluar si el modelo multivariable mejora el desempeño respecto al
+modelo simple y determinar si es conveniente su uso para predicciones
+futuras, analizaremos los resultados obtenidos en terminos de R2 y el
+test de hipotesis para los coeficientes de regresion.
 
-Para evaluar si el modelo multivariable mejora el desempeño respecto al modelo simple y determinar si es conveniente su uso para predicciones futuras, analizaremos los resultados obtenidos en terminos de R2 y el test de hipotesis para los coeficientes de regresion.
+Fumadores En el modelo simple, la variable BMI tenia una fuerte relacion
+con los charges, con un R2 ajustado de aproximadamente 0.649. En el
+modelo multivariable, donde se incluyen BMI y age, el R2 ajustado
+aumenta a 0.7514, lo que indica una mejora en la capacidad explicativa
+del modelo. La adicion de la variable age parece significativa segun el
+valor p asociado al coeficiente de age (p menor que 2e-16), lo cual
+respalda que esta variable aporta informacion adicional relevante al
+modelo, mejorando su ajuste y explicando mejor la variabilidad en los
+gastos medicos.
 
-Fumadores
-En el modelo simple, la variable BMI tenia una fuerte relacion con los charges, con un R2 ajustado de aproximadamente 0.649. En el modelo multivariable, donde se incluyen BMI y age, el R2 ajustado aumenta a 0.7514, lo que indica una mejora en la capacidad explicativa del modelo. La adicion de la variable age parece significativa segun el valor p asociado al coeficiente de age (p menor que 2e-16), lo cual respalda que esta variable aporta informacion adicional relevante al modelo, mejorando su ajuste y explicando mejor la variabilidad en los gastos medicos.
+No fumadores En el modelo simple, la variable age fue el predictor mas
+relevante para los charges, con un R2 ajustado de aproximadamente 0.394.
+Al agregar la variable children en el modelo multivariable, el R2
+ajustado aumenta ligeramente a 0.4071. Aunque este incremento es
+modesto, el coeficiente de children es estadisticamente significativo (p
+menor que 6.79e-07), lo cual indica que la presencia de hijos tambien
+esta relacionada con los gastos medicos en el grupo de no fumadores,
+aunque su impacto sea menor en comparacion con age.
 
-No fumadores
-En el modelo simple, la variable age fue el predictor mas relevante para los charges, con un R2 ajustado de aproximadamente 0.394. Al agregar la variable children en el modelo multivariable, el R2 ajustado aumenta ligeramente a 0.4071. Aunque este incremento es modesto, el coeficiente de children es estadisticamente significativo (p menor que 6.79e-07), lo cual indica que la presencia de hijos tambien esta relacionada con los gastos medicos en el grupo de no fumadores, aunque su impacto sea menor en comparacion con age.
+En general Para ambos grupos, el modelo multivariable muestra un
+desempeño superior al modelo simple y es estadisticamente significativo,
+lo cual sugiere que es preferible para capturar con mayor precision los
+factores asociados a los gastos medicos. Sin embargo, en aplicaciones
+donde la simplicidad y la interpretabilidad son clave, el modelo simple
+podria ser adecuado, especialmente en el caso de no fumadores, donde la
+mejora en R2 es menos pronunciada.
 
-En general
-Para ambos grupos, el modelo multivariable muestra un desempeño superior al modelo simple y es estadisticamente significativo, lo cual sugiere que es preferible para capturar con mayor precision los factores asociados a los gastos medicos. Sin embargo, en aplicaciones donde la simplicidad y la interpretabilidad son clave, el modelo simple podria ser adecuado, especialmente en el caso de no fumadores, donde la mejora en R2 es menos pronunciada.
+Para fumadores, el modelo multivariable es preferible al modelo simple
+de BMI, ya que el R2 ajustado mejora de 0.649 a 0.7514. Ambos
+coeficientes (BMI: p \< 2e-16, age: p \< 2e-16) son altamente
+significativos, lo que respalda su relevancia en la prediccion de gastos
+medicos, aunque el R2 sugiere que no captura toda la variabilidad. Sin
+embargo, ambos modelos tienen un R2 decente, por lo que ambos podrian
+ser utiles para la prediccion de nuevas entradas, con una clara
+preferencia por el modelo multivariable.
 
-Para fumadores, el modelo multivariable es preferible al modelo simple de BMI, ya que el R2 ajustado mejora de 0.649 a 0.7514. Ambos coeficientes (BMI: p < 2e-16, age: p < 2e-16) son altamente significativos, lo que respalda su relevancia en la prediccion de gastos medicos, aunque el R2 sugiere que no captura toda la variabilidad. Sin embargo, ambos modelos tienen un R2 decente, por lo que ambos podrian ser utiles para la prediccion de nuevas entradas, con una clara preferencia por el modelo multivariable.
-
-Para no fumadores, el modelo multivariable con age y children mejora marginalmente el R2 ajustado de 0.394 a 0.4071. Ambos coeficientes son significativos (age: p < 2e-16, children: p < 6.79e-07), pero el bajo R2 indica una capacidad predictiva limitada. Aqui, tanto el modelo simple de age como el modelo multivariable pueden no ser suficientes para prediccion de nuevas entradas debido al bajo R2, lo que sugiere que faltan variables adicionales, aunque ambas variables son estadisticamente significativas.
-
-
-
+Para no fumadores, el modelo multivariable con age y children mejora
+marginalmente el R2 ajustado de 0.394 a 0.4071. Ambos coeficientes son
+significativos (age: p \< 2e-16, children: p \< 6.79e-07), pero el bajo
+R2 indica una capacidad predictiva limitada. Aqui, tanto el modelo
+simple de age como el modelo multivariable pueden no ser suficientes
+para prediccion de nuevas entradas debido al bajo R2, lo que sugiere que
+faltan variables adicionales, aunque ambas variables son
+estadisticamente significativas.
 
 ```{r}
 
@@ -1457,14 +1554,26 @@ plot_non_smokers
 
 ```
 
+Por último, al graficar los planos generados por la regresión
+multivariable y compararlos con el modelo simple, se observa que el
+modelo para fumadores podría mejorarse significativamente. Este análisis
+sugiere la posibilidad de tener dos regresiones diferenciadas que
+dependen, entre otras variables, del índice de masa corporal (BMI), con
+un punto de quiebre cercano a 30, como se ve claramente en la regresión
+simple para fumadores. Esta bifurcación permitiría construir dos planos
+que capturen mejor la distribución de los datos para fumadores.
 
-
-Por último, al graficar los planos generados por la regresión multivariable y compararlos con el modelo simple, se observa que el modelo para fumadores podría mejorarse significativamente. Este análisis sugiere la posibilidad de tener dos regresiones diferenciadas que dependen, entre otras variables, del índice de masa corporal (BMI), con un punto de quiebre cercano a 30, como se ve claramente en la regresión simple para fumadores. Esta bifurcación permitiría construir dos planos que capturen mejor la distribución de los datos para fumadores.
-
-En el caso de los no fumadores, tanto el modelo simple como el multivariable capturan bien la distribución general de los datos. Sin embargo, los outliers con gastos médicos extremadamente altos afectan la pendiente del plano. Si se eliminan estos outliers, el plano se ajustaría de forma más precisa a la tendencia central de los datos. Incluso, gráficamente, el modelo simple para no fumadores muestra una tendencia que se ajusta adecuadamente a la mayoría de los puntos de datos. Esto sugiere que dichos outliers podrían no explicarse con las variables disponibles en el dataset y, por lo tanto, no formarían parte del comportamiento típico de los no fumadores, agregando una fuente de heterogeneidad no modelada.
-
-
-
+En el caso de los no fumadores, tanto el modelo simple como el
+multivariable capturan bien la distribución general de los datos. Sin
+embargo, los outliers con gastos médicos extremadamente altos afectan la
+pendiente del plano. Si se eliminan estos outliers, el plano se
+ajustaría de forma más precisa a la tendencia central de los datos.
+Incluso, gráficamente, el modelo simple para no fumadores muestra una
+tendencia que se ajusta adecuadamente a la mayoría de los puntos de
+datos. Esto sugiere que dichos outliers podrían no explicarse con las
+variables disponibles en el dataset y, por lo tanto, no formarían parte
+del comportamiento típico de los no fumadores, agregando una fuente de
+heterogeneidad no modelada.
 
  
 
