@@ -537,6 +537,26 @@ Sí, los resultados mejoran al aplicar la corrección de Bonferroni, ya que esta
 Cuando m es muy grande, la corrección de Bonferroni puede volverse demasiado conservadora. Dividir el nivel de significancia alpha por un número grande hace que el alpha corregido sea extremadamente bajo, lo cual requiere una evidencia estadística muy fuerte para obtener resultados significativos. Esto incrementa la probabilidad de falsos negativos, es decir, se hace más probable que se pierdan efectos verdaderamente significativos en los datos. En estudios con muchos tests, este método puede ser demasiado restrictivo, y podría ser preferible usar otras correcciones menos conservadoras, como el método de Benjamini-Hochberg, que controla la tasa de falsos descubrimientos en lugar de reducir drásticamente el nivel de significancia de cada test individual.
 
 
+Finalmente observando los p-valores del csv, se observa que:
+
+
+Con un nivel de significancia alpha = 0.05, observamos que los p-valores originales que están por debajo de 0.05 son los siguientes:
+
+NK602-13 por ciento: p-valor = 0.009946
+NK603-25 por ciento: p-valor = 0.03901
+NK602-22 por ciento: p-valor = 0.005332
+NK603-13 por ciento: p-valor = 0.00009712
+RoundUp D: p-valor = 0.00003723
+NK603-22 por ciento + R: p-valor = 0.02131745
+RoundUp C: p-valor = 0.02845455
+NK603-22 por ciento: p-valor = 0.01143779
+
+
+Sin embargo, después de aplicar la corrección de Bonferroni, la mayoría de estos valores aumentaron por encima del umbral de 0.05, y solo los valores de NK603-13 por ciento y RoundUp D (con p-valores corregidos de 0.00223376 y 0.00085629, respectivamente) se mantienen por debajo de 0.05. Esto significa que todos los demás valores que eran significativos con el p-valor usual ahora son rechazados bajo la corrección de Bonferroni.
+
+
+Este resultado implica que la corrección de Bonferroni puede aumentar el nivel de falsos negativos. Al hacer la prueba más estricta, se reduce el número de resultados significativos detectados, lo cual puede llevar a ignorar efectos que realmente existen en los datos. Esta corrección es conservadora y útil para evitar falsos positivos, pero en estudios con un gran número de tests, puede resultar en la pérdida de hallazgos significativos verdaderos.
+
 
 ---
 
@@ -571,7 +591,7 @@ b) Estudie si el modelo multivariable posee mejor desempeño que el modelo simpl
 #### Respuesta: Parte I
 
 ```{r}
-# Cargar los datos (asegúrate de ajustar la ruta si es necesario)
+# Cargar los datos
 insurance <- read.csv("insurance.csv")
 
 
@@ -606,7 +626,7 @@ summary(insurance)
 ```{r}
 
 
-# Paso 1: Separar el dataset en fumadores y no fumadores
+# Separar el dataset en fumadores y no fumadores
 smokers <- insurance[insurance$smoker == 1, ]
 non_smokers <- insurance[insurance$smoker == 0, ]
 
@@ -618,7 +638,7 @@ non_smokers <- insurance[insurance$smoker == 0, ]
 ```{r}
 
 
-# Paso 2: Función para calcular correlación manualmente
+# Función para calcular correlación manualmente
 calc_correlation <- function(X, Y) {
   X_mean <- sum(X) / length(X)
   Y_mean <- sum(Y) / length(Y)
@@ -633,7 +653,7 @@ variables_numericas <- colnames(insurance) %>%
   setdiff(c("charges", "smoker"))
 
 
-# Paso 3: Encontrar la variable con mayor correlación con 'charges' para fumadores
+# Encontrar la variable con mayor correlación con 'charges' para fumadores
 correlations_smokers <- sapply(variables_numericas, function(var) calc_correlation(smokers[[var]], smokers$charges))
 variable_mayor_correlacion_smokers <- variables_numericas[which.max(abs(correlations_smokers))]
 
@@ -641,7 +661,7 @@ variable_mayor_correlacion_smokers <- variables_numericas[which.max(abs(correlat
 cat("La variable numérica con mayor correlación para fumadores es:", variable_mayor_correlacion_smokers, 
     "con una correlación de", correlations_smokers[which.max(abs(correlations_smokers))], "\n")
 
-# Paso 4: Encontrar la variable con mayor correlación con 'charges' para no fumadores
+# Encontrar la variable con mayor correlación con 'charges' para no fumadores
 correlations_non_smokers <- sapply(variables_numericas, function(var) calc_correlation(non_smokers[[var]], non_smokers$charges))
 variable_mayor_correlacion_non_smokers <- variables_numericas[which.max(abs(correlations_non_smokers))]
 
@@ -649,7 +669,7 @@ variable_mayor_correlacion_non_smokers <- variables_numericas[which.max(abs(corr
 cat("La variable numérica con mayor correlación para no fumadores es:", variable_mayor_correlacion_non_smokers, 
     "con una correlación de", correlations_non_smokers[which.max(abs(correlations_non_smokers))], "\n")
 
-# Paso 5: Implementar la regresión lineal para ambos grupos con la variable más correlacionada
+# Implementar la regresión lineal para ambos grupos con la variable más correlacionada
 
 # Definir la función lm_reg para calcular los coeficientes de regresión lineal simple
 lm_reg <- function(X, Y) {
@@ -723,7 +743,7 @@ cat("R^2:", R2_non_smokers$R2, "\nR^2-ajustado:", R2_non_smokers$R2_adjusted, "\
 x_label_smokers <- paste(variable_mayor_correlacion_smokers, "(unidades correspondientes)")
 x_label_non_smokers <- paste(variable_mayor_correlacion_non_smokers, "(unidades correspondientes)")
 
-# Scatterplot y línea de regresión para fumadores
+
 
 # Scatterplot y línea de regresión para fumadores
 ggplot(data = smokers, aes(x = .data[[variable_mayor_correlacion_smokers]], y = charges)) +
@@ -774,11 +794,11 @@ variables_numericas <- colnames(insurance) %>%
   setdiff(c("charges", "smoker"))
 
 
-# Paso 1: Calcular la correlación de cada variable numérica con 'charges' para fumadores
+# Calcular la correlación de cada variable numérica con 'charges' para fumadores
 correlations_smokers <- sapply(variables_numericas, function(var) calc_correlation(smokers[[var]], smokers$charges))
 top_two_vars_smokers <- names(sort(abs(correlations_smokers), decreasing = TRUE))[1:2]
 
-# Paso 2: Calcular la correlación de cada variable numérica con 'charges' para no fumadores
+# Calcular la correlación de cada variable numérica con 'charges' para no fumadores
 correlations_non_smokers <- sapply(variables_numericas, function(var) calc_correlation(non_smokers[[var]], non_smokers$charges))
 top_two_vars_non_smokers <- names(sort(abs(correlations_non_smokers), decreasing = TRUE))[1:2]
 
@@ -786,7 +806,7 @@ top_two_vars_non_smokers <- names(sort(abs(correlations_non_smokers), decreasing
 cat("Variables seleccionadas para fumadores:", top_two_vars_smokers, "\n")
 cat("Variables seleccionadas para no fumadores:", top_two_vars_non_smokers, "\n")
 
-# Paso 3: Implementar la regresión lineal multivariable desde cero
+# Implementar la regresión lineal multivariable desde cero
 # Definir la función lm_multi_reg para calcular los coeficientes de regresión lineal multivariable
 lm_multi_reg <- function(X1, X2, Y) {
   # Matriz de diseño
@@ -840,7 +860,7 @@ En el modelo simple, la variable BMI tenia una fuerte relacion con los charges, 
 No fumadores
 En el modelo simple, la variable age fue el predictor mas relevante para los charges, con un R2 ajustado de aproximadamente 0.394. Al agregar la variable children en el modelo multivariable, el R2 ajustado aumenta ligeramente a 0.4071. Aunque este incremento es modesto, el coeficiente de children es estadisticamente significativo (p menor que 6.79e-07), lo cual indica que la presencia de hijos tambien esta relacionada con los gastos medicos en el grupo de no fumadores, aunque su impacto sea menor en comparacion con age.
 
-Recomendacion general
+En general
 Para ambos grupos, el modelo multivariable muestra un desempeño superior al modelo simple y es estadisticamente significativo, lo cual sugiere que es preferible para capturar con mayor precision los factores asociados a los gastos medicos. Sin embargo, en aplicaciones donde la simplicidad y la interpretabilidad son clave, el modelo simple podria ser adecuado, especialmente en el caso de no fumadores, donde la mejora en R2 es menos pronunciada.
 
 Para fumadores, el modelo multivariable es preferible al modelo simple de BMI, ya que el R2 ajustado mejora de 0.649 a 0.7514. Ambos coeficientes (BMI: p < 2e-16, age: p < 2e-16) son altamente significativos, lo que respalda su relevancia en la prediccion de gastos medicos, aunque el R2 sugiere que no captura toda la variabilidad. Sin embargo, ambos modelos tienen un R2 decente, por lo que ambos podrian ser utiles para la prediccion de nuevas entradas, con una clara preferencia por el modelo multivariable.
@@ -908,6 +928,11 @@ plot_non_smokers
 Por último, al graficar los planos generados por la regresión multivariable y compararlos con el modelo simple, se observa que el modelo para fumadores podría mejorarse significativamente. Este análisis sugiere la posibilidad de tener dos regresiones diferenciadas que dependen, entre otras variables, del índice de masa corporal (BMI), con un punto de quiebre cercano a 30, como se ve claramente en la regresión simple para fumadores. Esta bifurcación permitiría construir dos planos que capturen mejor la distribución de los datos para fumadores.
 
 En el caso de los no fumadores, tanto el modelo simple como el multivariable capturan bien la distribución general de los datos. Sin embargo, los outliers con gastos médicos extremadamente altos afectan la pendiente del plano. Si se eliminan estos outliers, el plano se ajustaría de forma más precisa a la tendencia central de los datos. Incluso, gráficamente, el modelo simple para no fumadores muestra una tendencia que se ajusta adecuadamente a la mayoría de los puntos de datos. Esto sugiere que dichos outliers podrían no explicarse con las variables disponibles en el dataset y, por lo tanto, no formarían parte del comportamiento típico de los no fumadores, agregando una fuente de heterogeneidad no modelada.
+
+
+
+
+
 
 &nbsp;
 <hr />
