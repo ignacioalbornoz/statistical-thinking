@@ -67,7 +67,7 @@ En la siguiente sección deberá resolver cada uno de los experimentos computaci
 
 Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 3 son las siguientes:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 # Manipulación de estructuras
 library(tidyverse)
 library(dplyr)
@@ -374,7 +374,7 @@ $$\mathbb{P}(\text{obtener al menos resultado significativo por azar})=1-(1-\alp
 - [ ] Ejecute el siguiente código que calcula el $p$-valor usual y el $p$-valor asociado a Bonferroni (que corresponde al $p$-valor * m donde $m$ es el numero de experimentos), ¿Cuantos valores que originalmente se hubieran aceptado fueron rechazados si $\alpha = 0.05$? ¿Que implica esto sobre el nivel de falsos negativos de este metodo?
 
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 data <- read.csv("ratones.csv",sep= ";", stringsAsFactors = T)
 head(data)
 ```
@@ -383,23 +383,180 @@ head(data)
 
 ```{r}
 
-probEmpirica <- function(alpha,m){
-  n <- 10000 # Cantidad de veces que se va a repetir el experimento para estimar la probabilidad, pueden cambiar este valor si lo desean
-  
+probEmpirica <- function(alpha, m) {
+  n <- 10000 # Cantidad de veces que se va a repetir el experimento para estimar la probabilidad
 
-  res <-... #Resultados de los experimentos
-  
-  # Puede agergar todo el codigo que estime conveniente para calcular la probabilidad empirica
-  ...
-  ...
-  #
-  prob <-... # Probabilidad empirica
+  # Generamos n veces el resultado de tener al menos un test significativo entre los m experimentos
+  res <- replicate(n, sum(rbinom(m, 1, alpha) > 0)) # rbinom genera resultados con p(alpha), si >0 indica significativo
+
+  # Calculamos la probabilidad empírica de que haya al menos un resultado significativo
+  prob <- mean(res > 0) # Contamos las veces que se obtuvo al menos un resultado significativo y calculamos su promedio
   
   return(prob)
-  
 }
 
 ```
+
+```{r}
+probTeorica <- function(alpha, m) {
+  prob <- 1 - (1 - alpha)^m
+  return(prob)
+}
+```
+
+```{r}
+
+plotProbs <- function(alpha) {
+  # Valores de m a evaluar
+  m_values <- seq(1, 200, by = 1)
+  
+  # Calculamos la probabilidad empírica y teórica para cada valor de m
+  prob_empirica <- sapply(m_values, function(m) probEmpirica(alpha, m))
+  prob_teorica <- sapply(m_values, function(m) probTeorica(alpha, m))
+  
+  # Creamos un data frame para facilitar el plot
+  df <- data.frame(
+    m = m_values,
+    Empirical = prob_empirica,
+    Theoretical = prob_teorica
+  )
+  
+  # Graficamos los resultados
+  ggplot(df, aes(x = m)) +
+    geom_line(aes(y = Empirical, color = "Probabilidad Empírica"), linewidth = 1) +
+    geom_line(aes(y = Theoretical, color = "Probabilidad Teórica"), linewidth = 1, linetype = "dashed") +
+    labs(
+      title = bquote("Comparación de Probabilidades Empírica y Teórica, con " ~ alpha == .(alpha)),
+      x = "Número de Experimentos (m)",
+      y = "Probabilidad de al Menos un Resultado Significativo",
+      color = "Tipo de Probabilidad"
+    ) +
+    scale_color_manual(values = c("Probabilidad Empírica" = "blue", "Probabilidad Teórica" = "red")) +
+    theme_minimal()
+}
+
+
+```
+
+```{r}
+# Establecemos el valor de alpha=0.05
+alpha <- 0.05
+plotProbs(alpha)
+# Establecemos el valor de alpha=0.2
+alpha <- 0.2
+plotProbs(alpha)
+# Establecemos el valor de alpha=0.01
+alpha <- 0.01
+plotProbs(alpha)
+
+
+```
+
+¿Se parecen sus resultados?
+Sí, los resultados empíricos y teóricos son bastante similares. A medida que aumentamos el número de experimentos (m), ambas probabilidades convergen, lo que muestra que la simulación empírica refleja correctamente el comportamiento teórico esperado.
+
+¿Qué sucede cuando la cantidad de experimentos crece mucho?
+Cuando el número de experimentos m es alto, la probabilidad de obtener al menos un resultado significativo por azar tiende rápidamente a 1, independientemente del valor de alpha. Esto implica que, con suficientes pruebas, la probabilidad de encontrar un resultado significativo por azar se acerca a 100%, lo cual demuestra la necesidad de correcciones cuando se realizan muchos tests de hipótesis.
+
+¿Este comportamiento depende del valor de significancia alpha?
+Sí, el valor de alpha afecta la velocidad con la que la probabilidad alcanza el 1. Un alpha mayor (por ejemplo, 0.2) hará que la probabilidad de obtener al menos un resultado significativo alcance 1 mucho más rápido que un alpha menor (como 0.01). Sin embargo, en todos los casos, la probabilidad tiende a 1 con un número suficientemente grande de experimentos.
+
+¿Es útil este método para la realización de múltiples tests de hipótesis?
+Este método no es adecuado para múltiples tests de hipótesis sin corrección, ya que a medida que el número de experimentos aumenta, se vuelve casi inevitable encontrar un resultado significativo solo por azar. Esto sugiere que, sin una corrección adecuada, los resultados pueden ser engañosos y llevar a conclusiones incorrectas. La corrección de Bonferroni, por ejemplo, es útil en estos casos para ajustar el nivel de significancia y reducir el riesgo de falsos positivos.
+
+
+
+
+
+
+
+
+```{r}
+probEmpiricaBonferroni <- function(alpha, m) {
+  n <- 10000 # Cantidad de veces que se va a repetir el experimento para estimar la probabilidad
+  alpha_corrected <- alpha / m
+  res <- replicate(n, sum(rbinom(m, 1, alpha_corrected) > 0))
+  prob <- mean(res > 0)
+  return(prob)
+}
+
+
+plotProbsBonferroni <- function(alpha) {
+  # Valores de m a evaluar
+  m_values <- seq(1, 200, by = 1)
+  
+  # Calculamos la probabilidad empírica, teórica y empírica con corrección de Bonferroni para cada valor de m
+  prob_empirica <- sapply(m_values, function(m) probEmpirica(alpha, m))
+  prob_teorica <- sapply(m_values, function(m) probTeorica(alpha, m))
+  prob_empirica_bonferroni <- sapply(m_values, function(m) probEmpiricaBonferroni(alpha, m))
+  
+  # Creamos un data frame para facilitar el plot
+  df <- data.frame(
+    m = m_values,
+    Empirical = prob_empirica,
+    Theoretical = prob_teorica,
+    Empirical_Bonferroni = prob_empirica_bonferroni
+  )
+  
+  # Graficamos los resultados
+  ggplot(df, aes(x = m)) +
+    geom_line(aes(y = Empirical, color = "Empírica"), linewidth = 1) +
+    geom_line(aes(y = Theoretical, color = "Teórica"), linewidth = 1, linetype = "dashed") +
+    geom_line(aes(y = Empirical_Bonferroni, color = "Empírica Bonferroni"), linewidth = 1, linetype = "dotdash") +
+    labs(
+      title = bquote("Probabilidades con y sin Bonferroni" ~ (alpha == .(alpha))),
+      x = "Número de Experimentos (m)",
+      y = "Probabilidad de al Menos un Resultado Significativo",
+      color = "Probabilidad"
+    ) +
+    scale_color_manual(values = c(
+      "Empírica" = "blue", 
+      "Teórica" = "red", 
+      "Empírica Bonferroni" = "green"
+    )) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 14, hjust = 0.5),
+      legend.title = element_text(size = 10),
+      legend.text = element_text(size = 8),
+      legend.position = "top",
+      legend.box = "horizontal"
+    )
+}
+
+alpha <- 0.05
+plotProbsBonferroni(alpha)
+
+```
+## Corrección Bonferroni
+
+### ¿Mejoran los resultados?
+Sí, los resultados mejoran al aplicar la corrección de Bonferroni, ya que esta corrección reduce drásticamente la probabilidad de obtener al menos un resultado significativo por azar cuando se realizan múltiples tests. Esto se observa en el gráfico: la probabilidad empírica con la corrección de Bonferroni (línea verde) se mantiene muy baja incluso cuando el número de experimentos (m) aumenta, en comparación con las probabilidades empírica y teórica sin corrección, que tienden rápidamente a 1. Este ajuste minimiza el riesgo de falsos positivos, lo cual es especialmente importante cuando se realizan muchos tests simultáneos.
+
+### Problema si m es muy grande
+Cuando m es muy grande, la corrección de Bonferroni puede volverse demasiado conservadora. Dividir el nivel de significancia alpha por un número grande hace que el alpha corregido sea extremadamente bajo, lo cual requiere una evidencia estadística muy fuerte para obtener resultados significativos. Esto incrementa la probabilidad de falsos negativos, es decir, se hace más probable que se pierdan efectos verdaderamente significativos en los datos. En estudios con muchos tests, este método puede ser demasiado restrictivo, y podría ser preferible usar otras correcciones menos conservadoras, como el método de Benjamini-Hochberg, que controla la tasa de falsos descubrimientos en lugar de reducir drásticamente el nivel de significancia de cada test individual.
+
+
+Finalmente observando los p-valores del csv, se observa que:
+
+
+Con un nivel de significancia alpha = 0.05, observamos que los p-valores originales que están por debajo de 0.05 son los siguientes:
+
+NK602-13 por ciento: p-valor = 0.009946
+NK603-25 por ciento: p-valor = 0.03901
+NK602-22 por ciento: p-valor = 0.005332
+NK603-13 por ciento: p-valor = 0.00009712
+RoundUp D: p-valor = 0.00003723
+NK603-22 por ciento + R: p-valor = 0.02131745
+RoundUp C: p-valor = 0.02845455
+NK603-22 por ciento: p-valor = 0.01143779
+
+
+Sin embargo, después de aplicar la corrección de Bonferroni, la mayoría de estos valores aumentaron por encima del umbral de 0.05, y solo los valores de NK603-13 por ciento y RoundUp D (con p-valores corregidos de 0.00223376 y 0.00085629, respectivamente) se mantienen por debajo de 0.05. Esto significa que todos los demás valores que eran significativos con el p-valor usual ahora son rechazados bajo la corrección de Bonferroni.
+
+
+Este resultado implica que la corrección de Bonferroni puede aumentar el nivel de falsos negativos. Al hacer la prueba más estricta, se reduce el número de resultados significativos detectados, lo cual puede llevar a ignorar efectos que realmente existen en los datos. Esta corrección es conservadora y útil para evitar falsos positivos, pero en estudios con un gran número de tests, puede resultar en la pérdida de hallazgos significativos verdaderos.
+
 
 ---
 
@@ -430,12 +587,350 @@ b) Estudie si el modelo multivariable posee mejor desempeño que el modelo simpl
 
 **Nota:** No esta permitido utilizar comandos que obtengan los valores solicitados directamente a menos que se le permita en la pregunta.
 
+
+#### Respuesta: Parte I
+
 ```{r}
-lm_reg <- function(X, Y){
-  
-  
-}
+# Cargar los datos
+insurance <- read.csv("insurance.csv")
+
+
+# Convertir a factor
+insurance$smoker <- as.factor(insurance$smoker)
+insurance$sex <- as.factor(insurance$sex)
+
+# Asignar 0 y 1 a los niveles del factor
+levels(insurance$smoker) <- c(0, 1)
+insurance$sex <- as.integer(insurance$sex)-1
+
+
+# Convertir la columna "region" en variables dummy
+dummies <- model.matrix(~ region - 1, data = insurance)
+
+# Convertir a dataframe y renombrar columnas
+dummies <- as.data.frame(dummies)
+colnames(dummies) <- gsub("region", "", colnames(dummies))
+
+# Combinar las columnas dummy con el dataset original y eliminar la columna "region"
+insurance <- cbind(insurance, dummies) %>%
+  select(-region)
+
+summary(insurance)
+
+
+
 ```
+
+
+
+```{r}
+
+
+# Separar el dataset en fumadores y no fumadores
+smokers <- insurance[insurance$smoker == 1, ]
+non_smokers <- insurance[insurance$smoker == 0, ]
+
+
+```
+
+
+
+```{r}
+
+
+# Función para calcular correlación manualmente
+calc_correlation <- function(X, Y) {
+  X_mean <- sum(X) / length(X)
+  Y_mean <- sum(Y) / length(Y)
+  covariance <- sum((X - X_mean) * (Y - Y_mean))
+  sd_X <- sqrt(sum((X - X_mean)^2))
+  sd_Y <- sqrt(sum((Y - Y_mean)^2))
+  correlation <- covariance / (sd_X * sd_Y)
+  return(correlation)
+}
+
+variables_numericas <- colnames(insurance) %>%
+  setdiff(c("charges", "smoker"))
+
+
+# Encontrar la variable con mayor correlación con 'charges' para fumadores
+correlations_smokers <- sapply(variables_numericas, function(var) calc_correlation(smokers[[var]], smokers$charges))
+variable_mayor_correlacion_smokers <- variables_numericas[which.max(abs(correlations_smokers))]
+
+# Justificación cuantitativa
+cat("La variable numérica con mayor correlación para fumadores es:", variable_mayor_correlacion_smokers, 
+    "con una correlación de", correlations_smokers[which.max(abs(correlations_smokers))], "\n")
+
+# Encontrar la variable con mayor correlación con 'charges' para no fumadores
+correlations_non_smokers <- sapply(variables_numericas, function(var) calc_correlation(non_smokers[[var]], non_smokers$charges))
+variable_mayor_correlacion_non_smokers <- variables_numericas[which.max(abs(correlations_non_smokers))]
+
+# Justificación cuantitativa
+cat("La variable numérica con mayor correlación para no fumadores es:", variable_mayor_correlacion_non_smokers, 
+    "con una correlación de", correlations_non_smokers[which.max(abs(correlations_non_smokers))], "\n")
+
+# Implementar la regresión lineal para ambos grupos con la variable más correlacionada
+
+# Definir la función lm_reg para calcular los coeficientes de regresión lineal simple
+lm_reg <- function(X, Y) {
+  X_mean <- sum(X) / length(X)
+  Y_mean <- sum(Y) / length(Y)
+  cov_XY <- sum((X - X_mean) * (Y - Y_mean))
+  var_X <- sum((X - X_mean)^2)
+  beta_1 <- cov_XY / var_X # Pendiente
+  beta_0 <- Y_mean - beta_1 * X_mean # Intercepto
+  return(list(intercepto = beta_0, pendiente = beta_1))
+}
+
+# Modelo para fumadores
+X_smokers <- smokers[[variable_mayor_correlacion_smokers]]
+Y_smokers <- smokers$charges
+modelo_smokers <- lm_reg(X_smokers, Y_smokers)
+
+cat("Modelo lineal para fumadores:\n")
+cat("Intercepto:", modelo_smokers$intercepto, "\nPendiente:", modelo_smokers$pendiente, "\n")
+
+# Modelo para no fumadores
+X_non_smokers <- non_smokers[[variable_mayor_correlacion_non_smokers]]
+Y_non_smokers <- non_smokers$charges
+modelo_non_smokers <- lm_reg(X_non_smokers, Y_non_smokers)
+
+cat("Modelo lineal para no fumadores:\n")
+cat("Intercepto:", modelo_non_smokers$intercepto, "\nPendiente:", modelo_non_smokers$pendiente, "\n")
+```
+
+
+```{r}
+# Función para calcular el R^2 y el R^2 ajustado
+calc_R2 <- function(X, Y, modelo) {
+  # Predicción de Y usando el modelo lineal
+  Y_pred <- modelo$intercepto + modelo$pendiente * X
+  
+  # Calcular la Suma Total de Cuadrados (SST)
+  Y_mean <- sum(Y) / length(Y)
+  SST <- sum((Y - Y_mean)^2)
+  
+  # Calcular la Suma de Cuadrados de los Residuos (SSR)
+  SSR <- sum((Y - Y_pred)^2)
+  
+  # Calcular R^2
+  R2 <- 1 - (SSR / SST)
+  
+  # Calcular R^2 ajustado
+  n <- length(Y)
+  p <- 1  # Número de predictores
+  R2_adjusted <- 1 - (1 - R2) * (n - 1) / (n - p - 1)
+  
+  return(list(R2 = R2, R2_adjusted = R2_adjusted))
+}
+
+# Cálculo para el modelo de fumadores
+R2_smokers <- calc_R2(X_smokers, Y_smokers, modelo_smokers)
+cat("Modelo para fumadores:\n")
+cat("R^2:", R2_smokers$R2, "\nR^2-ajustado:", R2_smokers$R2_adjusted, "\n")
+
+# Cálculo para el modelo de no fumadores
+R2_non_smokers <- calc_R2(X_non_smokers, Y_non_smokers, modelo_non_smokers)
+cat("Modelo para no fumadores:\n")
+cat("R^2:", R2_non_smokers$R2, "\nR^2-ajustado:", R2_non_smokers$R2_adjusted, "\n")
+
+```
+
+
+```{r}
+
+# Definir etiquetas de los ejes según la variable de mayor correlación
+x_label_smokers <- paste(variable_mayor_correlacion_smokers, "(unidades correspondientes)")
+x_label_non_smokers <- paste(variable_mayor_correlacion_non_smokers, "(unidades correspondientes)")
+
+
+
+# Scatterplot y línea de regresión para fumadores
+ggplot(data = smokers, aes(x = .data[[variable_mayor_correlacion_smokers]], y = charges)) +
+  geom_point(color = "blue") +  # Puntos de datos
+  geom_abline(intercept = modelo_smokers$intercepto, slope = modelo_smokers$pendiente, color = "red") +  # Línea de regresión
+  labs(title = "Modelo de Regresión Lineal para Fumadores",
+       x = variable_mayor_correlacion_smokers,
+       y = "Gastos Médicos (charges)") +
+  theme_minimal()
+
+# Scatterplot y línea de regresión para no fumadores
+ggplot(data = non_smokers, aes(x = .data[[variable_mayor_correlacion_non_smokers]], y = charges)) +
+  geom_point(color = "blue") +  # Puntos de datos
+  geom_abline(intercept = modelo_non_smokers$intercepto, slope = modelo_non_smokers$pendiente, color = "red") +  # Línea de regresión
+  labs(title = "Modelo de Regresión Lineal para No Fumadores",
+       x = variable_mayor_correlacion_non_smokers,
+       y = "Gastos Médicos (charges)") +
+  theme_minimal()
+
+```
+Como conclusión de la parte I y analizando las regresiones lineales obtenidas, se observa que el indice de masa corporal (BMI) es el predictor mas relevante para los fumadores, con una correlacion de 0.8065, mientras que la edad resulta ser el predictor mas significativo para los no fumadores, con una correlacion de 0.6279. Esto indica que el BMI esta fuertemente asociado con los gastos medicos en el grupo de fumadores, sugiriendo una relacion considerable entre el exceso de peso y los costos medicos en este subgrupo.
+
+El modelo para fumadores presenta un R2 de 0.6504 (ajustado: 0.6491), lo cual implica que aproximadamente el 65.04 por ciento de la variabilidad en los gastos medicos es explicada por el BMI en este grupo, un valor moderado-alto que refuerza la relevancia de este predictor. En contraste, el modelo para no fumadores muestra un R2 de 0.3943 (ajustado: 0.3937), indicando que solo el 39.43 por ciento de la variabilidad en los gastos medicos es explicado por la edad. Este menor ajuste sugiere que la edad tiene una influencia mas limitada sobre los costos medicos en los no fumadores, reflejando posiblemente la influencia de otros factores no capturados en el modelo.
+
+La pendiente del modelo en fumadores (1473.106) resalta un incremento significativo en los gastos con el aumento del BMI, mientras que en no fumadores la pendiente de 267.2489 indica un aumento mas moderado en funcion de la edad.
+
+Estas conclusiones implican que, en fumadores, el BMI es un factor critico que impulsa los costos medicos, sugiriendo que intervenciones para reducir el indice de masa corporal podrian ser efectivas en controlar gastos en este grupo. En no fumadores, aunque la edad afecta los costos, su impacto es menor, lo cual sugiere que en este grupo los factores de riesgo relacionados con el estilo de vida podrian ser menos determinantes en el gasto medico que en fumadores.
+
+La mayor correlación entre BMI y gastos médicos en fumadores podría reflejar una interacción sinérgica entre los efectos del tabaquismo y el sobrepeso en la salud, donde el daño combinado exacerba los costos médicos. En contraste, para no fumadores, la edad influye en los gastos de manera más moderada, posiblemente porque, sin el impacto adicional del tabaquismo, el BMI y otros factores de estilo de vida tienen un papel menos directo y menos agresivo sobre los costos de salud, distribuyéndose sus efectos a lo largo del envejecimiento natural.
+
+
+#### Respuesta: Parte II
+
+```{r}
+
+# Función para calcular correlación manualmente
+calc_correlation <- function(X, Y) {
+  X_mean <- sum(X) / length(X)
+  Y_mean <- sum(Y) / length(Y)
+  covariance <- sum((X - X_mean) * (Y - Y_mean))
+  sd_X <- sqrt(sum((X - X_mean)^2))
+  sd_Y <- sqrt(sum((Y - Y_mean)^2))
+  correlation <- covariance / (sd_X * sd_Y)
+  return(correlation)
+}
+
+variables_numericas <- colnames(insurance) %>%
+  setdiff(c("charges", "smoker"))
+
+
+# Calcular la correlación de cada variable numérica con 'charges' para fumadores
+correlations_smokers <- sapply(variables_numericas, function(var) calc_correlation(smokers[[var]], smokers$charges))
+top_two_vars_smokers <- names(sort(abs(correlations_smokers), decreasing = TRUE))[1:2]
+
+# Calcular la correlación de cada variable numérica con 'charges' para no fumadores
+correlations_non_smokers <- sapply(variables_numericas, function(var) calc_correlation(non_smokers[[var]], non_smokers$charges))
+top_two_vars_non_smokers <- names(sort(abs(correlations_non_smokers), decreasing = TRUE))[1:2]
+
+# Mostrar las dos variables más correlacionadas para fumadores y no fumadores
+cat("Variables seleccionadas para fumadores:", top_two_vars_smokers, "\n")
+cat("Variables seleccionadas para no fumadores:", top_two_vars_non_smokers, "\n")
+
+# Implementar la regresión lineal multivariable desde cero
+# Definir la función lm_multi_reg para calcular los coeficientes de regresión lineal multivariable
+lm_multi_reg <- function(X1, X2, Y) {
+  # Matriz de diseño
+  X <- cbind(1, X1, X2)  # Añadir un 1 para el intercepto
+  
+  # Calculo manual de los coeficientes beta
+  XtX_inv <- solve(t(X) %*% X)  # Inversa de XtX
+  XtY <- t(X) %*% Y  # XtY
+  betas <- XtX_inv %*% XtY  # Calculo de los coeficientes
+  
+  return(list(intercepto = betas[1], beta1 = betas[2], beta2 = betas[3]))
+}
+
+# Modelo multivariable para fumadores
+X1_smokers <- smokers[[top_two_vars_smokers[1]]]
+X2_smokers <- smokers[[top_two_vars_smokers[2]]]
+Y_smokers <- smokers$charges
+modelo_multi_smokers <- lm_multi_reg(X1_smokers, X2_smokers, Y_smokers)
+
+cat("Modelo multivariable para fumadores:\n")
+cat("Intercepto:", modelo_multi_smokers$intercepto, "\nBeta1:", modelo_multi_smokers$beta1, "\nBeta2:", modelo_multi_smokers$beta2, "\n")
+
+# Modelo multivariable para no fumadores
+X1_non_smokers <- non_smokers[[top_two_vars_non_smokers[1]]]
+X2_non_smokers <- non_smokers[[top_two_vars_non_smokers[2]]]
+Y_non_smokers <- non_smokers$charges
+modelo_multi_non_smokers <- lm_multi_reg(X1_non_smokers, X2_non_smokers, Y_non_smokers)
+
+cat("Modelo multivariable para no fumadores:\n")
+cat("Intercepto:", modelo_multi_non_smokers$intercepto, "\nBeta1:", modelo_multi_non_smokers$beta1, "\nBeta2:", modelo_multi_non_smokers$beta2, "\n")
+
+
+```
+```{r}
+# Modelo multivariable para fumadores usando lm()
+model_smokers_lm <- lm(charges ~ bmi + age, data = smokers)
+summary(model_smokers_lm)
+
+# Modelo multivariable para no fumadores usando lm()
+model_non_smokers_lm <- lm(charges ~ age + children, data = non_smokers)
+summary(model_non_smokers_lm)
+
+```
+
+
+Para evaluar si el modelo multivariable mejora el desempeño respecto al modelo simple y determinar si es conveniente su uso para predicciones futuras, analizaremos los resultados obtenidos en terminos de R2 y el test de hipotesis para los coeficientes de regresion.
+
+Fumadores
+En el modelo simple, la variable BMI tenia una fuerte relacion con los charges, con un R2 ajustado de aproximadamente 0.649. En el modelo multivariable, donde se incluyen BMI y age, el R2 ajustado aumenta a 0.7514, lo que indica una mejora en la capacidad explicativa del modelo. La adicion de la variable age parece significativa segun el valor p asociado al coeficiente de age (p menor que 2e-16), lo cual respalda que esta variable aporta informacion adicional relevante al modelo, mejorando su ajuste y explicando mejor la variabilidad en los gastos medicos.
+
+No fumadores
+En el modelo simple, la variable age fue el predictor mas relevante para los charges, con un R2 ajustado de aproximadamente 0.394. Al agregar la variable children en el modelo multivariable, el R2 ajustado aumenta ligeramente a 0.4071. Aunque este incremento es modesto, el coeficiente de children es estadisticamente significativo (p menor que 6.79e-07), lo cual indica que la presencia de hijos tambien esta relacionada con los gastos medicos en el grupo de no fumadores, aunque su impacto sea menor en comparacion con age.
+
+En general
+Para ambos grupos, el modelo multivariable muestra un desempeño superior al modelo simple y es estadisticamente significativo, lo cual sugiere que es preferible para capturar con mayor precision los factores asociados a los gastos medicos. Sin embargo, en aplicaciones donde la simplicidad y la interpretabilidad son clave, el modelo simple podria ser adecuado, especialmente en el caso de no fumadores, donde la mejora en R2 es menos pronunciada.
+
+Para fumadores, el modelo multivariable es preferible al modelo simple de BMI, ya que el R2 ajustado mejora de 0.649 a 0.7514. Ambos coeficientes (BMI: p < 2e-16, age: p < 2e-16) son altamente significativos, lo que respalda su relevancia en la prediccion de gastos medicos, aunque el R2 sugiere que no captura toda la variabilidad. Sin embargo, ambos modelos tienen un R2 decente, por lo que ambos podrian ser utiles para la prediccion de nuevas entradas, con una clara preferencia por el modelo multivariable.
+
+Para no fumadores, el modelo multivariable con age y children mejora marginalmente el R2 ajustado de 0.394 a 0.4071. Ambos coeficientes son significativos (age: p < 2e-16, children: p < 6.79e-07), pero el bajo R2 indica una capacidad predictiva limitada. Aqui, tanto el modelo simple de age como el modelo multivariable pueden no ser suficientes para prediccion de nuevas entradas debido al bajo R2, lo que sugiere que faltan variables adicionales, aunque ambas variables son estadisticamente significativas.
+
+
+
+
+```{r}
+
+
+# Modelo multivariable para fumadores (variables: bmi, age)
+model_smokers_lm <- lm(charges ~ bmi + age, data = smokers)
+coef_smokers <- coef(model_smokers_lm)
+
+# Generar una malla densa de valores para las variables independientes
+bmi_range <- seq(min(smokers$bmi), max(smokers$bmi), length.out = 50)
+age_range <- seq(min(smokers$age), max(smokers$age), length.out = 50)
+
+# Crear una cuadrícula de puntos para el plano de regresión de fumadores
+grid_smokers <- expand.grid(bmi = bmi_range, age = age_range)
+grid_smokers$charges <- coef_smokers[1] + coef_smokers[2] * grid_smokers$bmi + coef_smokers[3] * grid_smokers$age
+
+# Gráfico interactivo para fumadores
+plot_smokers <- plot_ly() %>%
+  add_markers(x = ~smokers$bmi, y = ~smokers$age, z = ~smokers$charges, color = I("blue"), size = I(3), name = "Datos Fumadores") %>%
+  add_surface(x = bmi_range, y = age_range, z = matrix(grid_smokers$charges, nrow = 50, ncol = 50), 
+              opacity = 0.5, colorscale = list(c(0,1), c("red", "red")), showscale = FALSE, name = "Plano de Regresión") %>%
+  layout(scene = list(xaxis = list(title = "BMI"),
+                      yaxis = list(title = "Edad"),
+                      zaxis = list(title = "Gastos Médicos (charges)")),
+         title = "Modelo Multivariable para Fumadores")
+
+# Modelo multivariable para no fumadores (variables: age, children)
+model_non_smokers_lm <- lm(charges ~ age + children, data = non_smokers)
+coef_non_smokers <- coef(model_non_smokers_lm)
+
+# Generar una malla densa de valores para las variables independientes
+age_range <- seq(min(non_smokers$age), max(non_smokers$age), length.out = 50)
+children_range <- seq(min(non_smokers$children), max(non_smokers$children), length.out = 50)
+
+# Crear una cuadrícula de puntos para el plano de regresión de no fumadores
+grid_non_smokers <- expand.grid(age = age_range, children = children_range)
+grid_non_smokers$charges <- coef_non_smokers[1] + coef_non_smokers[2] * grid_non_smokers$age + coef_non_smokers[3] * grid_non_smokers$children
+
+# Gráfico interactivo para no fumadores
+plot_non_smokers <- plot_ly() %>%
+  add_markers(x = ~non_smokers$age, y = ~non_smokers$children, z = ~non_smokers$charges, color = I("green"), size = I(3), name = "Datos No Fumadores") %>%
+  add_surface(x = age_range, y = children_range, z = matrix(grid_non_smokers$charges, nrow = 50, ncol = 50), 
+              opacity = 0.5, colorscale = list(c(0,1), c("orange", "orange")), showscale = FALSE, name = "Plano de Regresión") %>%
+  layout(scene = list(xaxis = list(title = "Edad"),
+                      yaxis = list(title = "Número de Hijos"),
+                      zaxis = list(title = "Gastos Médicos (charges)")),
+         title = "Modelo Multivariable para No Fumadores")
+
+# Mostrar ambos gráficos
+plot_smokers
+plot_non_smokers
+
+```
+
+
+
+Por último, al graficar los planos generados por la regresión multivariable y compararlos con el modelo simple, se observa que el modelo para fumadores podría mejorarse significativamente. Este análisis sugiere la posibilidad de tener dos regresiones diferenciadas que dependen, entre otras variables, del índice de masa corporal (BMI), con un punto de quiebre cercano a 30, como se ve claramente en la regresión simple para fumadores. Esta bifurcación permitiría construir dos planos que capturen mejor la distribución de los datos para fumadores.
+
+En el caso de los no fumadores, tanto el modelo simple como el multivariable capturan bien la distribución general de los datos. Sin embargo, los outliers con gastos médicos extremadamente altos afectan la pendiente del plano. Si se eliminan estos outliers, el plano se ajustaría de forma más precisa a la tendencia central de los datos. Incluso, gráficamente, el modelo simple para no fumadores muestra una tendencia que se ajusta adecuadamente a la mayoría de los puntos de datos. Esto sugiere que dichos outliers podrían no explicarse con las variables disponibles en el dataset y, por lo tanto, no formarían parte del comportamiento típico de los no fumadores, agregando una fuente de heterogeneidad no modelada.
+
+
+
 
 
 
