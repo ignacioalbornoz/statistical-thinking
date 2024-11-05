@@ -3,78 +3,119 @@ title: "Tarea 3"
 output:
   html_document:
     df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ![](banner.png)
 
-<center> <h1>Tarea 3: Frequentist Inference II </h1> </center>
-<center><strong>CC6104: Statistical Thinking</strong></center>
-#### **Integrantes :** 
+<center>
 
-- Alumno 1
-- Alumno 2
+<h1>Tarea 3: Frequentist Inference II</h1>
+
+</center>
+
+<center><strong>CC6104: Statistical Thinking</strong></center>
+
+#### **Integrantes :**
+
+-   Ignacio Albornoz
+-   Alejandra Toro
 
 #### **Cuerpo Docente:**
 
-- Profesor: Felipe Bravo M.
-- Auxiliar: Martín Paredes y Benjamín Farías
-            
+-   Profesor: Felipe Bravo M.
+-   Auxiliar: Martín Paredes y Benjamín Farías
 
 #### **Fecha límite de entrega:**
 
 ### **Índice:**
 
-1. [Objetivo](#id1)
-2. [Instrucciones](#id2)
-3. [Referencias](#id3)
-4. [Elaboración de Código](#id5)
+1.  [Objetivo](#id1)
+2.  [Instrucciones](#id2)
+3.  [Referencias](#id3)
+4.  [Elaboración de Código](#id5)
 
 ### **Objetivo**<a name="id1"></a>
 
-Bienvenid@s a la tercera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la segunda parte del curso, los cuales se enfocan principalmente en el diseño de experimentos, test de hipótesis y regresión lineal. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+[Bienvenid\@s](mailto:Bienvenid@s){.email} a la tercera tarea del curso
+Statistical Thinking. Esta tarea tiene como objetivo evaluar los
+contenidos teóricos de la segunda parte del curso, los cuales se enfocan
+principalmente en el diseño de experimentos, test de hipótesis y
+regresión lineal. Si aún no han visto las clases, se recomienda visitar
+los enlaces de las referencias.
 
-La tarea consta de una parte teórica que busca evaluar conceptos vistos en clases. Seguido por una parte práctica con el fin de introducirlos a la programación en R enfocada en el análisis estadístico de datos. 
+La tarea consta de una parte teórica que busca evaluar conceptos vistos
+en clases. Seguido por una parte práctica con el fin de introducirlos a
+la programación en R enfocada en el análisis estadístico de datos.
 
 ### **Instrucciones:**<a name="id2"></a>
 
-- La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacer de forma individual.
-- La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
-- El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
-- Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
-- No serán revisadas tareas desarrolladas en Python.
-- Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
-- Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso. 
-
+-   La tarea se realiza en grupos de **máximo 2 personas**. Pero no
+    existe problema si usted desea hacer de forma individual.
+-   La entrega es a través de u-cursos a más tardar el día estipulado en
+    la misma plataforma. A las tareas atrasadas se les descontará un
+    punto por día.
+-   El formato de entrega es este mismo **Rmarkdown** y un **html** con
+    la tarea desarrollada. Por favor compruebe que todas las celdas han
+    sido ejecutadas en el archivo html.
+-   Al momento de la revisión tu código será ejecutado. Por favor
+    verifica que tu entrega no tenga errores de compilación.
+-   No serán revisadas tareas desarrolladas en Python.
+-   Está **PROHIBIDO** la copia o compartir las respuestas entre
+    integrantes de diferentes grupos.
+-   Pueden realizar consultas de la tarea a través de U-cursos y/o del
+    canal de Discord del curso.
 
 ### **Referencias:**<a name="id3"></a>
 
 Slides de las clases:
 
-- [Design of Experiments & Hypothesis Testing](https://github.com/dccuchile/CC6104/blob/master/slides/ST-hypothesis.pdf)
-- [Linear Regression](https://github.com/dccuchile/CC6104/blob/master/slides/ST-regression.pdf)
+-   [Design of Experiments & Hypothesis
+    Testing](https://github.com/dccuchile/CC6104/blob/master/slides/ST-hypothesis.pdf)
+-   [Linear
+    Regression](https://github.com/dccuchile/CC6104/blob/master/slides/ST-regression.pdf)
 
 Enlaces a videos de las clases:
 
-- Design of Experiments & Hypothesis Testing: [video1](https://youtu.be/3MueyHnNNig) [video2](https://youtu.be/JuyIrya23E0) [video3](https://youtu.be/OXTyG6DIvK4) [video4](https://youtu.be/95QeSwrNoLI) [video5](https://youtu.be/ZCr3WCdc-54) [video6](https://youtu.be/T6ZR0KoKhBQ)
-- Introduction to Statistical Inference: [video1](https://youtu.be/ZLZXJPKH6tU) [video2](https://youtu.be/mW7bHkJBcB4) [video3](https://youtu.be/SHa5Neb7bfg) [video4](https://youtu.be/rCD_jofxecY) [video5](https://youtu.be/ir4P_f3s44g) [video6](https://youtu.be/wfNhJWHPOi8)
+-   Design of Experiments & Hypothesis Testing:
+    [video1](https://youtu.be/3MueyHnNNig)
+    [video2](https://youtu.be/JuyIrya23E0)
+    [video3](https://youtu.be/OXTyG6DIvK4)
+    [video4](https://youtu.be/95QeSwrNoLI)
+    [video5](https://youtu.be/ZCr3WCdc-54)
+    [video6](https://youtu.be/T6ZR0KoKhBQ)
+-   Introduction to Statistical Inference:
+    [video1](https://youtu.be/ZLZXJPKH6tU)
+    [video2](https://youtu.be/mW7bHkJBcB4)
+    [video3](https://youtu.be/SHa5Neb7bfg)
+    [video4](https://youtu.be/rCD_jofxecY)
+    [video5](https://youtu.be/ir4P_f3s44g)
+    [video6](https://youtu.be/wfNhJWHPOi8)
 
-
----
+------------------------------------------------------------------------
 
 # Elaboración de Código<a name="id5"></a>
 
-En la siguiente sección deberá resolver cada uno de los experimentos computacionales a través de la programación en R. Para esto se le aconseja que cree funciones en R, ya que le facilitará la ejecución de gran parte de lo solicitado.
+En la siguiente sección deberá resolver cada uno de los experimentos
+computacionales a través de la programación en R. Para esto se le
+aconseja que cree funciones en R, ya que le facilitará la ejecución de
+gran parte de lo solicitado.
 
-Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 3 son las siguientes:
+Para el desarrollo preste mucha atención en los enunciados, ya que se le
+solicitará la implementación de métodos sin uso de funciones
+predefinidas. Por otro lado, Las librerías permitidas para desarrollar
+de la tarea 3 son las siguientes:
 
-```{r, eval=FALSE}
+```{r}
 # Manipulación de estructuras
 library(tidyverse)
 library(dplyr)
 library(tidyr)
 
 # Para realizar plots
-library(scatterplot3d)
+#library(scatterplot3d)
 library(ggplot2)
 library(plotly)
 
@@ -84,116 +125,204 @@ library(gridExtra)
 
 ## Contextualización
 
-En este apartado se verán conceptos que será necesario revisar para responder a las siguientes preguntas.
+En este apartado se verán conceptos que será necesario revisar para
+responder a las siguientes preguntas.
 
 ### Z-test
 
-En clases se han visto diferentes tipos de test de hipótesis para demostrar una proposición sobre algún parámetro. Uno de los test vistos en clases es el Z-Test, el cual su distribución del test estadístico bajo la hipótesis nula se puede aproximar a una Gaussina.  Para la aplicación de este test, resaltan los siguientes puntos:
+En clases se han visto diferentes tipos de test de hipótesis para
+demostrar una proposición sobre algún parámetro. Uno de los test vistos
+en clases es el Z-Test, el cual su distribución del test estadístico
+bajo la hipótesis nula se puede aproximar a una Gaussina. Para la
+aplicación de este test, resaltan los siguientes puntos:
 
--	Cada uno de los puntos de la muestra deben ser independientes unos de otros.
--	Al utilizar una distribución normal en la hipótesis nula, este test debería utilizarse cuando se tiene un número considerable de observaciones, ya que la sampling distribution de la media tiende a una gaussiana, de lo contrario se debería usar un T-test.
+-   Cada uno de los puntos de la muestra deben ser independientes unos
+    de otros.
+-   Al utilizar una distribución normal en la hipótesis nula, este test
+    debería utilizarse cuando se tiene un número considerable de
+    observaciones, ya que la sampling distribution de la media tiende a
+    una gaussiana, de lo contrario se debería usar un T-test.
 
-Para calcular la 	significancia estadística al igual que con otros métodos esta se debe calcular como:
+Para calcular la significancia estadística al igual que con otros
+métodos esta se debe calcular como:
 
--	Menor/Cola-Izquierda (one-tailed):  La Hipótesis Nula H0: $\mu \geq \mu0$ vs Hipótesis Alternativa H1: $\mu < \mu0$.
--	Superior/Cola-Derecha (one-tailed): La Hipótesis Nula H0: $\mu \leq \mu0$ vs Hipótesis Alternativa H1: $\mu > \mu0$.
--	Dos-Colas/Two-tailed: Hipótesis Nula H0: $\mu = \mu0$ vs Hipótesis Alternativa H1: $\mu \neq \mu0$.
+-   Menor/Cola-Izquierda (one-tailed): La Hipótesis Nula H0:
+    $\mu \geq \mu0$ vs Hipótesis Alternativa H1: $\mu < \mu0$.
+-   Superior/Cola-Derecha (one-tailed): La Hipótesis Nula H0:
+    $\mu \leq \mu0$ vs Hipótesis Alternativa H1: $\mu > \mu0$.
+-   Dos-Colas/Two-tailed: Hipótesis Nula H0: $\mu = \mu0$ vs Hipótesis
+    Alternativa H1: $\mu \neq \mu0$.
 
-Luego, dependiendo del objetivo del test tenemos las metodologías one-sample y two-sample. Utilizaremos One-Sample cuando nuestro objetivo es comparar la media de una muestra con la media de la población. El Z-score del One-Sample se define como:
+Luego, dependiendo del objetivo del test tenemos las metodologías
+one-sample y two-sample. Utilizaremos One-Sample cuando nuestro objetivo
+es comparar la media de una muestra con la media de la población. El
+Z-score del One-Sample se define como:
 
 $$Z-score_{One-Sample} = \dfrac{\bar x - \mu}{\dfrac{\sigma}{\sqrt n}}$$
-Donde $\bar x$ es la media de la muestra, $\mu$ es la media de la población, $\sigma$ es la desviación estándar de la población y $n$ es el tamaño de la muestra.
+Donde $\bar x$ es la media de la muestra, $\mu$ es la media de la
+población, $\sigma$ es la desviación estándar de la población y $n$ es
+el tamaño de la muestra.
 
-Por otro lado, se utiliza Two-Sample cuando queremos comparar la media de dos muestras. El Z-score de Two-Sample se define con la ecuación:
+Por otro lado, se utiliza Two-Sample cuando queremos comparar la media
+de dos muestras. El Z-score de Two-Sample se define con la ecuación:
 
-$$Z-score_{Two-Sample} = \dfrac{(\bar x_2 - \bar x_1) - (\mu_1 - \mu_2)}{\dfrac{\sigma_1}{\sqrt n_1}+\dfrac{\sigma_2}{\sqrt n_2}}$$	
-Donde $(\bar x_2 - \bar x_1)$ es la diferencia de las medias de la muestra, $(\mu_1 - \mu_2)$ la diferencia de las medias de la población, $\sigma_{1,2}$ la desviación estándar de la población y $n_{1,2}$ el tamaño de las muestras.
+$$Z-score_{Two-Sample} = \dfrac{(\bar x_2 - \bar x_1) - (\mu_1 - \mu_2)}{\dfrac{\sigma_1}{\sqrt n_1}+\dfrac{\sigma_2}{\sqrt n_2}}$$
+Donde $(\bar x_2 - \bar x_1)$ es la diferencia de las medias de la
+muestra, $(\mu_1 - \mu_2)$ la diferencia de las medias de la población,
+$\sigma_{1,2}$ la desviación estándar de la población y $n_{1,2}$ el
+tamaño de las muestras.
 
 ### Multiples Test
 
-En la práctica aparece la necesidad de testear múltiples hipótesis (por ejemplo en biología se pueden utilizar múltiples grupos de control o querer estudiar múltiples resultados de un mismo experimento), de esta forma la primera idea es testear individualmente cada una de las hipótesis, el problema de este enfoque es que la probabilidad de que se obtenga al menos un resultado significante crece rápidamente (con un nivel de significancia $\alpha = 0.05$ y $20$ test ya se alcanza una probabilidad de $64\%$ de tener resultados significantes por azar).
+En la práctica aparece la necesidad de testear múltiples hipótesis (por
+ejemplo en biología se pueden utilizar múltiples grupos de control o
+querer estudiar múltiples resultados de un mismo experimento), de esta
+forma la primera idea es testear individualmente cada una de las
+hipótesis, el problema de este enfoque es que la probabilidad de que se
+obtenga al menos un resultado significante crece rápidamente (con un
+nivel de significancia $\alpha = 0.05$ y $20$ test ya se alcanza una
+probabilidad de $64\%$ de tener resultados significantes por azar).
 
-Una forma de corregir los inconvenientes del método anterior es utilizar el método de **Bonferroni correction** quien propone cambiar $\alpha$ por $\alpha/m$ (donde $m$ es la cantidad de test de hipotesis realizados), esto resulta que las probabilidades de rechazar por error se mantengan bajas. De esta forma los p-valores obtenidos en un test de hipótesis y al utilizar Bonferroni correction, quedan dados por el producto de un $p-valor_{i}$ y la cantidad de test realizados: $\text{p-valor}_{i}*m$.
+Una forma de corregir los inconvenientes del método anterior es utilizar
+el método de **Bonferroni correction** quien propone cambiar $\alpha$
+por $\alpha/m$ (donde $m$ es la cantidad de test de hipotesis
+realizados), esto resulta que las probabilidades de rechazar por error
+se mantengan bajas. De esta forma los p-valores obtenidos en un test de
+hipótesis y al utilizar Bonferroni correction, quedan dados por el
+producto de un $p-valor_{i}$ y la cantidad de test realizados:
+$\text{p-valor}_{i}*m$.
 
 ### Pregunta 1: "I´ve Got The Power!"
-El objetivo de esta pregunta es programar la potencia de un test de hipótesis y observar como se comportan las la hipótesis nula v/s la alternativa para un Z-test. Con el desarrollo de este ejercicio, podrán visualizar las diferentes partes que conforman a un test de hipótesis, identificar que es el p-valor y evidenciar como varia la potencia de un test one-sample y two-sample al variar $\alpha$.
 
-Para recordar; sabemos que en estadística el concepto de potencia viene dado por:
+El objetivo de esta pregunta es programar la potencia de un test de
+hipótesis y observar como se comportan las la hipótesis nula v/s la
+alternativa para un Z-test. Con el desarrollo de este ejercicio, podrán
+visualizar las diferentes partes que conforman a un test de hipótesis,
+identificar que es el p-valor y evidenciar como varia la potencia de un
+test one-sample y two-sample al variar $\alpha$.
+
+Para recordar; sabemos que en estadística el concepto de potencia viene
+dado por:
 
 $$Power = 1 - \beta$$
 
-Donde $\beta$ es la probabilidad de obtener un error de tipo II. Con esto, la potencia estadística viene a representar la probabilidad de rechazar la hipótesis nula cuando esta es falsa. O sea, la potencia de una prueba es la probabilidad de encontrar un resultado positivo dado que este existe. 
-Una de las formas de representar la potencia de un test es a través del siguiente gráfico:
+Donde $\beta$ es la probabilidad de obtener un error de tipo II. Con
+esto, la potencia estadística viene a representar la probabilidad de
+rechazar la hipótesis nula cuando esta es falsa. O sea, la potencia de
+una prueba es la probabilidad de encontrar un resultado positivo dado
+que este existe. Una de las formas de representar la potencia de un test
+es a través del siguiente gráfico:
 
+<img src="https://blogs.sas.com/content/iml/files/2013/05/simttest.png" alt="study" height="250"/>
 
-<img src="https://blogs.sas.com/content/iml/files/2013/05/simttest.png" alt="study" height="250">
 </p>
 
-Del gráfico, es posible visualizar que a medida que aumenta la diferencia en la media de la población, se obtienen mayores valores de potencia estadística.
+Del gráfico, es posible visualizar que a medida que aumenta la
+diferencia en la media de la población, se obtienen mayores valores de
+potencia estadística.
 
-Recordada que es la potencia de un test de hipótesis, a continuación, usted deberá programar una función que sea capaz de obtener la potencia de un Z-test one-sample y two-sample. Para esto por favor considere los siguientes puntos:
+Recordada que es la potencia de un test de hipótesis, a continuación,
+usted deberá programar una función que sea capaz de obtener la potencia
+de un Z-test one-sample y two-sample. Para esto por favor considere los
+siguientes puntos:
 
--	Crear una función que posea los siguientes argumentos:
+-   Crear una función que posea los siguientes argumentos:
 
-```r
+``` r
     function(n1=NULL, sigma1=0.5, 
     n2=NULL,sigma2=0.5, mu.Ha=0 , 
     mu.True=0, alfa=0.05)
 ```
 
-  De los argumentos, tendremos que: $n1$ representa la cantidad de datos para la muestra 1, $sigma1$ es la desviación estándar de la muestra 1, $n2$ la cantidad de datos para la muestra 2, $sigma2$ la desviación estándar para la muestra 2, $mu.Ha$ el mu del test de hipótesis y $mu.True$ la media de la población real. Notar que la presencia de una segunda muestra solo es para el caso two-sample, para el caso one-sample el argumento de entrada $n2$ debería ser nulo.
+De los argumentos, tendremos que: $n1$ representa la cantidad de datos
+para la muestra 1, $sigma1$ es la desviación estándar de la muestra 1,
+$n2$ la cantidad de datos para la muestra 2, $sigma2$ la desviación
+estándar para la muestra 2, $mu.Ha$ el mu del test de hipótesis y
+$mu.True$ la media de la población real. Notar que la presencia de una
+segunda muestra solo es para el caso two-sample, para el caso one-sample
+el argumento de entrada $n2$ debería ser nulo.
 
--	La función creada debe ser capaz de calcular el Z-test con el método One-sided (utilice solo la cola superior de la alternativa one-sided). Notar que la función al recibir un argumento nulo en $n2$ debería asumir que se trata de un test one-sample automáticamente.
-- Al recibir un valor no nulo para $n2$, $mu.Ha$ representará la diferencia entre las medias de las muestras y $mu.True$ la diferencia de las medias de la población de las muestras 1 y 2.
--	La salida de la función deberá retornar la potencia del test y un plot de las gaussianas que conforman el test de hipótesis. Para el caso del plot, observe los ejemplos de plot dispuestos más abajo.
-- Si utiliza el esqueleto propuesto, complete y comente que realiza cada una de las partes de la función one-sample entregada.
+-   La función creada debe ser capaz de calcular el Z-test con el método
+    One-sided (utilice solo la cola superior de la alternativa
+    one-sided). Notar que la función al recibir un argumento nulo en
+    $n2$ debería asumir que se trata de un test one-sample
+    automáticamente.
+-   Al recibir un valor no nulo para $n2$, $mu.Ha$ representará la
+    diferencia entre las medias de las muestras y $mu.True$ la
+    diferencia de las medias de la población de las muestras 1 y 2.
+-   La salida de la función deberá retornar la potencia del test y un
+    plot de las gaussianas que conforman el test de hipótesis. Para el
+    caso del plot, observe los ejemplos de plot dispuestos más abajo.
+-   Si utiliza el esqueleto propuesto, complete y comente que realiza
+    cada una de las partes de la función one-sample entregada.
 
 Codificada la función realice los siguientes experimentos:
 
--	Obtener el gráfico de potencia (visto al inicio de la pregunta) al variar la media poblacional para los siguientes argumentos de entrada:
+-   Obtener el gráfico de potencia (visto al inicio de la pregunta) al
+    variar la media poblacional para los siguientes argumentos de
+    entrada:
 
 $$ n1=16, sigma1=16, mu.Ha=100 , mu.True=Variar, alfa=0.05 $$
 $$ n1=16, sigma1=16, mu.Ha=100 , mu.True= Variar, alfa=0.01 $$
 $$ n1=16, sigma1=16, mu.Ha=100 , mu.True= Variar, alfa=0.1 $$
 
-Se le recomienda que la variación se realice a través de un `for` y grafique las curvas dentro de un mismo gráfico para observar potenciales diferencias entre ellas.
+Se le recomienda que la variación se realice a través de un `for` y
+grafique las curvas dentro de un mismo gráfico para observar potenciales
+diferencias entre ellas.
 
--	Diseñe un experimento one-sample y visualice cómo se comportan las distribuciones normales de la hipótesis nula y la hipótesis alternativa al variar $\alpha$.
+-   Diseñe un experimento one-sample y visualice cómo se comportan las
+    distribuciones normales de la hipótesis nula y la hipótesis
+    alternativa al variar $\alpha$.
 
--	Diseñe un experimento Two-sample y visualice cómo se comportan las distribuciones normales de la hipótesis nula y la hipótesis alternativa al variar $\alpha$.
+-   Diseñe un experimento Two-sample y visualice cómo se comportan las
+    distribuciones normales de la hipótesis nula y la hipótesis
+    alternativa al variar $\alpha$.
 
-Para el diseño de experimentos y/o comprobación de sus métodos puede serles útiles (no hay problema si decide utilizar los mismos ejemplos):
+Para el diseño de experimentos y/o comprobación de sus métodos puede
+serles útiles (no hay problema si decide utilizar los mismos ejemplos):
 
-- one-sample: [Power Functions](https://online.stat.psu.edu/stat415/lesson/25/25.2)
-- Two-Sample: [Simple Power Calculation for Two-Sample Z Test](https://ytliu0.github.io/Stat_Med/power2.html)
+-   one-sample: [Power
+    Functions](https://online.stat.psu.edu/stat415/lesson/25/25.2)
+-   Two-Sample: [Simple Power Calculation for Two-Sample Z
+    Test](https://ytliu0.github.io/Stat_Med/power2.html)
 
-A su vez, en estas fuentes se incluyen las visualizaciones esperadas de las distribuciones normales para cada experimento. Estos experimentos principalmente deben consistir en ver cómo cambia la potencia al cambiar alguno de los parámetros (por ejemplo $\alpha$), y se espera que se entregue un comentario acorde.
+A su vez, en estas fuentes se incluyen las visualizaciones esperadas de
+las distribuciones normales para cada experimento. Estos experimentos
+principalmente deben consistir en ver cómo cambia la potencia al cambiar
+alguno de los parámetros (por ejemplo $\alpha$), y se espera que se
+entregue un comentario acorde.
 
 **Respuesta**
-```{r, eval=FALSE}
+
+```{r}
 # Power Function, El esqueleto posee como ejemplo como obtener la potencia de un z-test one-sample.
 # Si utiliza este esqueleto deberá comentar la función que cumple cada una de las partes entregadas
 power.z.test <- function(n1=NULL, sigma1=0.5, 
                          n2=NULL,sigma2=0.5, mu.Ha=0 , 
                          mu.True=0, alfa=0.05){
-  if(){
-    # 
+  plot <- NULL
+  # primer paso es comprobar si es un test one-sample (ie n2 NULL)
+  if(is.null(n2)){
+    # se calcula el valor critico de Z 
     Z = qnorm(1-alfa)
     
+    # error estandar para la muestra 1
     denominador = sigma1/sqrt(n1)
     X_bar = Z*denominador + mu.Ha
     
+    # se calcula el Z-score real (diferencia entre X_bar y la media real)
     numerador = X_bar - mu.True
     Z = numerador/denominador
+    # se calcula la potencia del test
     Power = 1 - pnorm(Z)
     
-    # 
+    # calculamos los limites para el grafico de las distribuciones
     min_lim = min(rnorm(1000, mean=mu.Ha, sd=denominador)) - 
       round(min(rnorm(1000, mean=mu.Ha, sd=denominador)))%%10
     max_lim = max(rnorm(1000, mean=mu.True, sd=denominador)) +
       round(max(rnorm(1000, mean=mu.True, sd=denominador)))%%10
       
-    # 
+    # graficamos las distribuciones para H0 y Ha
     plot <- ggplot(data.frame(x = c(min_lim, max_lim)), aes(x)) + 
       stat_function(fun = dnorm, args = list(mean = mu.Ha, sd = denominador), 
                     col='red') +
@@ -204,22 +333,48 @@ power.z.test <- function(n1=NULL, sigma1=0.5,
       geom_vline(xintercept = X_bar, linetype="dotted", size=1) +
       annotate(x=X_bar, y=+Inf,label="alpha", vjust=2, geom="label") +
       theme_minimal() +
-      ggtitle("H0 vs Ha") +
+      ggtitle("H0 vs Ha (one-sample") +
       xlab(expression(bar(X))) + ylab("Density")
     }
-  }
   
-  if(){
-    #
+  # ahora se comprueba si es un test two-sample (ie n2 no es NULL)
+  if(!is.null(n2)){
+    # siguiendo los pasos anteriores de manera analoga
+    # se calcula el valor critico para Z
+    Z = qnorm(1 - alfa)
+    
+    # se calcula el error estandar combinado para las dos muestras
+    denominador = sqrt((sigma1^2 / n1) + (sigma2^2 / n2))
+    
+    # se calcula la media combinada para eliminar H0 hipotesis nula
+    X_bar_diff = Z*denominador+mu.Ha
+    
+    # ahora se calcula el Z-scorebasado en la diferencia de las medias
+    numerador = X_bar_diff-mu.True
+    Z = numerador/denominador
+    
+    # se calcula la potencia del test
+    Power = 1-pnorm(2)
+    
+    # se calculan los limites para el gradico de las distribuciones
+    min_lim = min(rnorm(1000, mean=mu.Ha, sd=denominador)) - 
+      round(min(rnorm(1000, mean=mu.Ha, sd=denominador))) %% 10
+    max_lim = max(rnorm(1000, mean=mu.True, sd=denominador)) + 
+      round(max(rnorm(1000, mean=mu.True, sd=denominador))) %% 10
     
     # 
-    if(plot.hypothesis){
-      
-      # 
-      
-      # 
-      plot = ...
-    }
+    plot <- ggplot(data.frame(x = c(min_lim, max_lim)), aes(x)) + 
+      stat_function(fun = dnorm, args = list(mean = mu.Ha, sd = denominador), 
+                    col='red') +
+      stat_function(fun = dnorm, args = list(mean = mu.True, sd = denominador), 
+                    col='blue') +
+      stat_function(fun = dnorm, args = list(mean = mu.True, sd = denominador), 
+                    xlim = c(X_bar_diff, max_lim), geom = "area", fill='red') + 
+      geom_vline(xintercept = X_bar_diff, linetype="dotted", size=1) +
+      annotate("label", x=X_bar_diff, y=+Inf, label="alpha", vjust=2) +
+      theme_minimal() +
+      ggtitle("H0 vs Ha (two-Sample)") +
+      xlab(expression(bar(X))) + ylab("Density")
   }
   
   # Como R no permite retornar dos salidas usamos una lista
@@ -233,20 +388,144 @@ power.z.test <- function(n1=NULL, sigma1=0.5,
 # Experimentos
 ```
 
----
+```{r}
+####### Experimentos #######
+
+# 1. Potencia al variar la media poblacional
+
+# Valores dados
+n1 <- 16
+sigma1 <- 16
+mu.Ha <- 100
+# rango de medias poblacionales 
+mu.True.values <- seq(80, 120, by=2)  
+
+# alpha a variar (valor de significancia)
+alpha.values <- c(0.05, 0.01, 0.1)
+
+# dataframe para guardar resultados y graficar mas facil con ggplot
+results <- data.frame(mu.True = numeric(), power = numeric(), alpha = numeric())
+
+# Loop para calcular la potencia para cada combinación de mu.True y alpha
+for (alpha in alpha.values) {
+  for (mu.True in mu.True.values) {
+    result <- power.z.test(n1=n1, sigma1=sigma1, mu.Ha=mu.Ha, 
+                           mu.True=mu.True, alfa=alpha)
+    results <- rbind(results, data.frame(mu.True=mu.True, power=result$power, 
+                                         alpha=alpha))
+  }
+}
+
+# Graficar los resultados de la potencia al variar mu.True
+ggplot(results, aes(x=mu.True, y=power, color=factor(alpha))) +
+  geom_line() +
+  geom_point() +
+  theme_minimal() +
+  ggtitle("Gráfico de potencia al variar la media poblacional") +
+  xlab("Media poblacional (mu.True)") +
+  ylab("Potencia") +
+  labs(color="Nivel de alfa") +
+  theme(legend.position="bottom")
+
+```
+
+Analisis: Se observa que a un mas alto alpha se produce una curva de
+potencia que crece mucho mas rapido, lo que se debe a que un nivel de
+significancia mas alto expande la region critica, aumentando la
+probabilidad de rechazar la hipotesis nula (H0), lo cual incrementa la
+potencia. Para alpha=0.01 la curva crece mas lento, por lo que necesiya
+una mayor diferencia entre mu.True y mu.Ha para alcanzar una potencia
+mas alta, por lo que se requiere mas evidencia para rechazar la
+hipotesis nula. Tambien se observa que todas las curvas tienen
+comportamiento asintotico (potencia aproxima a 1 cuando mu.True se aleja
+de mu.Ha), por lo que es probable rechazar correctamente la hipotesis
+nula cuando la diferencia entre las medias es mas grande. En resumen, la
+potencia del test depende de la diferencia de medias y el nivel de
+significancia (alpha)
+
+```{r}
+# 2. one-sample al variar alpha
+
+# fijamos la media poblacional
+mu.True <- 110
+
+alpha.values <- c(0.05, 0.01, 0.1)
+
+for (alpha in alpha.values) {
+  result <- power.z.test(n1=n1, sigma1=sigma1, mu.Ha=mu.Ha, mu.True=mu.True, alfa=alpha)
+  print(result$plot + ggtitle(paste("Distribuciones para alfa =", alpha)))
+}
+```
+
+Analisis: Se observa que para un alpha mas alto la region critica (roja)
+es mucho mas amplia, lo cual incrementa la probabilidad de rechazar la
+hipotesis nula, indicando una mayor probabilidad de detectar un efecto
+si existe. Para un alpha mas bajo la region critica es mucho mas
+pequeña, por lo que se requiere de mas evidencia para rechazar H0, lo
+cual reduce el riesgo de error tipo I (rechazar hipotesis nula
+verdadera), pero tambien reduce la potencia. La posicion de la linea
+entrecortada representa el valor critico de X para cada alpha, se
+observa que se mueve a la derecha al reducir alpha, por lo que para
+niveles de significancia mas bajos se necesita un X mas extremo para
+rechazar H0. La curva azul representa como la potencia y el error tipo I
+estan afectados por alpha, con un valor menor, la prueba es mas
+conservadora, lo que ayuda a evitar falsos positivos, pero tambien es
+dificil rechazar H0 cuando Ha es cierta.
+
+```{r}
+# 3. two-sample al variar alpha
+n2 <- 16
+sigma2 <- 16
+# Diferencia esperada entre medias de las muestras
+mu.Ha <- 5  
+# Diferencia real entre medias
+mu.True <- 0  
+
+# alpha a variar (valor de significancia)
+alpha.values <- c(0.05, 0.01, 0.1)
+
+for (alpha in alpha.values) {
+  result <- power.z.test(n1=n1, sigma1=sigma1, n2=n2, sigma2=sigma2, mu.Ha=mu.Ha, mu.True=mu.True, alfa=alpha)
+  print(result$plot + ggtitle(paste("Distribuciones Two-Sample para alfa =", alpha)))
+}
+```
+
+**Analisis:** La curva azul representa la hipotesis nula H0 y la roja la
+hipotesis alternativa (Ha), se observa que ambas distribuciones estan
+muy cerca, por lo que para valores mas bajos de alpha la region critica
+sera mas pequeña. La linea de corte se desplaza mas hacia valores
+extremos a medida que alpha disminuye, por lo que el test es mucho mas
+conservador. Para alpha=0.01 se necesita una diferencia muy
+significativa en las medias para rechazar la hipotesis nula. La potencia
+disminuye cuando alpha disminuye.
+
+------------------------------------------------------------------------
 
 ### Pregunta 2: Z-test
-Esta pregunta tiene como objetivo comprender como funciona un test de hipótesis y como deberíamos abordar la realización de múltiples test de hipótesis con datos reales.
 
-La pregunta deberá ser desarrollada utilizando el dataset `marketing_campaign.csv`. Con esto, deberá programar un Z-test, con el cual estudiará a través de experimentos el `Income` de personas con los grados académicos `Graduation`, `Master` y `PhD`. Para realizar esto considere la elaboración de los siguientes puntos de forma secuencial:
+Esta pregunta tiene como objetivo comprender como funciona un test de
+hipótesis y como deberíamos abordar la realización de múltiples test de
+hipótesis con datos reales.
 
-- Modificar el dataframe entregado generando un estructura apta para el test de hipótesis. Una estructura que se les aconseja utilizar son vectores con los valores que representan a los grados académicos `Graduation`, `Master` y `PhD` por separado.
+La pregunta deberá ser desarrollada utilizando el dataset
+`marketing_campaign.csv`. Con esto, deberá programar un Z-test, con el
+cual estudiará a través de experimentos el `Income` de personas con los
+grados académicos `Graduation`, `Master` y `PhD`. Para realizar esto
+considere la elaboración de los siguientes puntos de forma secuencial:
+
+-   Modificar el dataframe entregado generando un estructura apta para
+    el test de hipótesis. Una estructura que se les aconseja utilizar
+    son vectores con los valores que representan a los grados académicos
+    `Graduation`, `Master` y `PhD` por separado.
 
 <details>
+
 <summary>Ejemplo de estructura</summary>
+
 <p>
 
-Por ejemplo para el caso de Graduation pueden generar estructuras de la siguiente forma:
+Por ejemplo para el caso de Graduation pueden generar estructuras de la
+siguiente forma:
 
 | ID   | Graduation |
 |------|------------|
@@ -257,31 +536,56 @@ Por ejemplo para el caso de Graduation pueden generar estructuras de la siguient
 | 965  | 55635      |
 | ...  | ...        |
 
-Donde los valores en la fila de Graduation representan los sueldos de las diferentes personas que conforman el dataset. Un punto importante a considerar es que los datos para los diferentes grados académicos poseen diferentes numero de datos (no se asusten por esto).
+Donde los valores en la fila de Graduation representan los sueldos de
+las diferentes personas que conforman el dataset. Un punto importante a
+considerar es que los datos para los diferentes grados académicos poseen
+diferentes numero de datos (no se asusten por esto).
 
 </p>
+
 </details>
+
 <p>
+
 </p>
 
-- Programar el método Z-test con la metodología one sample y two sample, obteniendo los p-valores a través de las alternativas one-sided y two-sided. Para el caso de one-sided, cree una función capaz de obtener la cola menor y mayor de la gaussiana.
+-   Programar el método Z-test con la metodología one sample y two
+    sample, obteniendo los p-valores a través de las alternativas
+    one-sided y two-sided. Para el caso de one-sided, cree una función
+    capaz de obtener la cola menor y mayor de la gaussiana.
 
-- El calculo de las diferentes alternativas para calcular los p-valores deberá ser un argumento de su función, donde señalando 'menor','mayor' (para los casos one-sided) y 'two-sided' deberá obtener el valor pertinente para cada caso.
+-   El calculo de las diferentes alternativas para calcular los
+    p-valores deberá ser un argumento de su función, donde señalando
+    'menor','mayor' (para los casos one-sided) y 'two-sided' deberá
+    obtener el valor pertinente para cada caso.
 
-- Genere una función que permita realizar solo múltiples test del tipo two-sample y aplique bonferroni correction a los p-valores obtenidos. Notar que los múltiples test deberá realizar la comparación entre todos los elementos de entrada, por ejemplo si deseamos comparar los ingresos de `Graduation`, `Master` y `PhD`, se deberían comparar los ingresos de `Graduation` v/s `Master`, `Graduation` v/s `PhD` y `Master` y `PhD`
+-   Genere una función que permita realizar solo múltiples test del tipo
+    two-sample y aplique bonferroni correction a los p-valores
+    obtenidos. Notar que los múltiples test deberá realizar la
+    comparación entre todos los elementos de entrada, por ejemplo si
+    deseamos comparar los ingresos de `Graduation`, `Master` y `PhD`, se
+    deberían comparar los ingresos de `Graduation` v/s `Master`,
+    `Graduation` v/s `PhD` y `Master` y `PhD`
 
-Codificada las funciones, realice los siguientes experimentos con su función de test de hipótesis:
+Codificada las funciones, realice los siguientes experimentos con su
+función de test de hipótesis:
 
-- Compruebe si la media de los ingresos para la variable `Graduation` es similar a 52000. Señale formalmente este experimento y obtenga los p-valores para las alternativas one-sided y two-sided.
+-   Compruebe si la media de los ingresos para la variable `Graduation`
+    es similar a 52000. Señale formalmente este experimento y obtenga
+    los p-valores para las alternativas one-sided y two-sided.
 
-- Compruebe si la diferencia entre los ingresos de las personas con el grado académico `Graduation` es cercana a cero en relación a la recibida por los `Master` y `PhD`. Para este punto utilice la función que le permite realizar múltiples test del tipo two-sample.
+-   Compruebe si la diferencia entre los ingresos de las personas con el
+    grado académico `Graduation` es cercana a cero en relación a la
+    recibida por los `Master` y `PhD`. Para este punto utilice la
+    función que le permite realizar múltiples test del tipo two-sample.
 
-Para estos experimentos usted deberá escoger un $\alpha$, y con éste comentar respecto a los p-valores obtenidos.
+Para estos experimentos usted deberá escoger un $\alpha$, y con éste
+comentar respecto a los p-valores obtenidos.
 
-Para los diferentes experimentos considere que la desviación estandar de la población para los diferentes `income` son los siguientes:
+Para los diferentes experimentos considere que la desviación estandar de
+la población para los diferentes `income` son los siguientes:
 
-$$\sigma_{Graduation} = 28180$$
-$$\sigma_{Master} = 20160$$
+$$\sigma_{Graduation} = 28180$$ $$\sigma_{Master} = 20160$$
 $$\sigma_{PhD} = 20615$$
 
 **Respuesta:**
@@ -289,13 +593,16 @@ $$\sigma_{PhD} = 20615$$
 ```{r}
 df = read.csv('marketing_campaign.csv', sep='\t')
 head(df)
+```
 
+```{r}
 # Implementación de Z-test one-sided y two-sided
 # Puede utilizar este esqueleto
 z_test <- function(data1=NULL, sigma1=0.5, data2=NULL, sigma2=0.5, 
                    mu.Ha=0, test.type = c('one-sided','two-sided'),
                    verbose=TRUE){
   
+  # se escoge el tipo te test
   if(length(test.type)>=2){
     print("Por favor escoge un tipo de Test: ´one-sided´ o ´two-sided´ ")
     return()
@@ -304,16 +611,26 @@ z_test <- function(data1=NULL, sigma1=0.5, data2=NULL, sigma2=0.5,
     print("Por favor escoge un tipo de Test: ´menor´, ´mayor´ o ´two-sided´")
     return()
   }
+  # test one-sample (data2 NULL)
   else if(is.null(data2)){
     
+    # calculamos la media muestral de data1 y eliminamos datos NA
+    mean1 <- mean(data1, na.rm=TRUE)
+    # calculamos Z-score 
+    Z_score <- (mean1-mu.Ha) / (sigma1/sqrt(length(data1)))
+    
+    # calculamos los p-valores en funcion de la hipotesis 
     # P-value
     if(test.type=='menor'){
-
+      p_value <- pnorm(Z_score) #cola izquierda
+      
     }
     else if(test.type=='mayor'){
+      p_value <- 1-pnorm(Z_score) #cola derecha
 
     }
     else if(test.type=='two-sided'){
+      p_value <- 2*(1-pnorm(abs(Z_score))) 
 
     }
     
@@ -323,22 +640,33 @@ z_test <- function(data1=NULL, sigma1=0.5, data2=NULL, sigma2=0.5,
                       deparse(substitute(data1)), "\nZ=", Z_score, 
                       "P-value=", p_value, "\n\n",sep=" ")
     }
-    
+    # p-valor calculado
     return(p_value)
     
   }
+  # two-sample (data2 no NULL)
   else if(!is.null(data2)){
     # Hypothesis test
     
+    # calculamos medias muestrales
+    mean1 <- mean(data1, na.rm=TRUE)
+    mean2 <- mean(data2, na.rm=TRUE)
+    
+    # calculamos Z-score
+    Z_score <- (mean1-mean2-mu.Ha) / sqrt((sigma1^2/length(data1)) + (sigma2^2/length(data2)))
+    
     # p-value
     if(test.type=='menor'){
-      p_value = ...
+      p_value <- pnorm(Z_score)
+      
     }
     else if(test.type=='mayor'){
-      p_value = ...
+      p_value <- 1 - pnorm(Z_score)
+      
     }
     else if(test.type=='two-sided'){
-      p_value = ...
+      p_value <- 2*(1-pnorm(abs(Z_score)))
+      
     }
     # Texto de Salida
     if(verbose){
@@ -354,25 +682,205 @@ z_test <- function(data1=NULL, sigma1=0.5, data2=NULL, sigma2=0.5,
 ```
 
 ```{r}
-z.test.multiple_testing <- function(){
+# funcion para realizar multiples test
+z.test.multiple_testing <- function(data_list, sigma_list, mu.Ha=0, 
+                                    alpha=0.05, verbose=TRUE){
+  
+  # length debe coincidit con el numero de desviaciones
+  if(length(data_list) != length(sigma_list)){
+    stop("El numero de vectores en data_list debe coincidir con sigma_list")
+  }
+  
+  # numero de tests
+  m <- choose(length(data_list), 2)
+  
+  # listas para almacenar p-valores por prueba
+  p_values <- c()
+  comparisons <- c()
+  
+  # comparamos todos los pares de muestras en data_list
+  for(i in 1:(length(data_list)-1)){
+    for(j in (i+1):length(data_list)){
+      
+      # two-sample entre data_list[i] e data_list[j]
+      p_value <- z_test(data1=data_list[[i]], sigma1=sigma_list[i],
+                        data2=data_list[[j]], sigma2=sigma_list[j],
+                        mu.Ha=mu.Ha, test.type='two-sided', verbose=FALSE)
+      p_values <- c(p_values, p_value)
+      comparisons <- c(comparisons, paste(names(data_list)[i], "vs",
+                                          names(data_list)[j]))
+      
+      if(verbose){
+        cat("Comparacion:", names(data_list)[i], "vs",
+            names(data_list)[j], "- p_value original:", p_value, "\n")
+      }
+    }
+  }
+  
+  # se aplica correccion Bonferroni
+  bonferroni_p_values <- pmin(p_values*m, 1)
+  
+  if(verbose){
+    cat("\np-values despues de Bonferroni:\n")
+    for(k in 1:length(bonferroni_p_values)){
+      cat(comparisons[k], "- Bonferroni p_values:", bonferroni_p_values[k], "\n")
+      
+    }
+  }
+  # se retorna una lista con p_valores originales y ajustados con bonferroni
+  return(list(original_p_values=p_values, bonferroni_p_values=bonferroni_p_values))
 }
+
 ```
+
+```{r}
+# ahora preparamos el dataset
+df_clean <- df %>%
+  filter(!is.na(Income))
+
+# creamos vectores de ingresos para cada grado academico
+graduation_income <- df_clean %>%
+  filter(Education == "Graduation") %>%
+  pull(Income)
+
+master_income <- df_clean %>%
+  filter(Education == "Master") %>%
+  pull(Income)
+
+phd_income <- df_clean %>%
+  filter(Education == "PhD") %>%
+  pull(Income)
+```
+
+```{r}
+# ahora queremos comprobar si la media para Graduation es aprox 52000
+# hipotesis nula (H0) = la media es igual a 52000
+# hipotesis alternativa (Ha) = la media de ingresos es mayor o menor a 52000
+
+#nivel de significancia escogido
+alpha <- 0.05
+sigma_graduation <- 28180
+
+# one-sample (H0)
+p_value_graduation_two_sided <- z_test(data1 = graduation_income,
+                                       sigma1 =sigma_graduation, 
+                                       mu.Ha = 52000, 
+                                       test.type = 'two-sided',
+                                       verbose = TRUE)
+
+p_value_graduation_one_sided_lower <- z_test(data1 = graduation_income, 
+                                             sigma1 = sigma_graduation, 
+                                             mu.Ha = 52000, test.type = 'menor',
+                                             verbose = TRUE)
+
+p_value_graduation_one_sided_upper <- z_test(data1 = graduation_income,
+                                             sigma1 = sigma_graduation, 
+                                             mu.Ha = 52000, test.type = 'mayor',
+                                             verbose = TRUE)
+```
+
+**Analisis:** Se puede observar que en todos los casos los p-valores son
+mayores que el nivel de significancia escogido (alpha=0.05), por lo que
+no hay suficiente evidencia para rechazar la hipotesis nula de que la
+media de ingresos para Graduation es de 52000. Este resultado se puede
+deber al alpha escogido, por lo que se espera que al aumentar alpha se
+pueda rechazar la hipotesis nula con un mayor nivel de confianza como se
+observo en la pregunta anterior. Si se reduce alpha se mantendran los
+resultados no significativos, y sera mas dificil encontrar significncia.
+
+```{r}
+# ahora queremos comparar Graduation, Master y PhD mediante two-sample y 
+# aplicar bonferroni
+
+# lista de vectores de ingresos y desviaciones estandar correspondientes
+data_list <- list(Graduation = graduation_income, 
+                  Master = master_income,
+                  PhD =phd_income)
+
+sigma_list <- c(28180, 20160, 20615)
+
+results <- z.test.multiple_testing(data_list = data_list, sigma_list = sigma_list, 
+                                   mu.Ha = 0, alpha = alpha, verbose = TRUE)
+
+print(results)
+```
+
+```{r}
+summary(graduation_income)
+summary(master_income)
+summary(phd_income)
+
+mean(graduation_income)
+mean(master_income)
+mean(phd_income)
+
+sd(graduation_income)
+sd(master_income)
+sd(phd_income)
+
+```
+
+**Análisis:** Al ver los resultados se puede observar que entre
+Graduation y Master no hay una diferencia significativa en los ingresos,
+ya que el p_valor original es 0.88 aprox y el ajustado es igual a 1. En
+cambio, entre Graduation y PhD se observa que despues de la correccion
+de Bonferroni el p-valor ajustado es menor que el alpha escogido, por lo
+que hay una diferencia significativa entre los ingresos de cada grado,
+ie, las personas con PhD es significativamente diferente al nivel de
+ingresos de Graduation. En Master y PhD, despues de la correccion de
+Bonferroni el p-valor es mayor que alpha, por lo que no hay una
+diferencia signifiativa entre esos ingresos. Por lo tanto, el nivel
+educativo puede tener un impacto en los ingresos, especialmente entre
+los niveles de Graduation y PhD, pero no entre los otros.
 
 ### Pregunta 3: Testeando multiples hipotesis y Bonferroni Correction
 
-El objetivo de este problema es estudiar como realizar múltiples test de hipótesis simultáneamente. Para esto en primer lugar se estudiara el método "intuitivo", donde veremos sus limitantes y se comparará con el método llamado **Bonferroni correction**, posteriormente se realizará un estudio practico con el dataset `ratones.csv`.
+El objetivo de este problema es estudiar como realizar múltiples test de
+hipótesis simultáneamente. Para esto en primer lugar se estudiara el
+método "intuitivo", donde veremos sus limitantes y se comparará con el
+método llamado **Bonferroni correction**, posteriormente se realizará un
+estudio practico con el dataset `ratones.csv`.
 
-Un investigador se ha colocado en contacto con ustedes señalándoles que realiza diariamente test de hipótesis entre las muestras que toma día a día en su laboratorio. Con esto, al investigador le urge saber si realizar multiples test de hipótesis sin una corrección podría afectar la toma de decisiones. Para comprobar esto, les solicita comprobar matemáticamente como se comporta la probabilidad de obtener al menos un resultado significativos al azar de sus experimentos diarios. Para esto, les señala que la la probabilidad de obtener un experimento por azar puede ser simulado a través de los casos exitosos de una binomial (valores mayores a cero), donde el numero de observaciones son la cantidad de experimentos ($m$) y la probabilidad queda dada por $\alpha$ del test.
+Un investigador se ha colocado en contacto con ustedes señalándoles que
+realiza diariamente test de hipótesis entre las muestras que toma día a
+día en su laboratorio. Con esto, al investigador le urge saber si
+realizar multiples test de hipótesis sin una corrección podría afectar
+la toma de decisiones. Para comprobar esto, les solicita comprobar
+matemáticamente como se comporta la probabilidad de obtener al menos un
+resultado significativos al azar de sus experimentos diarios. Para esto,
+les señala que la la probabilidad de obtener un experimento por azar
+puede ser simulado a través de los casos exitosos de una binomial
+(valores mayores a cero), donde el numero de observaciones son la
+cantidad de experimentos ($m$) y la probabilidad queda dada por $\alpha$
+del test.
 
-A continuación, se entregan unas indicaciones mas especificas para desarrollar la pregunta:
+A continuación, se entregan unas indicaciones mas especificas para
+desarrollar la pregunta:
 
-- [ ] Complete el código presentado a continuación que le permite calcular la probabilidad empírica de que obtenga al menos un resultado significativo para significancia $\alpha$ y cantidad de experimentos $m$ arbitrarios.
-- [ ] Se puede verificar que para un nivel de significancia $\alpha$ y $m$ experimentos independientes la probabilidad de que se tenga al menos un resultado significativo por azar es 
-$$\mathbb{P}(\text{obtener al menos resultado significativo por azar})=1-(1-\alpha)^{m}$$
-- [ ] Considere $\alpha = 0.05$, grafique la probabilidad empírica y real variando el valor de $m$ ¿Se parecen sus resultados? ¿Que sucede cuando la cantidad de experimentos crece mucho? ¿Este comportamiento depende del valor de significancia $\alpha$? ¿Es útil este método para la realización de múltiples test de hipótesis?
-- [ ] Para solucionar los inconvenientes del método anterior es posible utilizar el método de **Bonferroni correction**, modifique su código anterior para verificar lo anterior ¿Mejoran los resultados? ¿cual podría ser un problema si es que $m$ es muy grande?
-- [ ] Ejecute el siguiente código que calcula el $p$-valor usual y el $p$-valor asociado a Bonferroni (que corresponde al $p$-valor * m donde $m$ es el numero de experimentos), ¿Cuantos valores que originalmente se hubieran aceptado fueron rechazados si $\alpha = 0.05$? ¿Que implica esto sobre el nivel de falsos negativos de este metodo?
-
+-   [ ] Complete el código presentado a continuación que le permite
+    calcular la probabilidad empírica de que obtenga al menos un
+    resultado significativo para significancia $\alpha$ y cantidad de
+    experimentos $m$ arbitrarios.
+-   [ ] Se puede verificar que para un nivel de significancia $\alpha$ y
+    $m$ experimentos independientes la probabilidad de que se tenga al
+    menos un resultado significativo por azar es
+    $$\mathbb{P}(\text{obtener al menos resultado significativo por azar})=1-(1-\alpha)^{m}$$
+-   [ ] Considere $\alpha = 0.05$, grafique la probabilidad empírica y
+    real variando el valor de $m$ ¿Se parecen sus resultados? ¿Que
+    sucede cuando la cantidad de experimentos crece mucho? ¿Este
+    comportamiento depende del valor de significancia $\alpha$? ¿Es útil
+    este método para la realización de múltiples test de hipótesis?
+-   [ ] Para solucionar los inconvenientes del método anterior es
+    posible utilizar el método de **Bonferroni correction**, modifique
+    su código anterior para verificar lo anterior ¿Mejoran los
+    resultados? ¿cual podría ser un problema si es que $m$ es muy
+    grande?
+-   [ ] Ejecute el siguiente código que calcula el $p$-valor usual y el
+    $p$-valor asociado a Bonferroni (que corresponde al $p$-valor \* m
+    donde $m$ es el numero de experimentos), ¿Cuantos valores que
+    originalmente se hubieran aceptado fueron rechazados si
+    $\alpha = 0.05$? ¿Que implica esto sobre el nivel de falsos
+    negativos de este metodo?
 
 ```{r, eval=FALSE}
 data <- read.csv("ratones.csv",sep= ";", stringsAsFactors = T)
@@ -401,34 +909,61 @@ probEmpirica <- function(alpha,m){
 
 ```
 
----
+------------------------------------------------------------------------
 
 ### Pregunta 4: Regression Lineal sin comandos.
-El objetivo de la siguiente pregunta es aplicar los conceptos de regresión lineal vistos en clases para implementar desde cero un función capaz de realizar una regresión simple y múltiple.
 
-Para este problema, ustedes deberán estudiar el comportamiento de los clientes de un holding de salud. Para esto, se les hace entrega del dataset `insurance.csv` para que estudien la creación de un modelo lineal con sus datos. Antes de comenzar a trabajar, se señalan las diferentes variables que componen al dataset:
+El objetivo de la siguiente pregunta es aplicar los conceptos de
+regresión lineal vistos en clases para implementar desde cero un función
+capaz de realizar una regresión simple y múltiple.
 
-- age: Señala la edad de cada uno de los sujetos.
-- sex: Si es mujer es igual a 1, si es hombre es igual a 0.
-- bmi: Indice de masa corporal del cliente.
-- children: Señala cuantos hijos tiene cada uno de los sujetos.
-- smoker: Variable binaria que cuando es 1 señala que el cliente es fumador (0 en caso contrario).
-- charges: Gastos médicos de cada uno de los clientes.
+Para este problema, ustedes deberán estudiar el comportamiento de los
+clientes de un holding de salud. Para esto, se les hace entrega del
+dataset `insurance.csv` para que estudien la creación de un modelo
+lineal con sus datos. Antes de comenzar a trabajar, se señalan las
+diferentes variables que componen al dataset:
 
-Es importante que considere que cada una de las filas representa un cliente distinto para el holding.
+-   age: Señala la edad de cada uno de los sujetos.
+-   sex: Si es mujer es igual a 1, si es hombre es igual a 0.
+-   bmi: Indice de masa corporal del cliente.
+-   children: Señala cuantos hijos tiene cada uno de los sujetos.
+-   smoker: Variable binaria que cuando es 1 señala que el cliente es
+    fumador (0 en caso contrario).
+-   charges: Gastos médicos de cada uno de los clientes.
 
-Dentro del estudio, el holding de salud le solicita estudiar los comportamientos de los clientes fumadores y no fumadores, por lo que se le aconseja separar el dataframe original en fumadores y no fumadores. En el estudio, realicen un modelo lineal que tiene como variable de respuesta a `charges` y los datos que mejor se correlacionan para los clientes fumadores y no fumadores. Para esto, deberán realizar las siguientes actividades:
+Es importante que considere que cada una de las filas representa un
+cliente distinto para el holding.
+
+Dentro del estudio, el holding de salud le solicita estudiar los
+comportamientos de los clientes fumadores y no fumadores, por lo que se
+le aconseja separar el dataframe original en fumadores y no fumadores.
+En el estudio, realicen un modelo lineal que tiene como variable de
+respuesta a `charges` y los datos que mejor se correlacionan para los
+clientes fumadores y no fumadores. Para esto, deberán realizar las
+siguientes actividades:
 
 #### Parte I
-a) Programe un modelo lineal simple escogiendo la variable numérica que tiene mayor relación con la variable de respuesta. Recuerde justificar la elección de la variable numérica cuantitativamente.
-b) Señale tanto el $R^2$ como el $R^2-adjustado$ del modelo.
-c) Grafique el scatterplot de los datos y la linea que ajusta a la regresión lineal obtenida.
+
+a)  Programe un modelo lineal simple escogiendo la variable numérica que
+    tiene mayor relación con la variable de respuesta. Recuerde
+    justificar la elección de la variable numérica cuantitativamente.
+b)  Señale tanto el $R^2$ como el $R^2-adjustado$ del modelo.
+c)  Grafique el scatterplot de los datos y la linea que ajusta a la
+    regresión lineal obtenida.
 
 #### Parte II
-a) Entrene un modelo lineal multivariable escogiendo dos variables numéricas que posean la mayor relación con `charges`.
-b) Estudie si el modelo multivariable posee mejor desempeño que el modelo simple y comente los resultados. ¿Es recomendable la utilización de los dos modelos creados para la predicción de nuevas entradas?. Para este análisis puede utilizar los valores de test de hipótesis entregados por el comando `lm()`, ya que esto le servirá para observar si la regresión lineal es significativa.
 
-**Nota:** No esta permitido utilizar comandos que obtengan los valores solicitados directamente a menos que se le permita en la pregunta.
+a)  Entrene un modelo lineal multivariable escogiendo dos variables
+    numéricas que posean la mayor relación con `charges`.
+b)  Estudie si el modelo multivariable posee mejor desempeño que el
+    modelo simple y comente los resultados. ¿Es recomendable la
+    utilización de los dos modelos creados para la predicción de nuevas
+    entradas?. Para este análisis puede utilizar los valores de test de
+    hipótesis entregados por el comando `lm()`, ya que esto le servirá
+    para observar si la regresión lineal es significativa.
+
+**Nota:** No esta permitido utilizar comandos que obtengan los valores
+solicitados directamente a menos que se le permita en la pregunta.
 
 ```{r}
 lm_reg <- function(X, Y){
@@ -437,19 +972,27 @@ lm_reg <- function(X, Y){
 }
 ```
 
+ 
 
-
-&nbsp;
 <hr />
-<p style="text-align: center;">A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a></p>
+
+<p style="text-align: center;">
+
+A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a>
+
+</p>
 
 <!-- Add icon library -->
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
 <!-- Add font awesome icons -->
+
 <p style="text-align: center;">
-    <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
-    <a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+
+<a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
+<a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+
 </p>
 
-&nbsp;
+ 
