@@ -73,7 +73,7 @@ En la siguiente sección deberá resolver cada uno de los experimentos computaci
 
 Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 4 son las siguientes:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 # Manipulación de estructuras
 library(tidyverse)
 library(dplyr)
@@ -89,13 +89,15 @@ library(plotly)
 library(gridExtra)
 
 # Análisis bayesiano
-library("rethinking")
+library(rethinking)
+
 ```
 
 Si no tiene instalada la librería “rethinking”, ejecute las siguientes líneas de código para instalar la librería:
 
-```{r, eval=FALSE}
-install.packages("rethinking")
+```{r, eval=F}
+library(devtools)
+install_github("rmcelreath/rethinking")
 ```
 
 En caso de tener problemas al momento de instalar la librería con el código anterior, utilice las siguiente chunk:
@@ -465,8 +467,12 @@ El objetivo de esta pregunta es introducirlo en la aplicación de una regresión
 
 Para esta pregunta usaremos el dataset `Pokemon.csv`, que contiene las características de más de 700 personajes.
 
-```{r, eval=FALSE}
+```{r, eval=T}
 poke.df <- read.csv("Pokemon.csv")
+
+
+write.csv(head(poke.df), "head_df.csv", row.names = FALSE)
+head(poke.df)
 ```
 
 
@@ -477,17 +483,110 @@ poke.df <- read.csv("Pokemon.csv")
 **Respuesta:**
 
 
-```{r, eval=FALSE}
+```{r, eval=T}
+# Cargar el dataset
+poke.df <- read.csv("Pokemon.csv")
+
+# Normalización de las variables para mejorar la estabilidad
+poke.df$Attack_std <- scale(poke.df$Attack)
+poke.df$SpAtk_std <- scale(poke.df$Sp..Atk)
+
+# Modelo bayesiano
+model <- alist(
+  SpAtk_std ~ dnorm(mu, sigma),
+  mu <- alpha + beta * Attack_std,
+  alpha ~ dnorm(0, 10),
+  beta ~ dnorm(0, 1),
+  sigma ~ dexp(1)
+)
+
+# Ajuste del modelo
+m <- quap(
+  model,
+  data = poke.df
+)
+
+# Resumen del modelo ajustado
+precis(m)
 
 ```
 
-```{r, eval=FALSE}
+1. Se define un modelo de regresión bayesiana para predecir SpAtk en función de Attack, asumiendo una relación lineal con un término de error. La media de SpAtk depende de un intercepto y una pendiente multiplicada por Attack estandarizado.
+
+El modelo establece que SpAtk sigue una distribución normal con media mu y desviación sigma, donde mu es igual a alpha más beta por Attack estandarizado. Los priors asignados son:
+
+Alpha: distribución normal centrada en 0 con desviación estándar 10.
+Beta: distribución normal centrada en 0 con desviación estándar 1.
+Sigma: distribución exponencial con media 1.
+
+
+Los priors reflejan las siguientes decisiones:
+
+- Alpha tiene un prior amplio para permitir variabilidad en el intercepto, considerando que este puede abarcar un rango más amplio en los datos.
+- Beta tiene un prior más restringido porque la pendiente suele tener un efecto moderado sobre la variable dependiente, evitando valores extremos.
+- Sigma utiliza un prior exponencial porque los errores son siempre positivos, generalmente pequeños, pero con cierta flexibilidad para capturar variabilidad.
+
+La desviación estándar de alpha es 10 veces mayor que la de beta porque alpha captura el intercepto, que puede variar más ampliamente según el rango de los datos. Tanto alpha como beta tienen medias centradas en 0 porque no se asume ninguna dirección o magnitud específica de la relación a priori. El prior de sigma, con media 1, refleja la escala esperada de los errores, asegurando un balance entre estabilidad y flexibilidad en el modelo.
+
+
+
+2. El ajuste del modelo con el método de Laplace muestra los siguientes resultados:
+
+Alpha tiene un valor promedio de 0.00, lo que indica que cuando Attack estandarizado es cero (en su media), la predicción de SpAtk también está centrada en 0. Su desviación estándar de 0.03 y el intervalo creíble (-0.05, 0.05) reflejan baja variabilidad y alta precisión en esta estimación.
+
+Beta presenta un promedio de 0.40, lo que sugiere una relación positiva moderada entre Attack y SpAtk; un incremento de una unidad estandarizada en Attack se asocia con un aumento promedio de 0.40 en SpAtk. Su baja desviación estándar de 0.03 y el intervalo creíble estrecho (0.34, 0.45) confirman esta relación con alta confianza.
+
+Sigma, con un promedio de 0.92, representa la desviación estándar de los errores del modelo. Esto indica una variabilidad moderada en las predicciones. El intervalo creíble (0.88, 0.95) muestra que la incertidumbre en la dispersión de los errores es baja.
+
+En general, el modelo ajustado refleja que la relación entre Attack y SpAtk es significativa y positiva, con predicciones precisas y bien delimitadas. Los intervalos estrechos para todos los parámetros confirman la confiabilidad del ajuste y la capacidad del modelo para capturar correctamente la relación lineal entre las variables.
+
+```{r, eval=T}
+
+# Crear un data frame para los intervalos
+interval_data <- data.frame(
+  Attack_std = Attack_seq,
+  mu_mean = mu_mean,
+  mu_PI_low = mu_PI[1, ],
+  mu_PI_high = mu_PI[2, ],
+  sim_PI_low = sim_PI[1, ],
+  sim_PI_high = sim_PI[2, ]
+)
+
+# Crear el gráfico con leyenda
 ggplot() +
-  geom_point(aes(x=poke.df$Attack, y=poke.df$Sp..Atk), color="red") +
-  geom_line(aes(x=, y=), color="orange") +
-  geom_ribbon(aes(x=, y=, ymin=, ymax=), alpha=0.3, fill="orange") +
-  geom_ribbon(aes(x=, y=, ymin=, ymax=), alpha=0.1, fill="orange")
+  # Datos observados
+  geom_point(aes(x = poke.df$Attack_std, y = poke.df$SpAtk_std, color = "Datos Observados"), alpha = 0.6) +
+  # Media predicha (MAP)
+  geom_line(aes(x = interval_data$Attack_std, y = interval_data$mu_mean, color = "Media Predicha (MAP)"), size = 1) +
+  # Intervalo de credibilidad sobre la media
+  geom_ribbon(aes(x = interval_data$Attack_std, ymin = interval_data$mu_PI_low, ymax = interval_data$mu_PI_high, fill = "IC 95% Media"), alpha = 0.3) +
+  # Intervalo de predicción
+  geom_ribbon(aes(x = interval_data$Attack_std, ymin = interval_data$sim_PI_low, ymax = interval_data$sim_PI_high, fill = "IC 95% Predicción"), alpha = 0.1) +
+  # Etiquetas del gráfico
+  labs(
+    x = "Attack (Estandarizado)",
+    y = "Sp.Atk (Estandarizado)",
+    title = "MAP de Regresión Lineal con Intervalos de Credibilidad y Predicción",
+    color = "Leyenda", fill = "Leyenda"
+  ) +
+  # Escalas de colores para la leyenda
+  scale_color_manual(values = c("Datos Observados" = "red", "Media Predicha (MAP)" = "black")) +
+  scale_fill_manual(values = c("IC 95% Media" = "green", "IC 95% Predicción" = "orange")) +
+  theme_minimal()
+
+
 ```
+3.Se observa una dispersión significativa, pero con una tendencia positiva clara, lo que valida la elección de un modelo lineal. Los puntos rojos representan los valores estandarizados de Attack y SpAtk en el dataset.
+
+Media predicha (MAP): La línea negra representa la media ajustada por el modelo para diferentes valores de Attack estandarizado. Esta línea captura correctamente la tendencia general del aumento de SpAtk con Attack, lo que indica que el modelo logra captar la relación principal entre ambas variables.
+
+Intervalos de credibilidad (IC 95% Media): El área verde alrededor de la línea MAP representa el intervalo de credibilidad del 95% para la media predicha. Este intervalo es estrecho, lo que refleja una alta precisión del modelo en la estimación de la media.
+
+Intervalos de predicción (IC 95% Predicción): El área naranja más amplia representa el intervalo de predicción del 95% para los valores de SpAtk. Este intervalo incluye la variabilidad residual, como es esperado, y cubre la mayoría de los puntos observados. Sin embargo, algunos puntos están fuera de este intervalo, sugiriendo que hay cierta dispersión adicional no explicada por el modelo.
+
+
+El modelo logra ser un buen predictor de la relación entre Attack y SpAtk, ya que la línea de predicción captura adecuadamente la tendencia general de los datos, y los intervalos del 95% muestran una buena cobertura de la variabilidad observada. La precisión del intervalo de credibilidad confirma que las estimaciones del modelo son robustas, mientras que los intervalos de predicción reflejan razonablemente la dispersión de los datos, aunque podrían optimizarse para cubrir algunos valores extremos.
+
 
 
 
