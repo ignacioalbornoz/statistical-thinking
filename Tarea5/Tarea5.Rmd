@@ -1,0 +1,172 @@
+---
+title: "Tarea 5"
+output:
+  html_document:
+    df_print: paged
+---
+
+![](banner.png)
+
+<center> <h1>Tarea 5: MCMC</h1> </center>
+<center><strong>CC6104: Statistical Thinking</strong></center>
+#### **Integrantes :** 
+
+- Alumno 1
+- Alumno 2
+
+#### **Cuerpo Docente:**
+
+-   Profesor: Felipe Bravo M.
+-   Auxiliar: Martín Paredes, Benjamín Farías
+-   Ayudantes: Scarleth Betancurt, Emilio Díaz, Kevin Iturra, Renzo Zanca
+
+
+### **Índice:**
+
+1. [Objetivo](#id1)
+2. [Instrucciones](#id2)
+3. [Referencias](#id3)
+2. [Primera Parte: Preguntas Teóricas](#id4)
+3. [Segunda Parte: Elaboración de Código](#id5)
+
+### **Objetivo**<a name="id1"></a>
+
+Bienvenid@s a la primera tarea del curso Statistical Thinking. Esta tarea tiene como objetivo evaluar los contenidos teóricos de la primera parte del curso, los cuales se enfocan principalmente en introducirlos en la estadística bayesiana. Si aún no han visto las clases, se recomienda visitar los enlaces de las referencias.
+
+La tarea consta de una parte teórica que busca evaluar conceptos vistos en clases. Seguido por una parte práctica con el fin de introducirlos a la programación en R enfocada en el análisis estadístico de datos. 
+
+### **Instrucciones:**<a name="id2"></a>
+
+- La tarea se realiza en grupos de **máximo 2 personas**. Pero no existe problema si usted desea hacerla de forma individual.
+- La entrega es a través de u-cursos a más tardar el día estipulado en la misma plataforma. A las tareas atrasadas se les descontará un punto por día.
+- El formato de entrega es este mismo **Rmarkdown** y un **html** con la tarea desarrollada. Por favor compruebe que todas las celdas han sido ejecutadas en el archivo html.
+- Al momento de la revisión tu código será ejecutado. Por favor verifica que tu entrega no tenga errores de compilación.
+- No serán revisadas tareas desarrolladas en Python.
+- Está **PROHIBIDO** la copia o compartir las respuestas entre integrantes de diferentes grupos.
+- Pueden realizar consultas de la tarea a través de U-cursos y/o del canal de Discord del curso. 
+
+
+### **Referencias:**<a name="id3"></a>
+
+Slides de las clases:
+
+- [Introduction to Bayesian Inference](https://github.com/dccuchile/CC6104/blob/master/slides/3_1_ST-bayesian.pdf)
+- [Summarizing the Posterior](https://github.com/dccuchile/CC6104/blob/master/slides/3_2_ST-posterior.pdf)
+
+
+Videos de las clases:
+
+- Introduction to Bayesian Inference: [video1](https://youtu.be/Gf2uuElPH0g) [video2](https://youtu.be/5ZZ3PTPdZQw) [video3](https://youtu.be/d_jXwM_-5jc) [video4](https://youtu.be/yZW1V3X4J94) [video5](https://youtu.be/-fw0ktR7psM) [video6](https://youtu.be/0oK9M82sw8Q) [video7](https://youtu.be/u7Qdw5rDDDU)
+- Summarizing the Posterior: [video1](https://youtu.be/67o8wcZsgtk)  [video2](https://youtu.be/Xr8S1Uv_5GQ) [video3](https://youtu.be/XJKyW4tYp_0) [video4](https://youtu.be/OMipgV727wo)
+
+Documentación:
+
+- [rethinking](https://github.com/rmcelreath/rethinking)
+- [tidyr](https://tidyr.tidyverse.org)
+- [purrr](https://purrr.tidyverse.org)
+- [dplyr](https://dplyr.tidyverse.org)
+- [ggplot2](https://ggplot2.tidyverse.org/)
+
+### Pregunta 1: Model Evaluation and Information Criteria
+
+Explique cómo cross-validation, criterios de información y regularización ayudan a mitigar o medir los problemas de underfitting y overfitting.
+
+> Respuesta
+
+
+### Pregunta 2: Directed Graphical Models	
+
+Diseñe una DAG para un problema causal inventado por usted de al menos 5 nodos (puede basarse en el ejemplo de Eugene Charniak) usando Dagitty y considere que la DAG tenga al menos: una chain, un fork y un collider. Muestre con dagitty todas las independencias condicionales de su DAG. Explique las independencias usando las reglas de d-separación.
+
+> Respuesta
+
+
+
+# Segunda Parte: Elaboración de Código<a name="id5"></a>
+En la siguiente sección deberá resolver cada uno de los experimentos computacionales a través de la programación en R. Para esto se le aconseja que cree funciones en R, ya que le facilitará la ejecución de gran parte de lo solicitado.
+
+Para el desarrollo preste mucha atención en los enunciados, ya que se le solicitará la implementación de métodos sin uso de funciones predefinidas. Por otro lado, Las librerías permitidas para desarrollar de la tarea 4 son las siguientes:
+
+```{r, eval=FALSE}
+# Manipulación de estructuras
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+
+# Para realizar plots
+library(scatterplot3d)
+library(ggplot2)
+library(plotly)
+
+# Manipulación de varios plots en una imagen.
+library(gridExtra)
+
+# Análisis bayesiano
+library("rethinking")
+```
+
+Si no tiene instalada la librería “rethinking”, ejecute las siguientes líneas de código para instalar la librería:
+
+```{r, eval=FALSE}
+install.packages("rethinking")
+```
+
+En caso de tener problemas al momento de instalar la librería con el código anterior, utilice las siguiente chunk:
+
+```{r, eval=FALSE}
+install.packages(c("mvtnorm","loo","coda"), repos="https://cloud.r-project.org/",dependencies=TRUE)
+options(repos=c(getOption('repos'), rethinking='http://xcelab.net/R'))
+install.packages('rethinking',type='source')
+```
+
+#### **Pregunta 1:** MCMC
+
+El objetivo de esta pregunta es lograr samplear, mediante la técnica de MCMC, la distribución gamma. 
+
+En general la distribución gamma se denota por $\Gamma(\alpha,\beta)$ donde $\alpha$ y $\beta$ son parámetros positivos, a $\alpha$ se le suele llamar "shape" y a $\beta$ rate La densidad no normalizada de una distribución gamma esta dada por:
+
+$$
+f(x\mid \alpha,\beta) = 
+\begin{cases}
+ x^{\alpha -1}e^{-\beta x} ~ &\text{ si } x > 0\\
+0 ~&\text{si } x \leq 0
+\end{cases}
+$$
+donde $\Gamma(\alpha)$ es una constante, usualmente se le llama función gamma.
+
+- [ ] Implemente el algoritmo de metropolis hasting utilizando $q(\theta^{(t)} \mid \theta^{(t-1)}) = \mathcal{N}(\theta^{t-1},1)$, **importante** su función tiene que poder recibir:
+  - [ ] La condición inicial $\theta_{0}$.
+  - [ ] Cantidad de repeticiones.
+  - [ ] $\alpha$ y $\beta$.
+  
+  Escriba el algoritmo sin utilizar implementenaciones de la distribución gamma en r. 
+  
+De ahora en adelante considere $\alpha = 5$ y $\beta = \frac{1}{5}$.
+
+  - [ ] Considere $\theta_{0} = 1$, grafique el histograma que obtiene para distintas cantidad de repeticiones, entre sus pruebas tiene que tener al menos una que tenga del orden de $10^5$ repeticiones ¿Como cambia la distribución en funcion de las repeticiones?
+  - [ ] Considere distintos valores de $\theta_{0}$ y una cantidad de repeticiones grande (del orden de $10^5$), grafique las distribuciones que obtenga comente sus resultados  ¿es importante la condición inicial del algoritmo?.
+  - [ ] Utilizando $\theta_{0}$ y cantidad de repeticiones conveniente (de acuerdo a lo que obtuvo en las partes anteriores) compare con la distribución real. **Obs:** En esta parte puede utilizar la distribución gamma que tiene implementado r para comparar con lo que usted realizo.
+
+
+> Respuesta
+
+
+
+
+&nbsp;
+<hr />
+<p style="text-align: center;">A work by <a href="https://github.com/dccuchile/CC6104">CC6104</a></p>
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
+<!-- Add font awesome icons -->
+<p style="text-align: center;">
+    <a href="https://github.com/dccuchile/CC6104"><i class="fab fa-github" style='font-size:30px'></i></a>
+</p>
+
+<p style="text-align: center;">
+    <a href="https://discord.gg/XCbQvGs3Uf"><i class="fab fa-discord" style='font-size:30px'></i></a>
+</p>
+
+&nbsp;
